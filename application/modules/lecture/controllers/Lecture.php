@@ -3,16 +3,23 @@
     function __construct()
     {
         parent::__construct();
-        $this->load->model('Model_model');
+        $this->load->model('Main_model');
     }
     function index()
     {
         $data['title'] = "Dosen Pembimbing";
-        $data['program_studi'] = $this->Model_model->allProdi();
-        $this->load->view('index', $data);
+        $data['program_studi'] = $this->Main_model->allProdi();
+        $this->load->view('lecture_view', $data);
     }
-    function add_dosen()
+    function login()
     {
-        $this->Model_model->add_supervisor();
+    }
+    function addLecture()
+    {
+        $this->Main_model->addLecture();
+    }
+    function allLecture()
+    {
+        return $this->db->get('dosen')->result_array();
     }
 }

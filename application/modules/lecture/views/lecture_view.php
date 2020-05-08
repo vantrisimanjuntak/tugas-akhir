@@ -4,18 +4,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= base_url('bootstrap-4.0.0/dist/css/bootstrap.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/bootstrap-4.0.0/dist/css/bootstrap.min.css') ?>">
     <!-- Font -->
     <link href=" https://fonts.googleapis.com/css2?family=Bree+Serif&family=PT+Serif&display=swap" rel="stylesheet">
     <!-- End Font -->
     <!-- Shortcut Icon -->
     <link rel="shortcut icon" href="<?= base_url('assets/images/stta.png'); ?>">
     <!-- Added JS -->
-    <script src="<?= base_url('assets/js/app.js') ?>"></script>
     <script src="<?= base_url('assets/javascript/jquery-3.5.1.js'); ?>"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
-    <script src="<?= base_url('bootstrap-4.0.0/dist/js/bootstrap.min.js') ?>"></script>
+    <script src="<?= base_url('assets/bootstrap-4.0.0/dist/js/bootstrap.min.js') ?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
+    <!-- <script src="<?= base_url('assets/javascript/main.js') ?>"></script> -->
     <title><?= $title; ?></title>
 </head>
 
@@ -38,14 +37,9 @@
             </ul>
         </div>
     </nav>
-    <div class="container success-alert">
-        <?= $this->session->flashdata('success-message'); ?>
-    </div>
-    <div class="container failed-alert">
-        <?= $this->session->flashdata('failed-message'); ?>
-    </div>
+
     <div class="container mt-4 mb-4">
-        <form action="<?= base_url('supervisor/add_supervisor') ?>" method="POST" enctype="multipart/form-data">
+        <form action="<?= base_url('lecture/addlecture') ?>" method="POST" enctype="multipart/form-data">
             <h3 class="text-center" style="font-family: 'Bree Serif', serif">BIODATA DOSEN</h3>
             <hr>
             <div class="form-group row mt-3" style="font-family: 'PT Serif', serif; ">
