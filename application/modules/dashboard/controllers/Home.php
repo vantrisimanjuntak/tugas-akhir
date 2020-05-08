@@ -7,6 +7,7 @@
 
     function index()
     {
-        $this->load->view('home_view');
+        $data['title'] = "Portal Tugas Akhir";
+        $this->load->view('home_view', $data);
     }
 }
