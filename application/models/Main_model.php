@@ -4,7 +4,7 @@
     {
         parent::__construct();
     }
-    function add_supervisor()
+    function addlecture()
     {
         $data = array(
             'nip' => $this->input->post('nip'),
@@ -15,16 +15,6 @@
         );
         if ($data == TRUE) {
             $this->db->insert('dosen', $data);
-            $this->session->set_flashdata('success-message', '<div class="alert alert-primary custom-alert" role="alert">
-            Berhasil menambahkan dosen <button type="button" class="close" data-dismiss="alert" aria-label="Close">
-            <span aria-hidden="true">&times;</span>
-          </button>
-          </div>');
-            redirect('supervisor');
-        } else {
-            $this->session->set_flashdata('failed-message', '<div class="alert alert-danger" role="alert">
-            A simple danger alert—check it out!</div>');
-            redirect('supervisor');
         }
     }
     private function _uploadImage()
