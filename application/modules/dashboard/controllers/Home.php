@@ -7,6 +7,6 @@
 
     function index()
     {
-        echo "Berhasil";
+        $this->load->view('home_view');
     }
 }
