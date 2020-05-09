@@ -10,4 +10,12 @@ $(document).ready(function () {
             $("#result").html("#keyword");
         }
     });
+
+    // function for button submit skripsi
+
+    $('#submitSkripsi').click(function () {
+        if ($('.nim').val() == '') {
+
+        }
+    })
 });
