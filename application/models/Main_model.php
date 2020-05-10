@@ -65,6 +65,11 @@
     function checknim()
     {
         $nim = $this->input->post('nim');
-        $this->db->get_where('mahasiswa', array('nim' => $nim));
+
+        if ($this->db->get_where('mahasiswa', array('nim' => $nim))) {
+            echo "NIM ada";
+        } else {
+            echo "NIM tidak ada";
+        }
     }
 }

@@ -3,6 +3,7 @@
     function __construct()
     {
         parent::__construct();
+        $this->load->helper('url');
         $this->load->model('Main_model');
     }
     function index()
@@ -21,5 +22,9 @@
         $dosen2 = $this->input->post('dp_2');
 
         $this->Main_model->submitSkripsi($no_reg, $nim, $judulskripsi, $abstrak, $dosen1, $dosen2);
+    }
+    function checknim()
+    {
+        $this->Main_model->checknim();
     }
 }
