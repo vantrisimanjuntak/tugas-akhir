@@ -4,6 +4,8 @@
     {
         parent::__construct();
     }
+
+    //function for dosen 
     function addlecture()
     {
         $data = array(
@@ -41,16 +43,28 @@
     {
         return $this->db->get('dosen')->result_array();
     }
-    function submit_skripsi()
+
+    // end funtion for dosen
+
+    // function for skripsi
+    function submitSkripsi($no_reg, $nim, $judul, $abstrak, $dp1, $dp2)
     {
+
         $data = array(
-            'no_reg' => $this->input->post('no_reg'),
-            'mahasiswa' => $this->input->post('nim'),
-            'judul_skripsi' => $this->input->post('judul_skripsi'),
-            'abstrak' => $this->input->post('abstrak'),
-            'dp_satu' => $this->input->post('dp_satu'),
-            'dp_dua' => $this->input->post('dp_dua'),
+            'no_reg' => $no_reg,
+            'mahasiswa' => $nim,
+            'judul_skripsi' => $judul,
+            'abstrak' => $abstrak,
+            'dp_satu' => $dp1,
+            'dp_dua' => $dp2,
         );
         $this->db->insert('tugas_akhir', $data);
+    }
+    // end function for skripsi
+
+    function checknim()
+    {
+        $nim = $this->input->post('nim');
+        $this->db->get_where('mahasiswa', array('nim' => $nim));
     }
 }

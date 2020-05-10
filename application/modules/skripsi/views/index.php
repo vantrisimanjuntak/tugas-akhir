@@ -15,6 +15,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Neuton:wght@700&display=swap" rel="stylesheet">
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.css'); ?>">
+
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
@@ -47,20 +48,18 @@
         </div>
     </nav>
     <!-- End Navbar -->
-    <div class="container alert alert-primary alert-dismissible fade show">
-        <button type="button" class="close" data-dismiss="alert">&times;</button>
-        <strong>Primary!</strong> Indicates an important action.
-    </div>
+
     <!-- Main Content -->
     <div class="container mt-3 pb-5" style="border-style: ridge; background-color:white">
-        <form action="" method="post">
+        <form action="<?= base_url('skripsi/submitSkripsi'); ?>" method="post">
             <div class="container border-dark">
                 <h4 class="font-weight-bold mt-3" style="font-family: 'Neuton', serif;">Form Input Skripsi</h4>
                 <hr>
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">No. Registrasi</label>
                     <div class="col-xs-2 col-sm-3 col-md-2">
-                        <input type="text" disabled class="form-control">
+                        <?php $no_reg = bin2hex(random_bytes(3)); ?>
+                        <input type="text" disabled class="form-control" value="<?= $no_reg; ?>">
                     </div>
                 </div>
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
@@ -72,7 +71,7 @@
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">Judul Skripsi<span style="color:red;">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control">
+                        <input type="text" class="form-control judulskripsi">
                     </div>
                 </div>
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
@@ -84,13 +83,21 @@
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">Dosen Pembimbing I <span style="color:red;">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control">
+                        <select name="" class="form-control" id="">
+                            <?php foreach ($dosen as $row) : ?>
+                                <option value="<?= $row['nip']; ?>"><?= $row['nama']; ?> </option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                 </div>
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">Dosen Pembimbing II <span style="color:red;">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control">
+                        <select name="" class="form-control" id="">
+                            <?php foreach ($dosen as $row) : ?>
+                                <option value="<?= $row['nip']; ?>"><?= $row['nama']; ?> </option>
+                            <?php endforeach; ?>
+                        </select>
                     </div>
                 </div>
             </div>
