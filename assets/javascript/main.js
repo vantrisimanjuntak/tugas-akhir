@@ -15,20 +15,48 @@ $(document).ready(function () {
 
     $('#submitSkripsi').click(function () {
         $('#nim').change(function () {
+
             var nim = $('#nim').val();
             if (nim != '') {
                 $.ajax({
-                    url: "<?php echo site_url('skripsi/home/checknim') ?>",
+                    url: 'skripsi/home/checknim',
                     method: 'POST',
                     data: {
                         nim: nim
                     },
                     success: function (data) {
-                        $('#nim_result').html(data);
+                        if (data == 'sucess') {
+                            $('#nim_result').html(data);
+                        } else {
+                            alert('NIM TIDAK ADA');
+                        }
                     }
 
                 });
             }
         })
     });
+
+    // $('#btnSubmit').click(function () {
+    //     Swal.fire({
+    //         title: 'Perhatian',
+    //         text: "Data yang sudah diinput tidak bisa diubah / dihapus",
+    //         icon: 'warning',
+    //         showCancelButton: true,
+    //         cancelButtonText: "Batal",
+    //         confirmButtonColor: '#3085d6',
+    //         cancelButtonColor: '#d33',
+    //         confirmButtonText: 'Submit'
+    //     }).then((result) => {
+    //         if (result.value) {
+    //             Swal.fire(
+    //                 'Deleted!',
+    //                 'Your file has been deleted.',
+    //                 'success'
+    //             )
+    //             // $('#submitSkripsi').submit();
+    //         }
+    //     })
+    // });
+
 });

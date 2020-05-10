@@ -50,7 +50,7 @@
 
     <!-- Main Content -->
     <div class="container mt-3 pb-5" style="border-style: ridge; background-color:white">
-        <form action="<?= base_url('skripsi/submitSkripsi'); ?>" method="post">
+        <form action="<?= base_url('skripsi/home/submit'); ?>" method="post" id="submitSkripsi">
             <div class="container border-dark">
                 <h4 class="font-weight-bold mt-3" style="font-family: 'Neuton', serif;">Form Input Skripsi</h4>
                 <hr>
@@ -58,13 +58,13 @@
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">No. Registrasi</label>
                     <div class="col-xs-2 col-sm-3 col-md-2">
                         <?php $no_reg = bin2hex(random_bytes(3)); ?>
-                        <input type="text" disabled class="form-control" value="<?= $no_reg; ?>">
+                        <input type="text" name="no_reg" readonly class="form-control" value="<?= $no_reg; ?>">
                     </div>
                 </div>
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">NIM<span style="color:red;">*</span></label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" id="nim">
+                        <input type="text" class="form-control" name="nim" id="nim">
                     </div>
                     <div class="col-sm-2" style="color: red">
                         <small id="nim_result"></small>
@@ -73,19 +73,19 @@
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">Judul Skripsi<span style="color:red;">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" class="form-control judulskripsi">
+                        <input type="text" name="judulskripsi" class="form-control judulskripsi">
                     </div>
                 </div>
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">Abstrak<span style="color:red;">*</span></label>
                     <div class="col-sm-9">
-                        <textarea name="" id="" cols="30" class="form-control" rows="10"></textarea>
+                        <textarea name="abstrak" id="" cols="30" class="form-control" rows="10"></textarea>
                     </div>
                 </div>
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">Dosen Pembimbing I <span style="color:red;">*</span></label>
                     <div class="col-sm-9">
-                        <select name="" class="form-control" id="">
+                        <select name="dp1" class="form-control" id="">
                             <?php foreach ($dosen as $row) : ?>
                                 <option value="<?= $row['nip']; ?>"><?= $row['nama']; ?> </option>
                             <?php endforeach; ?>
@@ -95,7 +95,7 @@
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">Dosen Pembimbing II <span style="color:red;">*</span></label>
                     <div class="col-sm-9">
-                        <select name="" class="form-control" id="">
+                        <select name="dp2" class="form-control" id="">
                             <?php foreach ($dosen as $row) : ?>
                                 <option value="<?= $row['nip']; ?>"><?= $row['nama']; ?> </option>
                             <?php endforeach; ?>
@@ -105,7 +105,7 @@
             </div>
             <div class="container-fluid">
                 <small><i style="color:red">(*) wajib diisi</i> </small>
-                <button class="btn btn-warning text-white float-right" id="submitSkripsi" type="button">Submit</button>
+                <button class="btn btn-warning text-white float-right" id="btnSubmit" type="button">Submit</button>
             </div>
         </form>
     </div>

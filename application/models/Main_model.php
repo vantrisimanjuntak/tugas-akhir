@@ -47,13 +47,19 @@
     // end funtion for dosen
 
     // function for skripsi
-    function submitSkripsi($no_reg, $nim, $judul, $abstrak, $dp1, $dp2)
+    function submitSkripsi()
     {
+        $no_reg = $this->input->post('no_reg');
+        $nim = $this->input->post('nim');
+        $judulskripsi = $this->input->post('judulskripsi');
+        $abstrak = $this->input->post('abstrak');
+        $dp1 = $this->input->post('dp1');
+        $dp2 = $this->input->post('dp2');
 
         $data = array(
             'no_reg' => $no_reg,
             'mahasiswa' => $nim,
-            'judul_skripsi' => $judul,
+            'judul_skripsi' => $judulskripsi,
             'abstrak' => $abstrak,
             'dp_satu' => $dp1,
             'dp_dua' => $dp2,
