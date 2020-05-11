@@ -28,7 +28,7 @@
         } else {
             echo '<i class="fa fa-times" aria-hidden="true">&nbsp;nim tidak ada</i>';
             echo '<script>
-                $("#judulskripsi").prop("disabled", true);
+                $("#judulskripsi, #abstrak, #dp1, #dp2, #btnSubmit").prop("disabled", true);
                     </script>';
         }
     }

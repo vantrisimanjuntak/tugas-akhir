@@ -37,26 +37,26 @@ $(document).ready(function () {
 
 
 
-    // $('#btnSubmit').click(function () {
-    //     Swal.fire({
-    //         title: 'Perhatian',
-    //         text: "Data yang sudah diinput tidak bisa diubah / dihapus",
-    //         icon: 'warning',
-    //         showCancelButton: true,
-    //         cancelButtonText: "Batal",
-    //         confirmButtonColor: '#3085d6',
-    //         cancelButtonColor: '#d33',
-    //         confirmButtonText: 'Submit'
-    //     }).then((result) => {
-    //         if (result.value) {
-    //             Swal.fire(
-    //                 'Deleted!',
-    //                 'Your file has been deleted.',
-    //                 'success'
-    //             )
-    //             // $('#submitSkripsi').submit();
-    //         }
-    //     })
-    // });
+    $('#btnSubmit').click(function () {
+        Swal.fire({
+            title: 'Perhatian',
+            text: "Data yang sudah diinput tidak bisa diubah / dihapus",
+            icon: 'warning',
+            showCancelButton: true,
+            cancelButtonText: "Batal",
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Submit'
+        }).then((result) => {
+            if (result.value) {
+                // Swal.fire(
+                //     'Berhasil!',
+                //     'Skripsi berhasil dikumpul',
+                //     'success'
+                // )
+                $('#submitSkripsi').submit();
+            }
+        })
+    });
 
 });
