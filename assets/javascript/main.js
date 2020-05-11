@@ -1,4 +1,5 @@
 $(document).ready(function () {
+
     $('.search').click(function () {
         if ($("#keyword").val() == '') {
             $("resultKeyword").remove();
@@ -12,26 +13,29 @@ $(document).ready(function () {
     });
 
     // function for button submit skripsi
+    $('#btnSubmit,#judulskripsi, #abstrak, #dp1, #dp2 ').prop('disabled', true);
 
-    $('#submitSkripsi').click(function () {
-        $('#nim').change(function () {
-            var nim = $('#nim').val();
-            if (nim != '') {
-                $.ajax({
-                    url: 'skripsi/home/checknim',
-                    method: 'POST',
-                    data: {
-                        nim: nim
-                    },
-                    success: function (data) {
-                        if (data) {
-                            $('#nim_result').html(data);
-                        }
+
+    $('#nim').change(function () {
+        var nim = $('#nim').val();
+        if (nim != '') {
+            $.ajax({
+                url: 'skripsi/home/checknim',
+                method: 'POST',
+                data: {
+                    nim: nim
+                },
+                success: function (data) {
+                    if (data) {
+                        $('#nim_result').html(data);
+
                     }
-                });
-            }
-        })
-    });
+                }
+            });
+        }
+    })
+
+
 
     // $('#btnSubmit').click(function () {
     //     Swal.fire({

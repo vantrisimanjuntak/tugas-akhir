@@ -73,19 +73,20 @@
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">Judul Skripsi<span style="color:red;">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" name="judulskripsi" class="form-control judulskripsi">
+                        <input type="text" name="judulskripsi" class="form-control" id="judulskripsi">
                     </div>
                 </div>
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">Abstrak<span style="color:red;">*</span></label>
                     <div class="col-sm-9">
-                        <textarea name="abstrak" id="" cols="30" class="form-control" rows="10"></textarea>
+                        <textarea name="abstrak" id="abstrak" cols="30" class="form-control" rows="10"></textarea>
                     </div>
                 </div>
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">Dosen Pembimbing I <span style="color:red;">*</span></label>
                     <div class="col-sm-9">
-                        <select name="dp1" class="form-control" id="">
+                        <select name="dp1" class="form-control" id="dp1">
+                            <option value="">--PILIH DOSEN--</option>
                             <?php foreach ($dosen as $row) : ?>
                                 <option value="<?= $row['nip']; ?>"><?= $row['nama']; ?> </option>
                             <?php endforeach; ?>
@@ -95,7 +96,8 @@
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">Dosen Pembimbing II <span style="color:red;">*</span></label>
                     <div class="col-sm-9">
-                        <select name="dp2" class="form-control" id="">
+                        <select name="dp2" class="form-control" id="dp2">
+                            <option value="">--PILIH DOSEN--</option>
                             <?php foreach ($dosen as $row) : ?>
                                 <option value="<?= $row['nip']; ?>"><?= $row['nama']; ?> </option>
                             <?php endforeach; ?>

@@ -21,9 +21,15 @@
     {
         $nim = $this->input->post('nim');
         if ($this->Main_model->checknim($nim)) {
-            echo '<i class="fa fa-times" aria-hidden="true">&nbsp;nim tidak ada</i>';
+            echo '<i class="fa fa-check" aria-hidden="true" style="color:yellow"></i>';
+            echo '<script>
+                $("#judulskripsi, #abstrak, #dp1, #dp2, #btnSubmit").removeAttr("disabled", true);
+                    </script>';
         } else {
-            echo 'NIM TIDAK ADA';
+            echo '<i class="fa fa-times" aria-hidden="true">&nbsp;nim tidak ada</i>';
+            echo '<script>
+                $("#judulskripsi").prop("disabled", true);
+                    </script>';
         }
     }
 }
