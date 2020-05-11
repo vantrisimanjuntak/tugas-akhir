@@ -19,6 +19,11 @@
     }
     function checknim()
     {
-        $this->Main_model->checknim();
+        $nim = $this->input->post('nim');
+        if ($this->Main_model->checknim($nim)) {
+            echo '<i class="fa fa-times" aria-hidden="true">&nbsp;nim tidak ada</i>';
+        } else {
+            echo 'NIM TIDAK ADA';
+        }
     }
 }

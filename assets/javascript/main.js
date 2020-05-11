@@ -15,7 +15,6 @@ $(document).ready(function () {
 
     $('#submitSkripsi').click(function () {
         $('#nim').change(function () {
-
             var nim = $('#nim').val();
             if (nim != '') {
                 $.ajax({
@@ -25,13 +24,10 @@ $(document).ready(function () {
                         nim: nim
                     },
                     success: function (data) {
-                        if (data == 'sucess') {
+                        if (data) {
                             $('#nim_result').html(data);
-                        } else {
-                            alert('NIM TIDAK ADA');
                         }
                     }
-
                 });
             }
         })

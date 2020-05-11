@@ -68,14 +68,15 @@
     }
     // end function for skripsi
 
-    function checknim()
+    function checknim($nim)
     {
-        $nim = $this->input->post('nim');
+        $this->db->where('nim', $nim);
+        $query = $this->db->get('mahasiswa');
 
-        if ($this->db->get_where('mahasiswa', array('nim' => $nim))) {
-            echo "NIM ada";
+        if ($query->num_rows() > 0) {
+            return true;
         } else {
-            echo "NIM tidak ada";
+            return false;
         }
     }
 }
