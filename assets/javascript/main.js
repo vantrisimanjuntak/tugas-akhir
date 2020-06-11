@@ -1,62 +1,50 @@
 $(document).ready(function () {
 
-    $('.search').click(function () {
-        if ($("#keyword").val() == '') {
-            $("resultKeyword").remove();
-            Swal.fire(
-                'Kata kunci kosong !',
-            );
-        } else {
-            $("#resultKeyword").show();
-            $("#result").html("#keyword");
-        }
-    });
+    // Show All Title
+    function showTitle() {
+        $.getJSON('assets/api/hero.json', function (data) {
+            let allTitle = data.papers;
+            // console.log(allTitle);
 
-    // function for button submit skripsi
-    $('#btnSubmit,#judulskripsi, #abstrak, #dp1, #dp2 ').prop('disabled', true);
-
-
-    $('#nim').change(function () {
-        var nim = $('#nim').val();
-        if (nim != '') {
-            $.ajax({
-                url: 'skripsi/home/checknim',
-                method: 'POST',
-                data: {
-                    nim: nim
-                },
-                success: function (data) {
-                    if (data) {
-                        $('#nim_result').html(data);
-
-                    }
-                }
+            $.each(allTitle, function (i, data) {
+                $('#wrapper').css("height", "100%");
+                $('#result').append(`<div class="container col-md-4 mt-3 pb-3" >` + data.title + `</div>`);
             });
+        });
+    }
+    // End Show All Title
+
+    // Show Spesific Title
+    function showSpesificTitle() {
+        if ($('#keyword').val() == '') {
+            // showTitle();
+            Swal.fire('Kata kunci kosong!');
+        } else {
+
+            let titleInput = $('#keyword').val();
+
+            $.getJSON('assets/api/hero.json', function (data) {
+                let titlePaper = data.papers;
+                let content = '';
+
+                $.each(titlePaper, function (i, data) {
+                    if (data.title == titleInput) {
+                        content += '<h4>' + data.title + '</h4>';
+                    } else {
+                        content += $('#result').html("NOT FOUND");
+                    }
+                });
+                $('#result').html(content);
+            });
+            $('#keyword').val('');
         }
-    })
+    }
+    // End Show Spesific Title
 
 
-
-    $('#btnSubmit').click(function () {
-        Swal.fire({
-            title: 'Perhatian',
-            text: "Data yang sudah diinput tidak bisa diubah / dihapus",
-            icon: 'warning',
-            showCancelButton: true,
-            cancelButtonText: "Batal",
-            confirmButtonColor: '#3085d6',
-            cancelButtonColor: '#d33',
-            confirmButtonText: 'Submit'
-        }).then((result) => {
-            if (result.value) {
-                // Swal.fire(
-                //     'Berhasil!',
-                //     'Skripsi berhasil dikumpul',
-                //     'success'
-                // )
-                $('#submitSkripsi').submit();
-            }
-        })
+    $('.search').click(function () {
+        showSpesificTitle();
     });
+
 
 });

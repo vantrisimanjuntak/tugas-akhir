@@ -15,6 +15,7 @@
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.css'); ?>">
     <script type="text/javascript" src="<?= base_url('assets/javascript/jquery-3.5.1.js') ?>"></script>
+    <!-- <script type="text/javascript" src="<?= base_url('assets/javascript/jquery-3.5.1.min.js') ?>"></script> -->
     <script type="text/javascript" languange="javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script>
     <!-- SweetAlert2 JS  -->
     <script src="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.js'); ?>"></script>
@@ -50,21 +51,17 @@
     <!-- End Navbar -->
     <!-- Content -->
     <!-- Content for Kata Kunci -->
-    <div class="container" style="margin-top:170px; height: 600px;">
-        <h3 class="text-center font-weight-bold mb-4">Masukkan Kata Kunci Judul</h3>
-        <form action="<?= base_url('keyword') ?>" method="GET">
-            <div class="input-group mb-3">
-                <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Cari ...">
-                <div class=" input-group-append">
-                    <button class="btn btn-outline-secondary search" type="button" id="btnSearch"><i class="fa fa-search"></i></button>
-                </div>
+    <div class="container" id="wrapper" style="margin-top:170px; height: 400px;">
+        <h3 class="text-center font-weight-bold mb-4">Judul</h3>
+        <div class="input-group pt-4 mb-3">
+            <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Cari ...">
+            <div class=" input-group-append">
+                <button class="btn btn-outline-secondary search" type="button" id="btnSearch"><i class="fa fa-search"></i></button>
             </div>
-        </form>
-        <!-- End Content for Kata Kunci -->
-
-        <div class="container-fluid border" id="resultKeyword" style="display:none">
-            <div id="result"></div>
         </div>
+        <!-- End Content for Kata Kunci -->
+        <div class="container " id="result"></div>
+
     </div>
 
     <!-- Content for Result -->
@@ -127,7 +124,5 @@
         </div>
     </div>
 </body>
-
-
 
 </html>
