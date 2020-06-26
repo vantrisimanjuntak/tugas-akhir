@@ -51,7 +51,7 @@
     <!-- End Navbar -->
     <!-- Content -->
     <!-- Content for Kata Kunci -->
-    <div class="container" id="wrapper" style="margin-top:170px; height: 400px;">
+    <div class="container" id="wrapper" style="margin-top:170px; height: 339px;">
         <h3 class="text-center font-weight-bold mb-4">Judul</h3>
         <div class="input-group pt-4 mb-3">
             <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Cari ...">
@@ -60,7 +60,7 @@
             </div>
         </div>
         <!-- End Content for Kata Kunci -->
-        <div class="container " id="result"></div>
+        <div class="container mb-3" id="result"></div>
 
     </div>
 
