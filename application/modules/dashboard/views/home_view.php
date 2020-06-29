@@ -60,7 +60,7 @@
             </div>
         </div>
         <!-- End Content for Kata Kunci -->
-        <div class="container mb-3" id="result"></div>
+        <div class="container-fluid mb-3" id="result"></div>
 
     </div>
 

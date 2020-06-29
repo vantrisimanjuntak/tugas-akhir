@@ -6,22 +6,26 @@ $(document).ready(function () {
         } else {
             let titleInput = $('#keyword').val();
 
-            var settings = {
-                "url": "https://core.ac.uk:443/api-v2/articles/search/" + titleInput + "?apiKey=dZFV7OnLgA3XwDMyr9emoxBEzNaHTcsG",
-                "method": "GET",
-                "timeout": 0,
-            };
-
-            $.ajax(settings).done(function (response) {
-                let titlePaper = response.data;
-                $.each(titlePaper, function (i, data) {
-                    $('#wrapper').css("height", "100%");
-                    $('#result').append(`
-                       <div class="mt-2" style="border: 1px solid black"> <h4>` + data.title + `</h4>
-                       <h5>` + data.authors + `</h5>
-                       </div>
-                    `);
-                });
+            $.ajax({
+                url: `https://core.ac.uk:443/api-v2/articles/search/` + titleInput + ``,
+                type: 'GET',
+                dataType: 'JSON',
+                data: {
+                    'apiKey': 'dZFV7OnLgA3XwDMyr9emoxBEzNaHTcsG',
+                },
+                success: function (result) {
+                    let returnData = result.data;
+                    $.each(returnData, function (i, data) {
+                        if (data.contributors == "Sekolah Tinggi Teknologi Adisutjipto Yogyakarta") {
+                            $('#wrapper').css("height", "100%");
+                            $('#result').append(`
+                                    <div class="mt-2 pr-2 pl-2" style="background-color: RGB(0, 255, 255) ;border: 1px solid black; border-radius: 4px; color: #800080">
+                                    <h4 style="color: #800080">` + data.title + `</h4>
+                                    <h6 style="color: #800080">` + data.authors + `</h6>
+                                    <small>` + data.contributors + `</small></div>`);
+                        }
+                    });
+                }
             });
         }
     }
