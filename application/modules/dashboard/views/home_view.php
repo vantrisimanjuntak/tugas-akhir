@@ -20,6 +20,8 @@
     <!-- SweetAlert2 JS  -->
     <script src="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.js'); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
     <title><?= $title; ?></title>
     <style>
         .swal2-popup {
@@ -30,7 +32,7 @@
 
 <body>
     <!-- Navbar -->
-    <nav class="navbar navbar-expand-sm navbar-dark fixed-top " style="background-color: #3104B4">
+    <nav class="navbar navbar-expand-sm navbar-dark fixed-top " style="background-color: rgba(255,64,255,0.2) ">
         <a class="navbar-brand" href="#">
             <img src="<?= base_url('assets/images/stta.png') ?>" class="img-fluid" style="width:40px;" alt="">
         </a>
@@ -51,22 +53,22 @@
     <!-- End Navbar -->
     <!-- Content -->
     <div class="container-fluid">
-        <div class="row mt-3 pt-5" style="height: 370px;">
-            <div class="col-md-2" style="background-color:purple">
-                <div class="mt-5 mb-3">
+        <div class="row mt-3 pt-5" style="height: 470px;">
+            <div class="col-sm-5 col-md-4 col-lg-2 col-xl-2" style="background-color:purple">
+                <div class="mt-5 mb-3 pr-2">
                     <h1 class="text-white">Bingung dengan judul tugas akhir?</h1>
-                    <button class="btn mt-5" style="background-color: green;">
-                        <h5 class="text-white">Konsultasi disini</h5>
-                    </button>
+                    <a href="<?= base_url('#wrapper') ?>">
+                        <button class="btn btn-sm mt-5 text-white" style="background-color: green;">
+                            Konsultasi disini
+                        </button>
+                    </a>
                 </div>
             </div>
-            <div class="col-md-10" style="background-image: url(assets/images/jumb-img-1.jpg); background-repeat: no-repeat;background-size: cover;background-position:center;position:relative">
-
-            </div>
+            <div class="col-sm-7 col-md-8 col-lg-10 col-xl-10" style="background-image: url(assets/images/img-1.jpg); background-repeat: no-repeat;background-size: 100%;background-position:center;position:relative"></div>
         </div>
     </div>
     <!-- Content for Kata Kunci -->
-    <div class=" container" id="wrapper" style="margin-top:170px; height: 339px;">
+    <div class="container" id="wrapper" style="margin-top:170px; height: 339px;">
         <h3 class="text-center font-weight-bold mb-4">Judul</h3>
         <div class="input-group pt-4 mb-3">
             <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Cari ...">
@@ -133,11 +135,27 @@
             </div>
         </div>
     </div>
-    <div class="container-fluid" style="background-color:#0080FF; color:white ">
-        <div class="container text-center" style="padding: 7px;font-family: 'Esteban', serif ">
-            Copyright 2010 - <?= date('Y'); ?> Sekolah Tinggi Teknologi Adisutijpto Yogyakarta. Powered by TIK STTA. All Right Reserved
+    <div class="container-fluid" style="background-color:#0080FF; color:white;border-radius:4px;">
+        <div class="container text-center" style="padding: 7px;font-family: 'Arial'">
+            Copyright 2010 - <?= date('Y'); ?> | Sekolah Tinggi Teknologi Adisutijpto Yogyakarta | Powered by TIK STTA | All Right Reserved
         </div>
     </div>
+    <script>
+        $(document).ready(function() {
+            $("a").on('click', function(event) {
+                if (this.hash !== "") {
+                    event.preventDefault();
+                    var hash = this.hash;
+
+                    $('html, body').animate({
+                        scrollTop: $(hash).offset().top
+                    }, 900, function() {
+                        window.location.hash = hash;
+                    });
+                }
+            });
+        });
+    </script>
 </body>
 
 </html>

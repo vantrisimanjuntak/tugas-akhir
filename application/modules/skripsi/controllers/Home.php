@@ -12,11 +12,6 @@
         $data['dosen'] = $this->Main_model->allLecture();
         $this->load->view('index', $data);
     }
-    function submit()
-    {
-        echo "HAi";
-        // $this->Main_model->submitSkripsi();
-    }
     function checknim()
     {
         $nim = $this->input->post('nim');

@@ -1,4 +1,7 @@
 $(document).ready(function () {
+    $('#nim_result').html('');
+    $('#judulskripsi, #abstrak, #dp1, #dp2').prop('disabled', 'disabled');
+
     function showSpesificTitle() {
         $('#result').html('');
         if ($('#keyword').val() == '') {
@@ -38,6 +41,7 @@ $(document).ready(function () {
 
 
     $('#btnSearch').click(function () {
+        $('#wrapper').css("height", "339px");
         showSpesificTitle();
     });
 
@@ -46,4 +50,24 @@ $(document).ready(function () {
             showSpesificTitle();
         }
     });
+
+    //check available NIM
+    $('#nim').change(function () {
+        var nim = $('#nim').val();
+        if (nim != '') {
+            $.ajax({
+                url: "skripsi/home/checknim",
+                method: "POST",
+                data: {
+                    nim: nim
+                },
+                success: function (data) {
+                    $('#nim_result').html(data);
+                }
+            });
+        } else {
+            $('#nim_reulst').html('NIM KOSONG');
+        }
+    });
+
 });
