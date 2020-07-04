@@ -1,6 +1,6 @@
 $(document).ready(function () {
     $('#nim_result').html('');
-    $('#judulskripsi, #abstrak, #dp1, #dp2').prop('disabled', 'disabled');
+    $('#judulskripsi, #abstrak, #dp1, #dp2, #btnSubmit').prop('disabled', 'disabled');
 
     function showSpesificTitle() {
         $('#result').html('');
@@ -66,8 +66,43 @@ $(document).ready(function () {
                 }
             });
         } else {
-            $('#nim_reulst').html('NIM KOSONG');
+            $('#nim_result').html('NIM KOSONG');
         }
+    });
+    // cek DP1 DP2
+    $('select').change(function () {
+        var dp1 = $('#dp1').find(":selected").text();
+        var dp2 = $('#dp2').find(":selected").text();
+        if (dp1 == dp2) {
+            Swal.fire(
+                'Terjadi kesalahan',
+                'Dosen Pembimbing Tidak Boleh Sama',
+                'error'
+            );
+            $('#btnSubmit').prop('disabled', 'disabled');
+        } else {
+            $('#btnSubmit').prop('disabled', false);
+        }
+    });
+    // submit Skripsi
+    $('#btnSubmit').click(function () {
+        Swal.fire({
+            title: 'Are you sure?',
+            text: "You won't be able to revert this!",
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#3085d6',
+            cancelButtonColor: '#d33',
+            confirmButtonText: 'Yes, delete it!'
+        }).then((result) => {
+            if (result.value) {
+                Swal.fire(
+                    'Deleted!',
+                    'Your file has been deleted.',
+                    'success'
+                )
+            }
+        })
     });
 
 });

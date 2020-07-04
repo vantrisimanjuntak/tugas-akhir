@@ -106,6 +106,7 @@
                 </div>
             </div>
             <div class="container-fluid">
+                <small id="dosen_sama"><i style="color:red"></i> </small><br>
                 <small><i style="color:red">(*) wajib diisi</i> </small>
                 <button class="btn btn-warning text-white float-right" id="btnSubmit" type="button">Submit</button>
             </div>
