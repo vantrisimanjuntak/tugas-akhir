@@ -69,6 +69,7 @@ $(document).ready(function () {
             $('#nim_result').html('NIM KOSONG');
         }
     });
+
     // cek DP1 DP2
     $('select').change(function () {
         var dp1 = $('#dp1').find(":selected").text();
@@ -84,6 +85,8 @@ $(document).ready(function () {
             $('#btnSubmit').prop('disabled', false);
         }
     });
+
+
     // submit Skripsi
     $('#btnSubmit').click(function () {
         Swal.fire({
