@@ -73,10 +73,21 @@
         $this->db->where('nim', $nim);
         $query = $this->db->get('mahasiswa');
 
-        if ($query->num_rows() > 0) {
-            return true;
+        $this->db->where('mahasiswa', $nim);
+        $dataExists = $this->db->get('tugas_akhir');
+
+        if ($query->num_rows() > 0 && $dataExists->num_rows() == null) {
+            echo '<i class="fa fa-check" aria-hidden="true" style="color:yellow"></i>';
+            echo '<script>
+                $("#judulskripsi, #abstrak, #dp1, #dp2, #btnSubmit").removeAttr("disabled", true);
+                    </script>';
+        } else if ($query->num_rows() > 0 && $dataExists->num_rows() > 0) {
+            echo "SKRIPSI SUDAH DIINPUT";
         } else {
-            return false;
+            echo '<i class="fa fa-times" aria-hidden="true">&nbsp;NIM TIDAK ADA</i>';
+            echo '<script>
+                $("#judulskripsi, #abstrak, #dp1, #dp2, #btnSubmit").prop("disabled", true);
+                    </script>';
         }
     }
 }
