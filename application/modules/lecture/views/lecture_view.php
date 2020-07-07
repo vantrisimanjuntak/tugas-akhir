@@ -8,6 +8,8 @@
     <!-- Font -->
     <link href=" https://fonts.googleapis.com/css2?family=Bree+Serif&family=PT+Serif&display=swap" rel="stylesheet">
     <!-- End Font -->
+    <!-- Font awesome -->
+    <link rel="stylesheet" href="<?= base_url('assets/font-awesome-4.7.0/css/font-awesome.min.css') ?>">
     <!-- Shortcut Icon -->
     <link rel="shortcut icon" href="<?= base_url('assets/images/stta.png'); ?>">
     <!-- Added JS -->
@@ -79,11 +81,7 @@
             <button type="submit" class="btn btn-primary align-right">Tambah Dosen</button>
         </form>
     </div>
-    <div class="container-fluid" style="background-color:#0080FF; color:white ">
-        <div class="container text-center" style="padding: 7px;font-family: 'Esteban', serif ">
-            Copyright 2010 - <?= date('Y'); ?> Sekolah Tinggi Teknologi Adisutijpto Yogyakarta. Powered by TIK STTA. All Right Reserved
-        </div>
-    </div>
+    <?php $this->load->view('footer'); ?>
 </body>
 
 </html>
