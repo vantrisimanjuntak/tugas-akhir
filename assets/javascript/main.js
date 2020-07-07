@@ -90,22 +90,31 @@ $(document).ready(function () {
     // submit Skripsi
     $('#btnSubmit').click(function () {
         Swal.fire({
-            title: 'Are you sure?',
-            text: "You won't be able to revert this!",
+            title: 'Apakah anda yakin?',
+            text: "Skripsi yang sudah di input tidak bisa diubah!",
             icon: 'warning',
             showCancelButton: true,
             confirmButtonColor: '#3085d6',
             cancelButtonColor: '#d33',
-            confirmButtonText: 'Yes, delete it!'
+            confirmButtonText: 'Submit',
+            cancelButtonText: 'Batal'
         }).then((result) => {
             if (result.value) {
+                $('#submitSkripsi').submit();
                 Swal.fire(
-                    'Deleted!',
-                    'Your file has been deleted.',
+                    'Berhasil!',
+                    'Skripsi berhasil dikumpul',
                     'success'
                 )
             }
         })
+    });
+
+    // input only number page Lecture
+    $('#nip').keypress(function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
     });
 
 });

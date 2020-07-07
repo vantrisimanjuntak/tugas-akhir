@@ -17,6 +17,7 @@
     function addLecture()
     {
         $this->Main_model->addLecture();
+        redirect('lecture');
     }
     function allLecture()
     {

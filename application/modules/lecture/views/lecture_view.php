@@ -14,7 +14,7 @@
     <script src="<?= base_url('assets/javascript/jquery-3.5.1.js'); ?>"></script>
     <script src="<?= base_url('assets/bootstrap-4.0.0/dist/js/bootstrap.min.js') ?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
-    <!-- <script src="<?= base_url('assets/javascript/main.js') ?>"></script> -->
+    <script src="<?= base_url('assets/javascript/main.js') ?>"></script>
     <title><?= $title; ?></title>
 </head>
 
@@ -38,14 +38,14 @@
         </div>
     </nav>
 
-    <div class="container mt-4 mb-4">
+    <div class="container mt-5 mb-4" style="height:500px;">
         <form action="<?= base_url('lecture/addlecture') ?>" method="POST" enctype="multipart/form-data">
             <h3 class="text-center" style="font-family: 'Bree Serif', serif">BIODATA DOSEN</h3>
             <hr>
-            <div class="form-group row mt-3" style="font-family: 'PT Serif', serif; ">
+            <div class="form-group row mt-5" style="font-family: 'PT Serif', serif; ">
                 <label for="" class="col-sm-2 col-lg-2 col-form-label">NIP</label>
                 <div class="col-sm-10 col-lg-3">
-                    <input type="number" name="nip" id="" class="form-control">
+                    <input type="text" name="nip" id="nip" class="form-control">
                 </div>
             </div>
             <div class="form-group row mt-3" style="font-family: 'PT Serif', serif; ">

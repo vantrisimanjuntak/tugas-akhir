@@ -33,7 +33,7 @@
 
     <!-- Main Content -->
     <div class="container pb-5" style="margin-top: 70px;border-style: ridge; background-color:white">
-        <form action="<?= base_url('skripsi/home/submit'); ?>" method="post" id="submitSkripsi">
+        <form action="<?= base_url('skripsi/submit'); ?>" method="post" id="submitSkripsi">
             <div class="container border-dark">
                 <h4 class="font-weight-bold mt-3" style="font-family: 'Neuton', serif;">Form Input Skripsi</h4>
                 <hr>
@@ -49,7 +49,7 @@
                     <div class="col-sm-3">
                         <input type="text" class="form-control" name="nim" id="nim">
                     </div>
-                    <div class="col-sm-2" style="color: red">
+                    <div class="col-sm-5" style="color: red">
                         <small id="nim_result"></small>
                     </div>
                 </div>
