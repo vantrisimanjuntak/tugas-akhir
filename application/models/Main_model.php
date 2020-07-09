@@ -44,7 +44,7 @@
         return $this->db->get('dosen')->result_array();
     }
 
-    // end funtion for dosen
+    // end function for dosen
 
     // function for skripsi
     function submitSkripsi()
@@ -65,6 +65,18 @@
             'dp_dua' => $dp2,
         );
         $this->db->insert('tugas_akhir', $data);
+    }
+
+    // function for search by title
+    function searchtitle($title)
+    {
+        $this->db->where('judul_skripsi', $title);
+        $checkTable = $this->db->get('tugas_akhir');
+        if ($checkTable->num_rows() > 0) {
+            return $checkTable->result_array();
+        } else {
+            echo "TIDAK ADA";
+        }
     }
     // end function for skripsi
 

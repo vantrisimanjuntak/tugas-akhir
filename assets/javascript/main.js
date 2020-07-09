@@ -39,15 +39,32 @@ $(document).ready(function () {
         }
     }
 
+    function getTitleFromDB() {
+        $('#result').html('');
+        if ($('#keyword').val() == '') {
+            Swal.fire('Kata kunci kosong');
+        } else {
+            if ($('#search').submit()) {
+                console.log("ADA");
+            } else {
+                alert("BELUM");
+            }
+
+        }
+    }
+
 
     $('#btnSearch').click(function () {
-        $('#wrapper').css("height", "339px");
-        showSpesificTitle();
+        // $('#wrapper').css("height", "339px");
+        // showSpesificTitle();
+        getTitleFromDB();
+
     });
 
     $('#keyword').on('keyup', function (e) {
         if (e.keyCode == 13) {
-            showSpesificTitle();
+            // showSpesificTitle();
+            // getTitleFromDB();
         }
     });
 

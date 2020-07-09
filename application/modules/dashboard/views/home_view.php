@@ -15,8 +15,7 @@
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.css'); ?>">
     <script type="text/javascript" src="<?= base_url('assets/javascript/jquery-3.5.1.js') ?>"></script>
-    <!-- <script type="text/javascript" src="<?= base_url('assets/javascript/jquery-3.5.1.min.js') ?>"></script> -->
-    <script type="text/javascript" languange="javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script>
+    <!-- <script type="text/javascript" languange="javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script> -->
     <!-- SweetAlert2 JS  -->
     <script src="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.js'); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -53,14 +52,23 @@
     <!-- Content for Kata Kunci -->
     <div class="container" id="wrapper" style="margin-top:170px; height: 339px;">
         <h3 class="text-center font-weight-bold mb-4">Judul</h3>
-        <div class="input-group pt-4 mb-3">
-            <input type="text" name="keyword" id="keyword" class="form-control" placeholder="Cari ...">
-            <div class=" input-group-append">
-                <button class="btn btn-outline-secondary search" type="button" id="btnSearch"><i class="fa fa-search"></i></button>
+        <form action="<?= base_url(''); ?>" method="POST" id="search">
+            <div class="input-group pt-4 mb-3">
+                <input type="text" name="keyword" id="keyword" autofocus class="form-control" placeholder="Cari ...">
+                <div class=" input-group-append">
+                    <button class="btn btn-outline-secondary search" type="submit" id="btnSearch"><i class="fa fa-search"></i></button>
+                </div>
             </div>
-        </div>
+        </form>
         <!-- End Content for Kata Kunci -->
-        <div class="container-fluid mb-3" id="result"></div>
+        <div class="container-fluid mb-3" id="result">
+            <?php foreach ($hasil as $row) {
+            ?>
+                <h4><?= $row['judul_skripsi']; ?></h4>
+                <br>
+                <small><?= $row['dp_satu']; ?></small>
+            <?php } ?>
+        </div>
 
     </div>
 
