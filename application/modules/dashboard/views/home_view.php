@@ -45,11 +45,11 @@
     <!-- Content for Kata Kunci -->
     <div class="container" id="wrapper" style="margin-top:170px; height: 339px;">
         <h3 class="text-center font-weight-bold mb-4">Judul</h3>
-        <!-- <form action="<?= base_url(''); ?>" method="POST" id="search"> -->
+        <!-- <form action="<?= base_url('dashboard/home/searchtitle'); ?>" method="POST" id="search"> -->
         <div class="input-group pt-4 mb-3">
-            <input type="text" name="keyword" id="keyword" autofocus class="form-control" placeholder="Cari ...">
+            <input type="text" name="judul_skripsi" id="keyword" class="form-control" placeholder="Cari ...">
             <div class=" input-group-append">
-                <button class="btn btn-outline-secondary search" type="submit" id="btnSearch"><i class="fa fa-search"></i></button>
+                <button class="btn btn-outline-secondary search" type="button" id="btnSearch"><i class="fa fa-search"></i></button>
             </div>
         </div>
         <!-- </form> -->

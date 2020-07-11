@@ -37,7 +37,7 @@
             <!-- Hubungi Kami -->
             <div class="p-4 col-lg-2">
                 <h5 class="font-weight-bold">Hubungi</h5>
-                <div style="col">
+                <div class="row">
                     <i class="fa fa-phone " aria-hidden="true">&nbsp; +62 274 451262 (Hunting) </i> <br>
                     <i class="fa fa-phone" aria-hidden="true">&nbsp; +62 274 451263 (Telp) </i><br>
                     <i class="fa fa-fax" aria-hidden="true">&nbsp; +62274451265 (Fax)</i><br>

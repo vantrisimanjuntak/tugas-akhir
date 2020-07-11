@@ -68,12 +68,16 @@
     }
 
     // function for search by title
-    function searchtitle($title)
+    function searchtitle($keyword)
     {
-        $this->db->where('judul_skripsi', $title);
-        $checkTable = $this->db->get('tugas_akhir');
-        if ($checkTable->num_rows() > 0) {
-            return $checkTable->result_array();
+        $this->db->where('judul_skripsi', $keyword);
+        $query = $this->db->get('tugas_akhir');
+        if ($query->num_rows() > 0) {
+            foreach ($query->result() as $row) {
+                echo $row->judul_skripsi;
+                echo "<br>";
+                echo $row->no_reg;
+            }
         } else {
             echo "TIDAK ADA";
         }
@@ -95,7 +99,8 @@
                     </script>';
         } else if ($query->num_rows() > 0 && $dataExists->num_rows() > 0) {
             echo "SKRIPSI SUDAH DIINPUT";
-        } else {
+        }
+        else {
             echo '<i class="fa fa-times" aria-hidden="true">&nbsp;NIM TIDAK ADA</i>';
             echo '<script>
                 $("#judulskripsi, #abstrak, #dp1, #dp2, #btnSubmit").prop("disabled", true);

@@ -39,30 +39,54 @@ $(document).ready(function () {
         }
     }
 
-    function getTitleFromDB() {
-        $('#result').html('');
-        if ($('#keyword').val() == '') {
-            Swal.fire('Kata kunci kosong');
-        } else {
-
-
-        }
-    }
-
 
     $('#btnSearch').click(function () {
-        // $('#wrapper').css("height", "339px");
-        // showSpesificTitle();
-        getTitleFromDB();
+        var keyword = $('#keyword').val();
 
-    });
-
-    $('#keyword').on('keyup', function (e) {
-        if (e.keyCode == 13) {
-            // showSpesificTitle();
-            // getTitleFromDB();
+        if (keyword != '') {
+            $.ajax({
+                url: "dashboard/home/searchtitle",
+                method: "POST",
+                data: {
+                    judul_skripsi: keyword,
+                },
+                success: function (data) {
+                    $('#result').html(data);
+                },
+            });
         }
     });
+
+
+    // function getTitleFromDB() {
+
+    //     $('#result').html('');
+    //     var title = $('#keyword').val();
+    //     if (title != '') {
+    //         $.ajax({
+    //             url: "dashboard/home/searchtitle",
+    //             method: "POST",
+    //             data: {
+    //                 jdl: title
+    //             },
+    //             success: function (data) {
+    //                 $('#result').html(data);
+    //             }
+    //         });
+    //     } else {
+    //         Swal.fire('Kata kunci kosong');
+    //     }
+    // }
+
+
+    // $('#btnSearch').click(function () {
+    //     // $('#wrapper').css("height", "339px");
+    //     // showSpesificTitle();
+    //     getTitleFromDB();
+
+    // });
+
+
 
     //check available NIM
     $('#nim').change(function () {
@@ -78,8 +102,6 @@ $(document).ready(function () {
                     $('#nim_result').html(data);
                 }
             });
-        } else {
-            $('#nim_result').html('NIM KOSONG');
         }
     });
 
