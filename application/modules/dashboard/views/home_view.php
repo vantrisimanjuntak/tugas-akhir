@@ -15,7 +15,7 @@
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.css'); ?>">
     <script type="text/javascript" src="<?= base_url('assets/javascript/jquery-3.5.1.js') ?>"></script>
-    <!-- <script type="text/javascript" languange="javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script> -->
+    <script type="text/javascript" languange="javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script>
     <!-- SweetAlert2 JS  -->
     <script src="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.js'); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -34,41 +34,27 @@
     <?php $this->load->view('nav'); ?>
     <!-- End Navbar -->
     <!-- Content -->
-    <div class="container-fluid">
-        <div class="row mt-3 pt-5" style="height: 470px;">
-            <div class="col-sm-5 col-md-4 col-lg-2 col-xl-2" style="background-color:purple">
-                <div class="mt-5 mb-3 pr-2">
-                    <h1 class="text-white">Bingung dengan judul tugas akhir?</h1>
-                    <a href="<?= base_url('#wrapper') ?>">
-                        <button class="btn btn-sm mt-5 text-white" style="background-color: green;">
-                            Konsultasi disini
-                        </button>
-                    </a>
-                </div>
-            </div>
-            <div class="col-sm-7 col-md-8 col-lg-10 col-xl-10" style="background-image: url(assets/images/img-1.jpg); background-repeat: no-repeat;background-size: 100%;background-position:center;position:relative"></div>
+    <div class="pt-5" style="background-image: url('assets/images/img-1.jpg'); height: 350px; background-position:70% 30%;background-size:cover;position:relative;background-repeat:no-repeat;">
+        <div class="pt-4 pl-3">
+            <h2 class="text-white" style="width:180px;">Bingung dengan Tugas Akhir?</h2>
+            <a href="#wrapper">
+                <button type="button" class="btn btn-success mt-4 font-weight-bold">Konsultasi disini</button>
+            </a>
         </div>
     </div>
     <!-- Content for Kata Kunci -->
     <div class="container" id="wrapper" style="margin-top:170px; height: 339px;">
         <h3 class="text-center font-weight-bold mb-4">Judul</h3>
-        <form action="<?= base_url(''); ?>" method="POST" id="search">
-            <div class="input-group pt-4 mb-3">
-                <input type="text" name="keyword" id="keyword" autofocus class="form-control" placeholder="Cari ...">
-                <div class=" input-group-append">
-                    <button class="btn btn-outline-secondary search" type="submit" id="btnSearch"><i class="fa fa-search"></i></button>
-                </div>
+        <!-- <form action="<?= base_url(''); ?>" method="POST" id="search"> -->
+        <div class="input-group pt-4 mb-3">
+            <input type="text" name="keyword" id="keyword" autofocus class="form-control" placeholder="Cari ...">
+            <div class=" input-group-append">
+                <button class="btn btn-outline-secondary search" type="submit" id="btnSearch"><i class="fa fa-search"></i></button>
             </div>
-        </form>
-        <!-- End Content for Kata Kunci -->
-        <div class="container-fluid mb-3" id="result">
-            <?php foreach ($hasil as $row) {
-            ?>
-                <h4><?= $row['judul_skripsi']; ?></h4>
-                <br>
-                <small><?= $row['dp_satu']; ?></small>
-            <?php } ?>
         </div>
+        <!-- </form> -->
+        <!-- End Content for Kata Kunci -->
+        <div class="container-fluid mb-3" id="result"></div>
 
     </div>
 

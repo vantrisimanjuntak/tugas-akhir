@@ -44,11 +44,7 @@ $(document).ready(function () {
         if ($('#keyword').val() == '') {
             Swal.fire('Kata kunci kosong');
         } else {
-            if ($('#search').submit()) {
-                console.log("ADA");
-            } else {
-                alert("BELUM");
-            }
+
 
         }
     }
