@@ -36,12 +36,20 @@
             </div>
             <!-- Hubungi Kami -->
             <div class="p-4 col-lg-2">
-                <h5 class="font-weight-bold">Hubungi</h5>
+                <h5 class="font-weight-bold">Hubungi Kami</h5>
                 <div class="row">
-                    <i class="fa fa-phone " aria-hidden="true">&nbsp; +62 274 451262 (Hunting) </i> <br>
-                    <i class="fa fa-phone" aria-hidden="true">&nbsp; +62 274 451263 (Telp) </i><br>
-                    <i class="fa fa-fax" aria-hidden="true">&nbsp; +62274451265 (Fax)</i><br>
-                    <i class="fa fa-envelope-o" aria-hidden="true">&nbsp; admin@stta.ac.id</i>
+                    <div class="col-sm-12 col-md-12">
+                        <i class="fa fa-phone " aria-hidden="true">&nbsp; +62 274 451262 (Hunting) </i>
+                    </div>
+                    <div class="col-sm-12 col-md-12">
+                        <i class="fa fa-phone" aria-hidden="true">&nbsp; +62 274 451263 (Telp) </i>
+                    </div>
+                    <div class="col-sm-12 col-md-12">
+                        <i class="fa fa-fax" aria-hidden="true">&nbsp; +62274451265 (Fax)</i><br>
+                    </div>
+                    <div class="col-sm-12 col-md-12">
+                        <i class="fa fa-envelope-o" aria-hidden="true">&nbsp; admin@stta.ac.id</i>
+                    </div>
                 </div>
             </div>
         </div>
@@ -51,4 +59,9 @@
     <div class="container text-center" style="padding: 7px;font-family: 'Arial'">
         Copyright 2010 - <?= date('Y'); ?> | Sekolah Tinggi Teknologi Adisutijpto Yogyakarta | Powered by TIK STTA | All Right Reserved
     </div>
+</div>
+
+<div class="container">
+<h3>
+Halo</h3>
 </div>

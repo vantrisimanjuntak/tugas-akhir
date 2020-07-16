@@ -1,4 +1,21 @@
 $(document).ready(function () {
+    $('#collapsibleNavbar').css("color: yellow");
+    var prevScrollpos = window.pageYOffset;
+    var nav = $('nav');
+    window.onscroll = function () {
+        var currentScrollPos = window.pageYOffset;
+        if (prevScrollpos > currentScrollPos) {
+            nav.addClass("fixed-top").show(400);
+        } else {
+            nav.hide(400);
+            // console.log("DOWN");
+            // nav.hide();
+            // nav.style.top = "-50px";
+        }
+        prevScrollpos = currentScrollPos;
+    }
+
+
     $('#nim_result').html('');
     $('#judulskripsi, #abstrak, #dp1, #dp2, #btnSubmit').prop('disabled', 'disabled');
 
@@ -39,10 +56,8 @@ $(document).ready(function () {
         }
     }
 
-
-    $('#btnSearch').click(function () {
+    function GetTitleFromDb() {
         var keyword = $('#keyword').val();
-
         if (keyword != '') {
             $.ajax({
                 url: "dashboard/home/searchtitle",
@@ -51,9 +66,20 @@ $(document).ready(function () {
                     judul_skripsi: keyword,
                 },
                 success: function (data) {
-                    $('#result').html(data);
+                    $('#result').show("slow", 1000).html(data);
                 },
             });
+        }
+    }
+
+
+    $('#btnSearch').click(function () {
+        GetTitleFromDb();
+    });
+
+    $('#keyword').on('keyup', function (e) {
+        if (e.keyCode == 13) {
+            GetTitleFromDb();
         }
     });
 

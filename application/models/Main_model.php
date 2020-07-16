@@ -44,6 +44,7 @@
         return $this->db->get('dosen')->result_array();
     }
 
+
     // end function for dosen
 
     // function for skripsi
@@ -70,13 +71,23 @@
     // function for search by title
     function searchtitle($keyword)
     {
+        $this->db->select('judul_skripsi, b.nama AS dosen_satu, c.nama AS dosen_dua');
+        $this->db->from('tugas_akhir a');
         $this->db->where('judul_skripsi', $keyword);
-        $query = $this->db->get('tugas_akhir');
+        $this->db->join('dosen b', 'a.dp_satu=b.nip');
+        $this->db->join('dosen c', 'a.dp_dua=c.nip');
+        $query = $this->db->get();
+        
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {
-                echo $row->judul_skripsi;
-                echo "<br>";
-                echo $row->no_reg;
+                echo '<div class="mt-2 pr-2 pl-2" style="background-color: RGB(0, 255, 255) ;border: 1px solid black; border-radius: 4px; color: #800080">
+                <h4 style="color: #800080">' . $row->judul_skripsi;
+                '</h4>';
+                echo '<h6 style="color: #800080">' . $row->dosen_satu;
+                '</h6> <br>' ;
+                echo '<h6 style="color: #800080">' . $row->dosen_dua;
+                '</h6>';
+                echo '</div>';
             }
         } else {
             echo "TIDAK ADA";
@@ -99,8 +110,7 @@
                     </script>';
         } else if ($query->num_rows() > 0 && $dataExists->num_rows() > 0) {
             echo "SKRIPSI SUDAH DIINPUT";
-        }
-        else {
+        } else {
             echo '<i class="fa fa-times" aria-hidden="true">&nbsp;NIM TIDAK ADA</i>';
             echo '<script>
                 $("#judulskripsi, #abstrak, #dp1, #dp2, #btnSubmit").prop("disabled", true);
