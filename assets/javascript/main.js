@@ -66,9 +66,12 @@ $(document).ready(function () {
                     judul_skripsi: keyword,
                 },
                 success: function (data) {
-                    $('#result').show("slow", 1000).html(data);
+                    $('#wrapper').css("height", "100%").show("slow", 1000);
+                    $('#result').html(data);
                 },
             });
+        } else {
+            Swal.fire('Kata kunci kosong');
         }
     }
 

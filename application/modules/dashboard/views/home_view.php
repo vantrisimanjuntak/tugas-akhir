@@ -22,7 +22,7 @@
     <!-- SweetAlert2 JS  -->
     <script src="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.js'); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
-    <script src="<?= base_url('assets/bootstrap-4.0.0/js/bootstrap.min.js'); ?>" type="javascript"></script>
+    <script src="<?= base_url('assets/bootstrap-4.0.0/js/bootstrap.min.js'); ?>"></script>
 
     <title><?= $title; ?></title>
     <style>
@@ -41,8 +41,8 @@
         <div class="pt-4 pl-3">
             <h1 class="text-white" style="width:180px;">Bingung dengan Tugas Akhir?</h1>
             <a href="#wrapper">
-                <button type="button" class="btn btn-success mt-4 font-weight-bold" style="border-radius: 26px;">
-                    <h5>Konsultasi disini</h5>
+                <button type="button" class="btn btn-success mt-4 font-weight-bold" style="border-radius: 29px;">
+                    <h5 class="mt-2">Konsultasi disini</h5>
                 </button>
             </a>
         </div>
@@ -87,7 +87,5 @@
     </script>
 
 </body>
-
-
 
 </html>

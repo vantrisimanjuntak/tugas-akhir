@@ -71,20 +71,24 @@
     // function for search by title
     function searchtitle($keyword)
     {
-        $this->db->select('judul_skripsi, b.nama AS dosen_satu, c.nama AS dosen_dua');
+
+        $this->db->select('judul_skripsi, abstrak, b.nama AS dosen_satu, c.nama AS dosen_dua');
         $this->db->from('tugas_akhir a');
-        $this->db->where('judul_skripsi', $keyword);
+        $this->db->like('judul_skripsi', $keyword);
         $this->db->join('dosen b', 'a.dp_satu=b.nip');
         $this->db->join('dosen c', 'a.dp_dua=c.nip');
         $query = $this->db->get();
-        
+
         if ($query->num_rows() > 0) {
             foreach ($query->result() as $row) {
                 echo '<div class="mt-2 pr-2 pl-2" style="background-color: RGB(0, 255, 255) ;border: 1px solid black; border-radius: 4px; color: #800080">
                 <h4 style="color: #800080">' . $row->judul_skripsi;
                 '</h4>';
+                echo "<br>";
+                echo "<small>" . $row->abstrak;
+                "</small>";
                 echo '<h6 style="color: #800080">' . $row->dosen_satu;
-                '</h6> <br>' ;
+                '</h6> <br>';
                 echo '<h6 style="color: #800080">' . $row->dosen_dua;
                 '</h6>';
                 echo '</div>';
