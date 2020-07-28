@@ -15,14 +15,6 @@
     <link href="https://fonts.googleapis.com/css2?family=Neuton:wght@700&display=swap" rel="stylesheet">
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.css'); ?>">
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
-    <!-- <script type="text/javascript" src="<?= base_url('assets/javascript/jquery-3.5.1.js') ?>"></script> -->
-    <script type="text/javascript" languange="javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script>
-    <!-- SweetAlert2 JS  -->
-    <script src="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.js'); ?>"></script>
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
     <title><?= $title; ?></title>
 </head>
 
@@ -96,10 +88,17 @@
         </form>
     </div>
     <!-- End Main Content -->
-
     <!-- Footer -->
     <?php $this->load->view('footer'); ?>
     <!-- End Footer -->
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"></script>
+<!-- <script type="text/javascript" src="<?= base_url('assets/javascript/jquery-3.5.1.js') ?>"></script> -->
+<script type="text/javascript" languange="javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script>
+<!-- SweetAlert2 JS  -->
+<script src="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.js'); ?>"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 </html>

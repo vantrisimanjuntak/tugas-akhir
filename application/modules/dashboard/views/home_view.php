@@ -14,6 +14,8 @@
     <link href="https://fonts.googleapis.com/css?family=Esteban&display=swap" rel="stylesheet">
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.css'); ?>">
+    <!-- Google Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="<?= base_url('assets/javascript/jquery-3.5.1.js') ?>"></script>
     <script type="text/javascript" languange="javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script>
@@ -35,31 +37,27 @@
     <?php $this->load->view('nav'); ?>
     <!-- End Navbar -->
     <!-- Content -->
-    <div class="pt-5" style="background-image: url('assets/images/img-1.jpg'); height: 350px; background-position:70% 30%;background-size:cover;position:relative;background-repeat:no-repeat;">
+    <div class="pt-5" style="background-image: url('assets/images/img-1.jpg'); height: 400px; background-position:70% 30%;background-size:cover;position:relative;background-repeat:no-repeat;">
         <div class="pt-4 pl-3">
-            <h2 class="text-white" style="width:180px;">Bingung dengan Tugas Akhir?</h2>
+            <h1 class="text-white" style="width:180px;">Bingung dengan Tugas Akhir?</h1>
             <a href="#wrapper">
-                <button type="button" class="btn btn-success mt-4 font-weight-bold">Konsultasi disini</button>
+                <button type="button" class="btn btn-success mt-4 font-weight-bold" style="border-radius: 26px;">
+                    <h5>Konsultasi disini</h5>
+                </button>
             </a>
         </div>
     </div>
     <!-- Content for Kata Kunci -->
     <div class="container" id="wrapper" style="margin-top:170px; height: 500px;">
-    <div class="div">
-    
-    </div>
-        <h3 class="text-center font-weight-bold mb-4">Judul</h3>
-        <!-- <form action="<?= base_url('dashboard/home/searchtitle'); ?>" method="POST" id="search"> -->
+        <h3 class="text-center font-weight-bold mb-4" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Kata Kunci</h3>
         <div class="input-group pt-4 mb-3">
             <input type="text" name="judul_skripsi" id="keyword" class="form-control" placeholder="Cari ...">
             <div class=" input-group-append">
                 <button class="btn btn-outline-secondary search" type="button" id="btnSearch"><i class="fa fa-search"></i></button>
             </div>
         </div>
-        <!-- </form> -->
         <!-- End Content for Kata Kunci -->
         <div class="container-fluid mb-3" id="result"></div>
-
     </div>
 
     <!-- Content for Result -->

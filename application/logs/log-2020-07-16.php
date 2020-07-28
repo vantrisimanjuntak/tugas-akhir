@@ -261,3 +261,8 @@ FROM `tugas_akhir` `a`
 JOIN `dosen` `b` ON `a`.`dp_satu`=`b`.`nip`
 JOIN `dosen` `c` ON `a`.`dp_dua`=`c`.`nip`
 WHERE `judul_skripsi` IS NULL
+ERROR - 2020-07-16 20:35:00 --> Query error: Not unique table/alias: 'b' - Invalid query: SELECT `judul_skripsi`, `b`.`nama` AS `dosen_satu`, `b`.`nama` AS `dosen_dua`
+FROM `tugas_akhir` `a`
+JOIN `dosen` `b` ON `a`.`dp_satu`=`b`.`nip`
+JOIN `dosen` `b` ON `a`.`dp_dua`=`b`.`nip`
+WHERE `judul_skripsi` = 'PENCARIAN KATA DASAR MENGGUNAKAN METODE PREFIX DAN POSTFIX BERBASIS WEB'
