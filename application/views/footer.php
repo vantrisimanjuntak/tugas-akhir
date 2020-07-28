@@ -60,7 +60,7 @@
         </div>
     </div>
     <div class="container-fluid mt-4 pb-3" style="background-color:#21086F; color:white;">
-        <div class="container text-center" style="padding: 7px;font-family: 'Arial'">
+        <div class="container pt-3 text-center font-weight-bold" style="font-family: 'Arial'">
             Copyright 2010 - <?= date('Y'); ?> | Sekolah Tinggi Teknologi Adisutijpto Yogyakarta | Powered by TIK STTA | All Right Reserved
         </div>
     </div>
