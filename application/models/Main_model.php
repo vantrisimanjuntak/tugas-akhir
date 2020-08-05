@@ -71,31 +71,62 @@
     // function for search by title
     function searchtitle($keyword)
     {
+        // cahnge keyword to lowercase
+        $kecilKeyword = strtolower($keyword);
 
-        $this->db->select('judul_skripsi, abstrak, b.nama AS dosen_satu, c.nama AS dosen_dua');
-        $this->db->from('tugas_akhir a');
-        $this->db->like('judul_skripsi', $keyword);
-        $this->db->join('dosen b', 'a.dp_satu=b.nip');
-        $this->db->join('dosen c', 'a.dp_dua=c.nip');
-        $query = $this->db->get();
+        // get data from DB
 
-        if ($query->num_rows() > 0) {
-            foreach ($query->result() as $row) {
-                echo '<div class="mt-2 pr-2 pl-2" style="background-color: RGB(0, 255, 255) ;border: 1px solid black; border-radius: 4px; color: #800080">
-                <h4 style="color: #800080">' . $row->judul_skripsi;
-                '</h4>';
-                echo "<br>";
-                echo "<small>" . $row->abstrak;
-                "</small>";
-                echo '<h6 style="color: #800080">' . $row->dosen_satu;
-                '</h6> <br>';
-                echo '<h6 style="color: #800080">' . $row->dosen_dua;
-                '</h6>';
-                echo '</div>';
-            }
-        } else {
-            echo "TIDAK ADA";
+        $this->db->select('judul_skripsi, abstrak');
+        $this->db->from('tugas_akhir');
+        $res =  $this->db->get();
+        foreach ($res->result_array() as $row) {
+            echo '<b>' . $row["judul_skripsi"] . '</b>';
+            echo "<br>";
+            echo $row['abstrak'];
+            echo "<br><br>";
+            $abstrak  = $row['abstrak'];
+            $kecilAbstrak = strtolower($abstrak);
+            $total = substr_count($kecilAbstrak, $kecilKeyword);
+            echo "Banyaknya kata $keyword dalam abstrak adalah :$total ";
+            echo "<br><br><br>";
         }
+
+
+        // $kecilKeyword = strtolower($keyword);
+        // $text = "HARI INI kita Akan BELAJAR Apa yAng KeMARIN KITA peLajaRI";
+        // // $lowerText = strtolower($text);
+        // echo "<br>";
+        // echo  $text;
+        // $totalKeyword =  substr_count($text, $ke);
+        // echo "<br>";
+        // echo $totalKeyword;
+
+
+        // $text = "Perkembangan jaringan Internet yang dipunggawai oleh perangkat CisCo dan jaringan Mikrotik";
+        // $wordsText = explode(" ", $text);
+        // $wordsKeyword = explode(" ", $keyword);
+
+        // echo substr_count($text, $keyword);
+
+
+        // $search_word = $keyword;
+        // $count = "0";
+        // for ($x = "0"; $x < strlen($text); $x++) {
+        //     if (substr($text, $x, 1) == $search_word) {
+        //         $count = $count + 1;
+        //     }
+        // }
+        // echo $count . "\n";
+
+        // $kata = array("HALO", "SEMUA", "Cisco", "dan", "Cisco");
+        // // $arr1 = explode(" ", $keyword);
+        // // $arr2 = explode(" ", $kata);
+
+        // if (in_array($keyword, $kata)) {
+        //     echo "ADA";
+        // } else {
+        //     echo "TIDAK ADA";
+        // }
     }
     // end function for skripsi
 
