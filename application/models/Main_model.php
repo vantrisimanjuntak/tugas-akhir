@@ -71,62 +71,30 @@
     // function for search by title
     function searchtitle($keyword)
     {
-        // cahnge keyword to lowercase
-        $kecilKeyword = strtolower($keyword);
+        // change keyword to lowercase
+
+        $toLowerKeyword = strtolower($keyword);
 
         // get data from DB
 
         $this->db->select('judul_skripsi, abstrak');
-        $this->db->from('tugas_akhir');
-        $res =  $this->db->get();
-        foreach ($res->result_array() as $row) {
-            echo '<b>' . $row["judul_skripsi"] . '</b>';
-            echo "<br>";
+        $this->db->from('sample');
+        $res = $this->db->get()->result_array();
+        $x =  json_encode($res);
+        $toLowerData = strtolower($x);
+        $countAll = substr_count($toLowerData, $toLowerKeyword);
+
+        foreach ($res as $row) {
+            $toLowerAbstrak = strtolower($row['abstrak']);
+            $count = substr_count($toLowerAbstrak, $toLowerKeyword);
             echo $row['abstrak'];
-            echo "<br><br>";
-            $abstrak  = $row['abstrak'];
-            $kecilAbstrak = strtolower($abstrak);
-            $total = substr_count($kecilAbstrak, $kecilKeyword);
-            echo "Banyaknya kata $keyword dalam abstrak adalah :$total ";
-            echo "<br><br><br>";
+            echo "<br>";
+            echo "Banyak kata $keyword dalam data ini adalah : $count";
+            echo "<br>";
         }
-
-
-        // $kecilKeyword = strtolower($keyword);
-        // $text = "HARI INI kita Akan BELAJAR Apa yAng KeMARIN KITA peLajaRI";
-        // // $lowerText = strtolower($text);
-        // echo "<br>";
-        // echo  $text;
-        // $totalKeyword =  substr_count($text, $ke);
-        // echo "<br>";
-        // echo $totalKeyword;
-
-
-        // $text = "Perkembangan jaringan Internet yang dipunggawai oleh perangkat CisCo dan jaringan Mikrotik";
-        // $wordsText = explode(" ", $text);
-        // $wordsKeyword = explode(" ", $keyword);
-
-        // echo substr_count($text, $keyword);
-
-
-        // $search_word = $keyword;
-        // $count = "0";
-        // for ($x = "0"; $x < strlen($text); $x++) {
-        //     if (substr($text, $x, 1) == $search_word) {
-        //         $count = $count + 1;
-        //     }
-        // }
-        // echo $count . "\n";
-
-        // $kata = array("HALO", "SEMUA", "Cisco", "dan", "Cisco");
-        // // $arr1 = explode(" ", $keyword);
-        // // $arr2 = explode(" ", $kata);
-
-        // if (in_array($keyword, $kata)) {
-        //     echo "ADA";
-        // } else {
-        //     echo "TIDAK ADA";
-        // }
+        echo "<br><br>";
+        echo "Total jumlah kata $keyword keseluruhan adalah : $countAll";
+        // echo $toLowerData;
     }
     // end function for skripsi
 
