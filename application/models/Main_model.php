@@ -71,31 +71,63 @@
     // function for search by title
     function searchtitle($keyword)
     {
-        // change keyword to lowercase
-
         $toLowerKeyword = strtolower($keyword);
+        $wordMark = '/[{}()""!,.:?]/';
+        $stopWords = [',', 'adalah', 'oleh', 'pada', 'ini', 'dan', 'yang', 'sebagai', 'sebuah', 'yaitu', 'untuk', 'selain', 'itu', 'dengan', 'ada', 'tentang', 'men', 'akan', 'an  ', 'bagi', 'dalam',  'judul_skripsi', 'abstrak'];
 
-        // get data from DB
+        $num_doc = 1;
 
         $this->db->select('judul_skripsi, abstrak');
         $this->db->from('sample');
         $res = $this->db->get()->result_array();
-        $x =  json_encode($res);
-        $toLowerData = strtolower($x);
-        $countAll = substr_count($toLowerData, $toLowerKeyword);
+        $j = json_encode($res);
 
         foreach ($res as $row) {
-            $toLowerAbstrak = strtolower($row['abstrak']);
-            $count = substr_count($toLowerAbstrak, $toLowerKeyword);
-            echo $row['abstrak'];
-            echo "<br>";
-            echo "Banyak kata $keyword dalam data ini adalah : $count";
-            echo "<br>";
+            echo "<b>Dokumen  " . $num_doc++ . "</b><br>";
+            echo "<b>DOKUMEN ASLI</b><br>";
+            $judulskripsi = $row['judul_skripsi'];
+            $abstrakskripsi = $row['abstrak'];
+            echo $judulskripsi . "<br>";
+            echo $abstrakskripsi . "<br><br>";
+            echo "<b>BERSIH</b><br>";
+            $judulKecil = strtolower($judulskripsi);
+            $abstrakKecil = strtolower($abstrakskripsi);
+            $judulRemove = preg_replace($wordMark, "", $judulKecil);
+            $abstrakRemove = preg_replace($wordMark, "", $abstrakKecil);
+            $unikAbstrak = array_unique(explode(" ", $abstrakRemove));
+            $ada = 1;
+            $tidak = 0;
+            foreach ($unikAbstrak as $clean) {
+                echo $clean . " ";
+            }
+            echo "<br><br>";
+            foreach ($res as $key => $value) {
+                foreach ($value as $y => $v) {
+                    $array[] = $v;
+                }
+            }
+            foreach ($array as $words) {
+                $geprek = preg_replace($wordMark, "", strtolower($words));
+                $prek = explode(" ", $geprek);
+                $unique = array_unique($prek);
+                foreach ($unique as $kata) {
+                    if ($kata != "") {
+                        if (strpos($abstrakRemove, $kata)) {
+                            $p[] = $kata . $ada;
+                            // echo "Kata " . $kata . " = " . $ada . " <br>";
+                        } else {
+                            $q[] = $kata . $tidak;
+                            // echo "Kata " . $kata . " = " . $tidak . "<br>";
+                        }
+                    }
+                }
+                $s = array_merge($p, $q);
+                print_r($s);
+            }
         }
-        echo "<br><br>";
-        echo "Total jumlah kata $keyword keseluruhan adalah : $countAll";
-        // echo $toLowerData;
     }
+
+    // end function for search by title
     // end function for skripsi
 
     function checknim($nim)
