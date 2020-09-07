@@ -65,7 +65,19 @@
             'dp_satu' => $dp1,
             'dp_dua' => $dp2,
         );
-        $this->db->insert('tugas_akhir', $data);
+        $this->db->insert('sample', $data);
+
+        $toLowerAbstrak = strtolower($abstrak);
+        $wordMark = '/[{}()""!,.:?]/';
+        $clean = preg_replace($wordMark, "", $toLowerAbstrak);
+        $explode = explode(" ", $clean);
+        foreach ($explode as $kata) {
+            $data = array(
+                'no_reg_dokumen' => $no_reg,
+                'kata_kata' => $kata,
+            );
+            $this->db->insert('pecah_kata', $data);
+        }
     }
 
     // function for search by title
@@ -80,8 +92,7 @@
         $this->db->select('judul_skripsi, abstrak');
         $this->db->from('sample');
         $res = $this->db->get()->result_array();
-        $j = json_encode($res);
-
+        // echo "<br></br>";
         foreach ($res as $row) {
             echo "<b>Dokumen  " . $num_doc++ . "</b><br>";
             echo "<b>DOKUMEN ASLI</b><br>";
@@ -95,35 +106,41 @@
             $judulRemove = preg_replace($wordMark, "", $judulKecil);
             $abstrakRemove = preg_replace($wordMark, "", $abstrakKecil);
             $unikAbstrak = array_unique(explode(" ", $abstrakRemove));
+
             $ada = 1;
             $tidak = 0;
-            foreach ($unikAbstrak as $clean) {
-                echo $clean . " ";
+            foreach ($unikAbstrak as $kata) {
+                echo $kata . " ";
             }
             echo "<br><br>";
-            foreach ($res as $key => $value) {
-                foreach ($value as $y => $v) {
-                    $array[] = $v;
-                }
-            }
-            foreach ($array as $words) {
-                $geprek = preg_replace($wordMark, "", strtolower($words));
-                $prek = explode(" ", $geprek);
-                $unique = array_unique($prek);
-                foreach ($unique as $kata) {
-                    if ($kata != "") {
-                        if (strpos($abstrakRemove, $kata)) {
-                            $p[] = $kata . $ada;
-                            // echo "Kata " . $kata . " = " . $ada . " <br>";
-                        } else {
-                            $q[] = $kata . $tidak;
-                            // echo "Kata " . $kata . " = " . $tidak . "<br>";
-                        }
+            echo "<b>Pecahan Kata</b><br>";
+            foreach ($res as $a => $b) {
+                foreach ($b as $c => $d) {
+                    $explode = explode(" ", $d);
+                    foreach ($explode as $kata) {
+                        $kata_kecil = strtolower($kata);
+                        $bersihkan_kata_kecil = preg_replace($wordMark, "", $kata_kecil);
+                        $x[] = $bersihkan_kata_kecil;
                     }
                 }
-                $s = array_merge($p, $q);
-                print_r($s);
             }
+            $unik = array_unique($x);
+            foreach ($unik as $kata_gabungan) {
+                if ($kata_gabungan != "") {
+                    if (strpos($abstrakRemove, $kata_gabungan)) {
+                        echo "Kata " . $kata_gabungan . " = " . $ada . "<br>";
+                        $m[] = $kata_gabungan . $ada;
+                    } else {
+                        echo "Kata " . $kata_gabungan . " = " . $tidak . "<br>";
+                        $n[] = $kata_gabungan . $tidak;
+                    }
+                }
+            }
+            $s = array_merge($m, $n);
+            $f = array_count_values($s);
+            print_r($f);
+
+            echo "<br><br>";
         }
     }
 
@@ -136,7 +153,7 @@
         $query = $this->db->get('mahasiswa');
 
         $this->db->where('mahasiswa', $nim);
-        $dataExists = $this->db->get('tugas_akhir');
+        $dataExists = $this->db->get('sample');
 
         if ($query->num_rows() > 0 && $dataExists->num_rows() == null) {
             echo '<i class="fa fa-check" aria-hidden="true" style="color:yellow"></i>';
