@@ -51,7 +51,7 @@
     <div class="container" id="wrapper" style="margin-top:170px; height: 500px;">
         <h3 class="text-center font-weight-bold mb-4" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Kata Kunci</h3>
         <div class="input-group pt-4 mb-3">
-            <input type="text" name="judul_skripsi" id="keyword" class="form-control" placeholder="Cari ...">
+            <input type="text" name="judul_skripsi" id="keyword" class="form-control" autofocus placeholder="Cari ...">
             <div class=" input-group-append">
                 <button class="btn btn-outline-secondary search" type="button" id="btnSearch"><i class="fa fa-search"></i></button>
             </div>

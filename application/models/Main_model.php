@@ -136,12 +136,19 @@
                     }
                 }
             }
-            $s = array_merge($m, $n);
-            $f = array_count_values($s);
-            print_r($f);
-
-            echo "<br><br>";
         }
+        echo "<br><br>";
+        $s = array_merge($m, $n);
+        $z = array_count_values($s);
+
+        foreach ($z as $key => $value) {
+            $belakang = substr($key, -1);
+            if ($belakang == 1) {
+                echo "Banyak dokumen yang mengandung kata " . substr($key, 0, -1) . " =" . $value . "<br>";
+            }
+        }
+
+        echo "<br><br>";
     }
 
     // end function for search by title
