@@ -66,18 +66,56 @@
             'dp_dua' => $dp2,
         );
         $this->db->insert('sample', $data);
-
+        $wordMark = '/[{}()""!,.:?]/';
         $toLowerAbstrak = strtolower($abstrak);
         $wordMark = '/[{}()""!,.:?]/';
         $clean = preg_replace($wordMark, "", $toLowerAbstrak);
-        $explode = explode(" ", $clean);
+        $explode = array_unique(explode(" ", $clean));
         foreach ($explode as $kata) {
             $data = array(
-                'no_reg_dokumen' => $no_reg,
                 'kata_kata' => $kata,
+                'no_doc' => $no_reg,
             );
             $this->db->insert('pecah_kata', $data);
         }
+        $ada = 1;
+        $tidak = 0;
+        $this->db->select('abstrak');
+        $sample = $this->db->get('sample');
+        foreach ($sample->result_array() as $row) {
+            $per_abstrak = strtolower(preg_replace($wordMark, "", $row['abstrak']));
+            echo $per_abstrak  . "<br>";
+            $this->db->select('kata_kata');
+            $query = $this->db->get('pecah_kata')->result_array();
+            foreach ($query as $row) {
+                $seluruh_data = $row['kata_kata'];
+                if ($seluruh_data != "") {
+                    if (strpos($per_abstrak, $seluruh_data) !== FALSE) {
+                        echo "Kata " . $seluruh_data . " = " . $ada . "<br>";
+                        $m[] = $seluruh_data . $ada;
+                    } else {
+                        echo "Kata " . $seluruh_data . " = " . $tidak . "<br>";
+                        $n[] = $seluruh_data . $tidak;
+                    }
+                }
+            }
+        }
+        $p = array_merge($m, $n);
+        $q = array_count_values($p);
+
+
+        $banyakDokumen = $sample->num_rows();
+        foreach ($q as $key => $value) {
+            $belakang = substr($key, -1);
+            if ($belakang == 1) {
+                // $akar = substr($key, 0, -1);
+                echo "Banyak dokumen yang mengandung kata " . substr($key, 0, -1) . " =" . round(sqrt($value))   . "<br>";
+                $this->db->set('total_dokumen', round(sqrt($value)));
+                $this->db->where('kata_kata', substr($key, 0, -1));
+                $this->db->update('pecah_kata');
+            }
+        }
+        // echo "<b>SELURUH KATA</b><br>";
     }
 
     // function for search by title
@@ -115,43 +153,10 @@
             echo "<br><br>";
             echo "<b>Pecahan Kata</b><br>";
             // KUMPULAN SELURUH KATA-KATA
-            foreach ($res->result_array() as $a => $b) {
-                foreach ($b as $semuaKata) {
-                    $arrayPecahanKata = explode(" ", $semuaKata);
-                    foreach ($arrayPecahanKata as $KataKata) {
-                        // Mengubah ke huruf kecil
-                        $kataKecil = strtolower($KataKata);
-                        $bersihkankataKecil = preg_replace($wordMark, "", $kataKecil);
-                        $x[] = $bersihkankataKecil;
-                    }
-                }
-            }
-            $unik = array_unique($x);
-            foreach ($unik as $kataUnik) {
-                if ($kataUnik != "") {
-                    if (strpos($abstrakRemove2, $kataUnik) !== FALSE) {
-                        echo "Kata " . $kataUnik . " = " . $ada . "<br>";
-                        $m[] = $kataUnik . $ada;
-                    } else {
-                        echo "Kata " . $kataUnik . " = " . $tidak . "<br>";
-                        $n[] = $kataUnik . $tidak;
-                    }
-                }
-            }
-        }
-        $s = array_merge($m, $n);
-        $z = array_count_values($s);
-
-        $banyakDokumen = $res->num_rows();
-        foreach ($z as $key => $value) {
-            $belakang = substr($key, -1);
-            if ($belakang == 1) {
-                echo "Banyak dokumen yang mengandung kata " . substr($key, 0, -1) . " =" . $value;
-                echo "<br>";
-                $Ddf = $banyakDokumen / $value;
-                echo "D/Df = " . $Ddf;
-                echo "<br>";
-                echo "IDF = " . log10($Ddf) . "<br><br>";
+            $this->db->select('kata_kata');
+            $kata = $this->db->get('pecah_kata');
+            foreach ($kata->result_array() as $row) {
+                echo $row['kata_kata'] . "<br>";
             }
         }
     }
