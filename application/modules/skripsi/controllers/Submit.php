@@ -8,6 +8,6 @@
     function index()
     {
         $this->Main_model->submitSkripsi();
-        // redirect('skripsi');
+        redirect('skripsi');
     }
 }

@@ -109,10 +109,20 @@
             $belakang = substr($key, -1);
             if ($belakang == 1) {
                 // $akar = substr($key, 0, -1);
-                echo "Banyak dokumen yang mengandung kata " . substr($key, 0, -1) . " =" . round(sqrt($value))   . "<br>";
-                $this->db->set('total_dokumen', round(sqrt($value)));
+                $nilai = round(sqrt($value));
+                $df = $banyakDokumen / $nilai;
+                echo "Banyak dokumen yang mengandung kata " . substr($key, 0, -1) . " =" . $nilai   . "<br>";
+                $idf = log10($df);
+                echo '<b>IDF</b>= ' . $idf . "<br>";
+                $data = array(
+                    'total_dokumen' => $nilai,
+                    'idf' => $idf,
+                );
                 $this->db->where('kata_kata', substr($key, 0, -1));
-                $this->db->update('pecah_kata');
+                // $this->db->set('total_dokumen', $nilai);
+                // $this->db->set('idf', $idf);
+                // $this->db->where('kata_kata', substr($key, 0, -1));
+                $this->db->update('pecah_kata', $data);
             }
         }
         // echo "<b>SELURUH KATA</b><br>";
