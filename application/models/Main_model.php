@@ -66,62 +66,68 @@
             'dp_dua' => $dp2,
         );
         $this->db->insert('sample', $data);
+
+        $this->db->select('kata_kata');
+        $query = $this->db->get('pecah_kata')->result_array();
+
         $wordMark = '/[{}()""!,.:?]/';
         $toLowerAbstrak = strtolower($abstrak);
-        $wordMark = '/[{}()""!,.:?]/';
         $clean = preg_replace($wordMark, "", $toLowerAbstrak);
         $explode = array_unique(explode(" ", $clean));
-        foreach ($explode as $kata) {
-            $data = array(
-                'kata_kata' => $kata,
-                'no_doc' => $no_reg,
-            );
-            $this->db->insert('pecah_kata', $data);
-        }
-        $ada = 1;
-        $tidak = 0;
-        $this->db->select('abstrak');
-        $sample = $this->db->get('sample');
-        foreach ($sample->result_array() as $row) {
-            $per_abstrak = strtolower(preg_replace($wordMark, "", $row['abstrak']));
-            // echo $per_abstrak  . "<br>";
-            $this->db->select('kata_kata');
-            $query = $this->db->get('pecah_kata')->result_array();
-            foreach ($query as $row) {
-                $seluruh_data = $row['kata_kata'];
-                if ($seluruh_data != "") {
-                    if (strpos($per_abstrak, $seluruh_data) !== FALSE) {
-                        // echo "Kata " . $seluruh_data . " = " . $ada . "<br>";
-                        $m[] = $seluruh_data . $ada;
-                    } else {
-                        // echo "Kata " . $seluruh_data . " = " . $tidak . "<br>";
-                        $n[] = $seluruh_data . $tidak;
-                    }
+
+        foreach ($explode as $wordsAbstrak) {
+            $this->db->where('kata_kata', $wordsAbstrak);
+            $q = $this->db->get('pecah_kata');
+
+            $this->db->select('total_dokumen');
+            $this->db->where('kata_kata', $wordsAbstrak);
+            $n = $this->db->get('pecah_kata');
+            if ($q->num_rows() > 0) {
+                foreach ($n->result_array() as $key) {
                 }
-            }
-        }
-        $p = array_merge($m, $n);
-        $q = array_count_values($p);
-
-
-        $banyakDokumen = $sample->num_rows();
-        foreach ($q as $key => $value) {
-            $belakang = substr($key, -1);
-            if ($belakang == 1 && $belakang != "") {
-                // $akar = substr($key, 0, -1);
-                $nilai = round(sqrt($value));
-                $df = $banyakDokumen / $nilai;
-                // echo "Banyak dokumen yang mengandung kata " . substr($key, 0, -1) . " =" . $nilai   . "<br>";
-                $idf = log10($df);
-                // echo '<b>IDF</b>= ' . $idf . "<br>";
-                $data = array(
-                    'total_dokumen' => $nilai,
-                    'idf' => $idf,
+                $count = $key['total_dokumen'];
+                $count++;
+                $this->db->set('total_dokumen', $count);
+                $this->db->where('kata_kata', $wordsAbstrak);
+                $this->db->update('pecah_kata');
+            } else {
+                $x = array(
+                    'kata_kata' => $wordsAbstrak,
+                    'no_doc' => $no_reg,
+                    'total_dokumen' => 1,
                 );
-                $this->db->where('kata_kata', substr($key, 0, -1));
-                $this->db->update('pecah_kata', $data);
+                $this->db->insert('pecah_kata', $x);
             }
         }
+
+
+
+
+        // $wordMark = '/[{}()""!,.:?]/';
+        // $toLowerAbstrak = strtolower($abstrak);
+        // $clean = preg_replace($wordMark, "", $toLowerAbstrak);
+        // $explode = array_unique(explode(" ", $clean));
+        // foreach ($explode as $kata) {
+        //     $this->db->select('kata_kata');
+        //     $query = $this->db->get('pecah_kata');
+        //     foreach ($query->result_array() as $row) {
+        //         if ($kata == $row['kata_kata']) {
+        //             echo $kata . " sama" . "<br>";
+        //         } else {
+        //             echo $kata . " beda" . "<br>";
+        //         }
+        //     }
+        //     // if ($kata != "") {
+        //     //     $data = array(
+        //     //         'kata_kata' => $kata,
+        //     //         'no_doc' => $no_reg,
+        //     //     );
+        //     //     // $this->db->insert('pecah_kata', $data);
+        //     // }
+        // }
+
+
+
         // echo "<b>SELURUH KATA</b><br>";
     }
 
