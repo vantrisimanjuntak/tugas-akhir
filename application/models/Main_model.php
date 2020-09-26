@@ -75,29 +75,48 @@
         $clean = preg_replace($wordMark, "", $toLowerAbstrak);
         $explode = array_unique(explode(" ", $clean));
 
-        foreach ($explode as $wordsAbstrak) {
-            $this->db->where('kata_kata', $wordsAbstrak);
-            $q = $this->db->get('pecah_kata');
+        // Banyak data
+        $t = $this->db->get('sample');
+        $banyakData =  $t->num_rows();
+        // D/df
 
-            $this->db->select('total_dokumen');
-            $this->db->where('kata_kata', $wordsAbstrak);
-            $n = $this->db->get('pecah_kata');
-            if ($q->num_rows() > 0) {
-                foreach ($n->result_array() as $key) {
-                }
-                $count = $key['total_dokumen'];
-                $count++;
-                $this->db->set('total_dokumen', $count);
+        foreach ($explode as $wordsAbstrak) {
+
+            if ($wordsAbstrak != "") {
                 $this->db->where('kata_kata', $wordsAbstrak);
-                $this->db->update('pecah_kata');
-            } else {
-                $x = array(
-                    'kata_kata' => $wordsAbstrak,
-                    'no_doc' => $no_reg,
-                    'total_dokumen' => 1,
-                );
-                $this->db->insert('pecah_kata', $x);
+                $query = $this->db->get('pecah_kata');
+                // UPDATE TOTAL_DOKUMEN
+                if ($query->num_rows() > 0) {
+                    foreach ($query->result_array() as $row) {
+                        $id = $row['id'];
+                        $katakata = $row['kata_kata'];
+                        $totalDokumen = $row['total_dokumen'];
+                    }
+                    $totalDokumen++;
+
+                    $this->db->set('total_dokumen', $totalDokumen);
+                    $this->db->where('kata_kata', $katakata);
+                    $this->db->update('pecah_kata');
+                } else {
+                    $IdfBaru = log10($banyakData / 1);
+                    $data = array(
+                        'kata_kata' => $wordsAbstrak,
+                        'no_doc' => $no_reg,
+                        'total_dokumen' => 1,
+                        'idf' => $IdfBaru,
+
+                    );
+                    $this->db->insert('pecah_kata', $data);
+                }
             }
+        }
+        // UPDATE IDF
+        $u = $this->db->get('pecah_kata')->result_array();
+        foreach ($u as $row) {
+            $idf = log10($banyakData / $row['total_dokumen']);
+            $this->db->set('idf', $idf);
+            $this->db->where('kata_kata', $row['kata_kata']);
+            $this->db->update('pecah_kata');
         }
 
 
