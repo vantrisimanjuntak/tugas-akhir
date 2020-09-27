@@ -185,11 +185,19 @@
             echo "<br><br>";
             echo "<b>Pecahan Kata</b><br>";
             // KUMPULAN SELURUH KATA-KATA
-            $this->db->select('kata_kata');
-            $kata = $this->db->get('pecah_kata');
-            foreach ($kata->result_array() as $row) {
-                echo $row['kata_kata'] . "<br>";
+            $this->db->select('kata_kata ,idf');
+            $query = $this->db->get('pecah_kata');
+            foreach ($query->result_array() as $row) {
+                if (strpos($abstrakRemove2, $row['kata_kata']) !== FALSE) {
+                    echo $row['kata_kata'] . " " . $row['idf'] . "<br>";
+                    $a[] = $row['idf'];
+                } else {
+                    echo $row['kata_kata'] . " " . $tidak . "<br>";
+                    $b[] = $row['idf'];
+                }
             }
+            $gabung = array_merge($a, $b);
+            echo array_sum($gabung);
         }
     }
 
