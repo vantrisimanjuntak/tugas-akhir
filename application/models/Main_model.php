@@ -198,6 +198,19 @@
             }
             $gabung = array_merge($a, $b);
             echo array_sum($gabung);
+            echo "<br><br>";
+            foreach ($query->result_array() as $r) {
+                if (strpos($toLowerKeyword, $r['kata_kata']) !== FALSE) {
+                    echo $r['kata_kata'] . " " . $r['idf'] . "<br>";
+                    $p[] = $r['idf'];
+                }
+            }
+
+            echo array_sum($p);
+            echo "<br><br>";
+            // $explodeKeyword = explode(" ", $toLowerKeyword);
+            // print_r($explodeKeyword);
+            // echo  "<br><br>";
         }
     }
 
