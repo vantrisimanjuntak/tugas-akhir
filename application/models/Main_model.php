@@ -164,7 +164,8 @@
         $res = $this->db->get();
 
         foreach ($res->result_array() as $row) {
-            echo "<b>Dokumen  " . $num_doc++ . "</b><br>";
+            $namaDokumen = "<b>Dokumen " . $num_doc++ . "</b>";
+            echo $namaDokumen . "<br>";
             echo "<b>DOKUMEN ASLI</b><br>";
             $judulskripsi = $row['judul_skripsi'];
             $abstrakskripsi = $row['abstrak'];
@@ -193,25 +194,43 @@
                     $a[] = $row['idf'];
                 } else {
                     echo $row['kata_kata'] . " " . $tidak . "<br>";
-                    $b[] = $row['idf'];
+                    $b[] = $tidak;
                 }
             }
-            $gabung = array_merge($a, $b);
-            echo array_sum($gabung);
-            echo "<br><br>";
-            foreach ($query->result_array() as $r) {
-                if (strpos($toLowerKeyword, $r['kata_kata']) !== FALSE) {
-                    echo $r['kata_kata'] . " " . $r['idf'] . "<br>";
-                    $p[] = $r['idf'];
+            $gabungan = array_merge($a, $b);
+            echo "<b>SUM = </b>" . array_sum($gabungan);
+
+            echo  "<br><br>";
+            foreach ($unikAbstrak as $kata) {
+                if ($kata != "") {
+                    if (strpos($toLowerKeyword, $kata) !== FALSE) {
+                        $this->db->select('kata_kata, idf');
+                        $this->db->where('kata_kata', $kata);
+                        $query = $this->db->get('pecah_kata');
+                        $nul = 0;
+                        if ($query->num_rows() > 0) {
+                            foreach ($query->result_array() as $key) {
+                                echo $kata . " " . $key['idf'] . "<br>";
+                                $f[] = $key['idf'];
+                            }
+                            print_r($f);
+                        } else {
+                            echo $kata . " " . $tidak . "<br>";
+                            $g[] = $tidak;
+                        }
+                    }
                 }
             }
 
-            echo array_sum($p);
-            echo "<br><br>";
-            // $explodeKeyword = explode(" ", $toLowerKeyword);
-            // print_r($explodeKeyword);
-            // echo  "<br><br>";
+            echo "<b>HASIL = </b>";
+            echo  "<br><br>";
         }
+
+        // print_r($cuancuan);
+        // arsort($cuancuan);
+        // foreach ($cuancuan as $key => $value) {
+        //     echo "Dokumen" . $key . $value . "<br>";
+        // }
     }
 
 

@@ -1224,3 +1224,23 @@ ERROR - 2020-09-28 06:43:00 --> Severity: Warning --> array_sum() expects parame
 ERROR - 2020-09-28 06:45:21 --> Severity: Notice --> Undefined variable: q C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 210
 ERROR - 2020-09-28 06:45:21 --> Severity: Warning --> array_merge(): Expected parameter 2 to be an array, null given C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 210
 ERROR - 2020-09-28 06:45:21 --> Severity: Warning --> array_sum() expects parameter 1 to be array, null given C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 211
+ERROR - 2020-09-28 09:45:14 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 210
+ERROR - 2020-09-28 09:45:14 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 210
+ERROR - 2020-09-28 09:45:14 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 210
+ERROR - 2020-09-28 09:48:07 --> Severity: Notice --> Array to string conversion C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 218
+ERROR - 2020-09-28 09:49:45 --> Severity: Notice --> Undefined variable: p C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 209
+ERROR - 2020-09-28 09:49:45 --> Severity: Warning --> array_sum() expects parameter 1 to be array, null given C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 209
+ERROR - 2020-09-28 09:49:45 --> Severity: Notice --> Undefined variable: p C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 210
+ERROR - 2020-09-28 09:49:45 --> Severity: Warning --> array_sum() expects parameter 1 to be array, null given C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 210
+ERROR - 2020-09-28 09:49:45 --> Severity: Notice --> Undefined variable: p C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 209
+ERROR - 2020-09-28 09:49:45 --> Severity: Warning --> array_sum() expects parameter 1 to be array, null given C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 209
+ERROR - 2020-09-28 09:49:45 --> Severity: Notice --> Undefined variable: p C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 210
+ERROR - 2020-09-28 09:49:45 --> Severity: Warning --> array_sum() expects parameter 1 to be array, null given C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 210
+ERROR - 2020-09-28 09:49:45 --> Severity: Notice --> Undefined variable: p C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 209
+ERROR - 2020-09-28 09:49:45 --> Severity: Warning --> array_sum() expects parameter 1 to be array, null given C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 209
+ERROR - 2020-09-28 09:49:45 --> Severity: Notice --> Undefined variable: p C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 210
+ERROR - 2020-09-28 09:49:45 --> Severity: Warning --> array_sum() expects parameter 1 to be array, null given C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 210
+ERROR - 2020-09-28 10:24:08 --> Severity: error --> Exception: syntax error, unexpected ';', expecting ')' C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 209
+ERROR - 2020-09-28 10:28:58 --> Severity: Warning --> array_sum() expects parameter 1 to be array, string given C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 211
+ERROR - 2020-09-28 10:28:58 --> Severity: Warning --> array_sum() expects parameter 1 to be array, string given C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 211
+ERROR - 2020-09-28 10:28:58 --> Severity: Warning --> array_sum() expects parameter 1 to be array, string given C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 211
