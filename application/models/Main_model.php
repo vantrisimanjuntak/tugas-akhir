@@ -118,10 +118,6 @@
             $this->db->where('kata_kata', $row['kata_kata']);
             $this->db->update('pecah_kata');
         }
-
-
-
-
         // $wordMark = '/[{}()""!,.:?]/';
         // $toLowerAbstrak = strtolower($abstrak);
         // $clean = preg_replace($wordMark, "", $toLowerAbstrak);
@@ -185,52 +181,27 @@
             }
             echo "<br><br>";
             echo "<b>Pecahan Kata</b><br>";
+            $null = 0;
             // KUMPULAN SELURUH KATA-KATA
-            $this->db->select('kata_kata ,idf');
-            $query = $this->db->get('pecah_kata');
-            foreach ($query->result_array() as $row) {
-                if (strpos($abstrakRemove2, $row['kata_kata']) !== FALSE) {
-                    echo $row['kata_kata'] . " " . $row['idf'] . "<br>";
-                    $a[] = $row['idf'];
-                } else {
-                    echo $row['kata_kata'] . " " . $tidak . "<br>";
-                    $b[] = $tidak;
-                }
-            }
-            $gabungan = array_merge($a, $b);
-            echo "<b>SUM = </b>" . array_sum($gabungan);
-
-            echo  "<br><br>";
             foreach ($unikAbstrak as $kata) {
                 if ($kata != "") {
-                    if (strpos($toLowerKeyword, $kata) !== FALSE) {
-                        $this->db->select('kata_kata, idf');
-                        $this->db->where('kata_kata', $kata);
-                        $query = $this->db->get('pecah_kata');
-                        $nul = 0;
-                        if ($query->num_rows() > 0) {
-                            foreach ($query->result_array() as $key) {
-                                echo $kata . " " . $key['idf'] . "<br>";
-                                $f[] = $key['idf'];
-                            }
-                            print_r($f);
-                        } else {
-                            echo $kata . " " . $tidak . "<br>";
-                            $g[] = $tidak;
+                    $this->db->where('kata_kata', $kata);
+                    $query = $this->db->get('pecah_kata');
+
+                    if ($query->num_rows() > 0) {
+                        foreach ($query->result_array() as $row) {
+                            echo $kata . " " . $row['idf'] . "<br>";
+                            $idf = $row['idf'];
                         }
+                        $null += $idf;
                     }
                 }
             }
+            echo "<br><br>";
+            echo "<b>SUM = $null </b>";
 
-            echo "<b>HASIL = </b>";
             echo  "<br><br>";
         }
-
-        // print_r($cuancuan);
-        // arsort($cuancuan);
-        // foreach ($cuancuan as $key => $value) {
-        //     echo "Dokumen" . $key . $value . "<br>";
-        // }
     }
 
 
