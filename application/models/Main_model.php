@@ -181,25 +181,42 @@
             }
             echo "<br><br>";
             echo "<b>Pecahan Kata</b><br>";
-            $null = 0;
+            $sum = 0;
             // KUMPULAN SELURUH KATA-KATA
             foreach ($unikAbstrak as $kata) {
                 if ($kata != "") {
                     $this->db->where('kata_kata', $kata);
                     $query = $this->db->get('pecah_kata');
-
                     if ($query->num_rows() > 0) {
                         foreach ($query->result_array() as $row) {
                             echo $kata . " " . $row['idf'] . "<br>";
                             $idf = $row['idf'];
                         }
-                        $null += $idf;
+                        $sum += $idf;
+                    }
+                }
+            }
+            $cek = 0;
+            echo  "<br><br>";
+            foreach ($unikAbstrak as $kata) {
+                if ($kata != "") {
+                    if (strpos($toLowerKeyword, $kata) !== FALSE) {
+                        $this->db->select('kata_kata, idf');
+                        $this->db->where('kata_kata', $kata);
+                        $query = $this->db->get('pecah_kata');
+                        if ($query->num_rows() > 0) {
+                            foreach ($query->result_array() as $row) {
+                                echo $kata . " " . $row['idf'] . "<br>";
+                            }
+                            $cek += $row['idf'];
+                        }
                     }
                 }
             }
             echo "<br><br>";
-            echo "<b>SUM = $null </b>";
-
+            echo "<b>SUM = $sum </b>";
+            echo  "<br><br>";
+            echo "<b>Nilai Kata Kunci = $cek</b>";
             echo  "<br><br>";
         }
     }
