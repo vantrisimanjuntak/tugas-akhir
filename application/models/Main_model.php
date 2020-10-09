@@ -118,32 +118,6 @@
             $this->db->where('kata_kata', $row['kata_kata']);
             $this->db->update('pecah_kata');
         }
-        // $wordMark = '/[{}()""!,.:?]/';
-        // $toLowerAbstrak = strtolower($abstrak);
-        // $clean = preg_replace($wordMark, "", $toLowerAbstrak);
-        // $explode = array_unique(explode(" ", $clean));
-        // foreach ($explode as $kata) {
-        //     $this->db->select('kata_kata');
-        //     $query = $this->db->get('pecah_kata');
-        //     foreach ($query->result_array() as $row) {
-        //         if ($kata == $row['kata_kata']) {
-        //             echo $kata . " sama" . "<br>";
-        //         } else {
-        //             echo $kata . " beda" . "<br>";
-        //         }
-        //     }
-        //     // if ($kata != "") {
-        //     //     $data = array(
-        //     //         'kata_kata' => $kata,
-        //     //         'no_doc' => $no_reg,
-        //     //     );
-        //     //     // $this->db->insert('pecah_kata', $data);
-        //     // }
-        // }
-
-
-
-        // echo "<b>SELURUH KATA</b><br>";
     }
 
     // function for search by title
@@ -155,12 +129,13 @@
 
         $num_doc = 1;
 
-        $this->db->select('judul_skripsi, abstrak');
+        $this->db->select('judul_skripsi, abstrak, no_reg');
         $this->db->from('sample');
         $res = $this->db->get();
 
         foreach ($res->result_array() as $row) {
             $namaDokumen = "<b>Dokumen " . $num_doc++ . "</b>";
+            $idDokumen = $row['no_reg'];
             echo $namaDokumen . "<br>";
             echo "<b>DOKUMEN ASLI</b><br>";
             $judulskripsi = $row['judul_skripsi'];
@@ -189,7 +164,7 @@
                     $query = $this->db->get('pecah_kata');
                     if ($query->num_rows() > 0) {
                         foreach ($query->result_array() as $row) {
-                            echo $kata . " " . $row['idf'] . "<br>";
+                            // echo $kata . " " . $row['idf'] . "<br>";
                             $idf = $row['idf'];
                         }
                         $sum += $idf;
@@ -206,19 +181,43 @@
                         $query = $this->db->get('pecah_kata');
                         if ($query->num_rows() > 0) {
                             foreach ($query->result_array() as $row) {
-                                echo $kata . " " . $row['idf'] . "<br>";
+                                // echo $kata . " " . $row['idf'] . "<br>";
                             }
                             $cek += $row['idf'];
                         }
                     }
+                    $asf = array($namaDokumen => $cek);
                 }
             }
+
+            // print_r($asf);
             echo "<br><br>";
             echo "<b>SUM = $sum </b>";
-            echo  "<br><br>";
+            echo  "<br>";
             echo "<b>Nilai Kata Kunci = $cek</b>";
             echo  "<br><br>";
+
+
+            $namaDokumenArray = array(
+                // 'idDokumen' => $idDokumen,
+                'judulSkripsi' => $judulskripsi,
+                'nilaiKataKunci' => $cek,
+            );
+
+            print_r($namaDokumenArray);
+            echo "<br>";
+            $x[] = $namaDokumenArray;
+            // print_r($x);
         }
+        echo "<br><br><br>";
+        echo "<b>Perhitungan</b><br>";
+        // print_r($x);
+        $ccc = array_column($x, 'nilaiKataKunci', 'judulSkripsi');
+        arsort($ccc);
+        foreach ($ccc as $key => $value) {
+            echo $key . " " . $value . "<br>";
+        }
+        echo "<br><br><br>";
     }
 
 
