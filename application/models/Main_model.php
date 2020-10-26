@@ -26,6 +26,7 @@
         $config['max_size'] = '2048';
         $config['max_width'] = '0';
         $config['max_height'] = '0';
+        $config['file_name'] = $this->input->post('nip');
 
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
@@ -41,7 +42,9 @@
     }
     function allLecture()
     {
-        return $this->db->get('dosen')->result_array();
+        $this->db->order_by('nama', 'ASC');
+        $query = $this->db->get('dosen');
+        return $query->result_array();
     }
 
 
@@ -65,7 +68,7 @@
             'dp_satu' => $dp1,
             'dp_dua' => $dp2,
         );
-        $this->db->insert('sample', $data);
+        $this->db->insert('tugas_akhir', $data);
 
         $this->db->select('kata_kata');
         $query = $this->db->get('pecah_kata')->result_array();
@@ -76,7 +79,7 @@
         $explode = array_unique(explode(" ", $clean));
 
         // Banyak data
-        $t = $this->db->get('sample');
+        $t = $this->db->get('tugas_akhir');
         $banyakData =  $t->num_rows();
         // D/df
 
@@ -98,8 +101,10 @@
                     $this->db->where('kata_kata', $katakata);
                     $this->db->update('pecah_kata');
                 } else {
+
                     $IdfBaru = log10($banyakData / 1);
                     $data = array(
+
                         'kata_kata' => $wordsAbstrak,
                         'no_doc' => $no_reg,
                         'total_dokumen' => 1,
@@ -129,8 +134,8 @@
 
         $num_doc = 1;
 
-        $this->db->select('judul_skripsi, abstrak, no_reg');
-        $this->db->from('sample');
+        $this->db->select('judul_skripsi, abstrak, no_reg, dp_satu, dp_dua');
+        $this->db->from('tugas_akhir');
         $res = $this->db->get();
 
         foreach ($res->result_array() as $row) {
@@ -140,6 +145,8 @@
             echo "<b>DOKUMEN ASLI</b><br>";
             $judulskripsi = $row['judul_skripsi'];
             $abstrakskripsi = $row['abstrak'];
+            $dosen1 = $row['dp_satu'];
+            $dosen2 = $row['dp_dua'];
             echo $judulskripsi . "<br>";
             echo $abstrakskripsi . "<br><br>";
             echo "<b>BERSIH</b><br>";
@@ -155,8 +162,15 @@
                 echo $kata . " ";
             }
             echo "<br><br>";
+            echo "<b>Banyak Kata</b>";
+
+            echo "<br><br>";
             echo "<b>Pecahan Kata</b><br>";
+
+            // nilai awal (sebelum dipangkat)
             $sum = 0;
+            // nilai awal (setelah dipangkat)
+            $pangkat_sum = 0;
             // KUMPULAN SELURUH KATA-KATA
             foreach ($unikAbstrak as $kata) {
                 if ($kata != "") {
@@ -164,15 +178,23 @@
                     $query = $this->db->get('pecah_kata');
                     if ($query->num_rows() > 0) {
                         foreach ($query->result_array() as $row) {
-                            // echo $kata . " " . $row['idf'] . "<br>";
+                            // $ho = pow($row['idf'], 2); // $ho = nilai $row['idf'] yang dipangkatdua kan
+                            echo $kata . " " . $row['idf']  .   "<br>";
                             $idf = $row['idf'];
                         }
+                        // sebelum dipangkatkan
                         $sum += $idf;
+                        // setelah dipangkatkan
+                        $pangkat_sum += pow($idf, 2);
                     }
                 }
             }
+            // nilai awal (sebelum dipangkat)
             $cek = 0;
-            echo  "<br><br>";
+            // nilai awal (setelah dipangkat)
+            $cek_after = 0;
+            $ts = 0;
+            // echo  "<br><br>";
             foreach ($unikAbstrak as $kata) {
                 if ($kata != "") {
                     if (strpos($toLowerKeyword, $kata) !== FALSE) {
@@ -181,41 +203,104 @@
                         $query = $this->db->get('pecah_kata');
                         if ($query->num_rows() > 0) {
                             foreach ($query->result_array() as $row) {
-                                // echo $kata . " " . $row['idf'] . "<br>";
+                                $xxx = pow($row['idf'], 2);
+
+                                echo "<b>" . $kata . " " . $row['idf'] . " " . $xxx . "</b><br>";
                             }
+                            // Hasil pencarian sebelum dipangkat
                             $cek += $row['idf'];
+                            // Hasil pencarian setelah dipangkat
+                            $cek_after += pow($row['idf'], 2);
+                            // $ts += $xxx;
                         }
                     }
-                    $asf = array($namaDokumen => $cek);
+                    $asf = array($namaDokumen =>  $cek);
                 }
             }
 
-            // print_r($asf);
+            print_r($asf);
             echo "<br><br>";
+            // SUM sebelum dipangkat
             echo "<b>SUM = $sum </b>";
+            echo "<br>";
+            // SUM setelah dipangkat
+            echo "<b>SUM Sqrt = " . sqrt($pangkat_sum)   . "</b>";
             echo  "<br>";
-            echo "<b>Nilai Kata Kunci = $cek</b>";
+            // Nilai Kata Kunci sebelum dipangkat
+            echo "<b>Nilai Kata Kunci = " . $cek . "</b>";
+            // Nilai Kata Kunci setelah dipangkat
+            echo "<br>";
+            echo "<b>Nilai Kata Kunci Sqrt = " . sqrt($cek_after)    . "</b><br>";
+            $arrayToLowerKeyword = explode(" ", $toLowerKeyword);
+            $hitungkoma_awal = 0;
+            foreach ($arrayToLowerKeyword as $key) {
+                $this->db->select('kata_kata, idf');
+                $this->db->from('pecah_kata');
+                $this->db->where('kata_kata', $key);
+                $query = $this->db->get();
+                if ($query->num_rows() > 0) {
+                    foreach ($query->result_array() as $row) {
+                        $idf = $row['idf'];
+                    }
+                    $hitungkoma_akhir = substr_count($abstrakRemove2, $key) * $idf;
+                    echo "Kata $key = " . $hitungkoma_akhir . "<br>";
+                } else {
+                    echo "Kata $key = " . substr_count($abstrakRemove2, $key) * $idf . "<br>";
+                }
+                $hitungkoma_awal += $hitungkoma_akhir;
+            }
+            echo "<br>";
+            echo "<b>Hasil total = $hitungkoma_awal </b>";
             echo  "<br><br>";
+
 
 
             $namaDokumenArray = array(
                 // 'idDokumen' => $idDokumen,
-                'judulSkripsi' => $judulskripsi,
+                'idDokumen' => $idDokumen,
                 'nilaiKataKunci' => $cek,
+                'dosen_satu' => $dosen1,
+                'dosen_dua' => $dosen2,
             );
 
-            print_r($namaDokumenArray);
-            echo "<br>";
+            // print_r($namaDokumenArray);
+            // echo "<br>";
             $x[] = $namaDokumenArray;
             // print_r($x);
         }
-        echo "<br><br><br>";
-        echo "<b>Perhitungan</b><br>";
-        // print_r($x);
-        $ccc = array_column($x, 'nilaiKataKunci', 'judulSkripsi');
-        arsort($ccc);
-        foreach ($ccc as $key => $value) {
-            echo $key . " " . $value . "<br>";
+        // echo "<br><br><br>";
+        echo "<b>Hasil Pencarian</b><br>";
+        // print_r(array_slice($x, 12));
+        $ccc =  array_column($x, 'nilaiKataKunci', 'idDokumen');
+        // MENGAMBIL 2 LIMIT
+        $ow = array_slice($ccc, 0, 3);
+
+        // MENGURUTKAN DARI YANG BESAR -> KECIL;
+        arsort($ow);
+
+        foreach ($ow as $idDokumen => $nilaiCari) {
+            $this->db->select('no_reg, judul_skripsi, abstrak, a.nama AS dp_satu, b.nama AS dp_dua, a.foto AS foto_dosen_satu, b.foto AS foto_dosen_dua');
+            $this->db->from('tugas_akhir c');
+            $this->db->join('dosen a', 'c.dp_satu = a.nip');
+            $this->db->join('dosen b', 'c.dp_dua = b.nip');
+            $this->db->where('no_reg', $idDokumen);
+            $query = $this->db->get();
+            if ($query->num_rows() > 0) {
+                foreach ($query->result_array() as $row) {
+                    $judul = $row['judul_skripsi'];
+                    $dosen_satu = $row['dp_satu'];
+                    $foto_dosen_satu = $row['foto_dosen_satu'];
+                    $dosen_dua = $row['dp_dua'];
+                    $foto_dosen_dua = $row['foto_dosen_dua'];
+                }
+                echo $judul . "<br>";
+                echo $dosen_satu . "<br>";
+                echo $foto_dosen_satu . "<br>";
+                echo $foto_dosen_dua . "<br>";
+                echo $dosen_dua . "<br>";
+            } else {
+                echo "<h2><b>NOT FOUND</b><h2>";
+            }
         }
         echo "<br><br><br>";
     }
@@ -230,7 +315,7 @@
         $query = $this->db->get('mahasiswa');
 
         $this->db->where('mahasiswa', $nim);
-        $dataExists = $this->db->get('sample');
+        $dataExists = $this->db->get('tugas_akhir');
 
         if ($query->num_rows() > 0 && $dataExists->num_rows() == null) {
             echo '<i class="fa fa-check" aria-hidden="true" style="color:yellow"></i>';

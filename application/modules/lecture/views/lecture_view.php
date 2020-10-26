@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="<?= base_url('assets/bootstrap-4.0.0/dist/css/bootstrap.min.css') ?>">
+    <link rel="stylesheet" href="<?= base_url('assets/bootstrap-4.0.0/css/bootstrap.min.css') ?>">
     <!-- Font -->
     <link href=" https://fonts.googleapis.com/css2?family=Bree+Serif&family=PT+Serif&display=swap" rel="stylesheet">
     <!-- End Font -->
@@ -14,7 +14,7 @@
     <link rel="shortcut icon" href="<?= base_url('assets/images/stta.png'); ?>">
     <!-- Added JS -->
     <script src="<?= base_url('assets/javascript/jquery-3.5.1.js'); ?>"></script>
-    <script src="<?= base_url('assets/bootstrap-4.0.0/dist/js/bootstrap.min.js') ?>"></script>
+    <script src="<?= base_url('assets/bootstrap-4.0.0/js/bootstrap.min.js') ?>"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.1/jquery.min.js"></script>
     <script src="<?= base_url('assets/javascript/main.js') ?>"></script>
     <title><?= $title; ?></title>
@@ -30,7 +30,7 @@
             <div class="form-group row mt-5" style="font-family: 'PT Serif', serif; ">
                 <label for="" class="col-sm-2 col-lg-2 col-form-label">NIP</label>
                 <div class="col-sm-10 col-lg-3">
-                    <input type="text" name="nip" id="nip" class="form-control">
+                    <input type="text" name="nip" id="nip" class="form-control" autocomplete="off">
                 </div>
             </div>
             <div class="form-group row mt-3" style="font-family: 'PT Serif', serif; ">
