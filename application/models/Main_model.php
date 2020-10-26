@@ -224,7 +224,8 @@
             echo "<b>SUM = $sum </b>";
             echo "<br>";
             // SUM setelah dipangkat
-            echo "<b>SUM Sqrt = " . sqrt($pangkat_sum)   . "</b>";
+            $sum_sqrt = sqrt($pangkat_sum);
+            echo "<b>SUM Sqrt = " . $sum_sqrt  . "</b>";
             echo  "<br>";
             // Nilai Kata Kunci sebelum dipangkat
             echo "<b>Nilai Kata Kunci = " . $cek . "</b>";
@@ -233,6 +234,7 @@
             echo "<b>Nilai Kata Kunci Sqrt = " . sqrt($cek_after)    . "</b><br>";
             $arrayToLowerKeyword = explode(" ", $toLowerKeyword);
             $hitungkoma_awal = 0;
+            $hargaKataKunci = 0;
             foreach ($arrayToLowerKeyword as $key) {
                 $this->db->select('kata_kata, idf');
                 $this->db->from('pecah_kata');
@@ -243,14 +245,20 @@
                         $idf = $row['idf'];
                     }
                     $hitungkoma_akhir = substr_count($abstrakRemove2, $key) * $idf;
+
                     echo "Kata $key = " . $hitungkoma_akhir . "<br>";
                 } else {
                     echo "Kata $key = " . substr_count($abstrakRemove2, $key) * $idf . "<br>";
                 }
                 $hitungkoma_awal += $hitungkoma_akhir;
+                $hargaKataKunci += $row['idf'];
             }
             echo "<br>";
-            echo "<b>Hasil total = $hitungkoma_awal </b>";
+            echo "<b>Hasil total = $hitungkoma_awal </b><br>";
+            echo "<b>Harga kata kunci =$hargaKataKunci </b><br>";
+            $kali = $hargaKataKunci * $sum_sqrt;
+            $hasilAkhir = sqrt($hitungkoma_awal / $kali);
+            echo "<b>FIX NILAI AKHIR = " . $hasilAkhir . "</b>";
             echo  "<br><br>";
 
 
@@ -258,7 +266,8 @@
             $namaDokumenArray = array(
                 // 'idDokumen' => $idDokumen,
                 'idDokumen' => $idDokumen,
-                'nilaiKataKunci' => $cek,
+                'hasil_akhir' => $hasilAkhir,
+                // 'nilaiKataKunci' => $cek,
                 'dosen_satu' => $dosen1,
                 'dosen_dua' => $dosen2,
             );
@@ -271,7 +280,7 @@
         // echo "<br><br><br>";
         echo "<b>Hasil Pencarian</b><br>";
         // print_r(array_slice($x, 12));
-        $ccc =  array_column($x, 'nilaiKataKunci', 'idDokumen');
+        $ccc =  array_column($x, 'hasil_akhir', 'idDokumen');
         // MENGAMBIL 2 LIMIT
         $ow = array_slice($ccc, 0, 3);
 
@@ -298,8 +307,6 @@
                 echo $foto_dosen_satu . "<br>";
                 echo $foto_dosen_dua . "<br>";
                 echo $dosen_dua . "<br>";
-            } else {
-                echo "<h2><b>NOT FOUND</b><h2>";
             }
         }
         echo "<br><br><br>";
