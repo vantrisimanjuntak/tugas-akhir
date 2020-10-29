@@ -10,12 +10,14 @@
     <link rel="stylesheet" href="<?= base_url('assets/font-awesome-4.7.0/css/font-awesome.min.css') ?>">
     <!-- Lateef Font -->
     <link href="https://fonts.googleapis.com/css?family=Lateef&display=swap" rel="stylesheet">
+
     <!-- Esteban -->
     <link href="https://fonts.googleapis.com/css?family=Esteban&display=swap" rel="stylesheet">
     <!-- SweetAlert2 CSS -->
     <link rel="stylesheet" type="text/css" href="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.css'); ?>">
     <!-- Google Font -->
     <link href="https://fonts.googleapis.com/css2?family=Lora:wght@500&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@500&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="<?= base_url('assets/javascript/jquery-3.5.1.js') ?>"></script>
     <script type="text/javascript" languange="javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script>
@@ -39,7 +41,9 @@
     <!-- Content -->
     <div class="pt-5" style="background-image: url('assets/images/img-1.jpg'); height: 400px; background-position:70% 30%;background-size:cover;position:relative;background-repeat:no-repeat;">
         <div class="pt-4 pl-3">
-            <h1 class="text-white" style="width:180px;">Bingung dengan Tugas Akhir?</h1>
+            <div style="width: 240px;">
+                <h1 class="text-white" style="font-family: 'Playfair Display', serif">Bingung dengan Tugas Akhir?</h1>
+            </div>
             <a href="#wrapper">
                 <button type="button" class="btn btn-success mt-4 font-weight-bold" style="border-radius: 29px;">
                     <h5 class="mt-2">Konsultasi disini</h5>

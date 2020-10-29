@@ -302,13 +302,33 @@
                     $dosen_dua = $row['dp_dua'];
                     $foto_dosen_dua = $row['foto_dosen_dua'];
                 }
+
                 echo $judul . "<br>";
-                echo $dosen_satu . "<br>";
-                echo $foto_dosen_satu . "<br>";
-                echo $foto_dosen_dua . "<br>";
-                echo $dosen_dua . "<br>";
+                echo $dosen_satu . " " . $foto_dosen_satu . "<br>";
+                echo $dosen_dua . " " . $foto_dosen_dua . "<br>";
+                echo "<br>";
+
+                $dosen = array($dosen_satu, $dosen_dua);
             }
+            $vv[] = $dosen_satu;
+            $ww[] = $dosen_dua;
         }
+        $bb = array_merge($vv, $ww);
+        // $mn = array_column($vv, '0', '1');
+        // print_r($vv);
+        echo "<br>";
+        // print_r($ww);
+        echo "<br>";
+        // print_r($bb);
+        echo "<br>";
+        echo "<b>Hasil Dosen</b><br>";
+        $hasilDosen = array_count_values($bb);
+        arsort($hasilDosen);
+        foreach ($hasilDosen as $key => $lk) {
+            echo $key . "<br>";
+        }
+
+
         echo "<br><br><br>";
     }
 

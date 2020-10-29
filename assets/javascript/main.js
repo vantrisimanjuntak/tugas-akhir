@@ -7,7 +7,7 @@ $(document).ready(function () {
         if (prevScrollpos > currentScrollPos) {
             nav.addClass("fixed-top").show(400);
         } else {
-            nav.hide(400);
+            nav.hide(200);
             // console.log("DOWN");
             // nav.hide();
             // nav.style.top = "-50px";
