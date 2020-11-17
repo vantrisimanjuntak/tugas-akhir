@@ -88,9 +88,6 @@
 
 
 
-
-
-
     // SKRIPSI
     function submitSkripsi()
     {
@@ -407,14 +404,14 @@
                     $bb = array_merge($vv, $ww);
                     $hasilDosen = array_count_values($bb);
                     arsort($hasilDosen);
+                    // return $hasilDosen;
                     // echo "<br><br>";
                     // echo "<br><br>";
                     // echo "<br><br>";
                 }
             }
             foreach ($hasilDosen as $namaDosen => $nilai) {
-                echo $namaDosen . " " . $nilai . "<br>";
-
+                return $hasilDosen;
 
                 // Insert Pencarian and Dosen to DB
                 $data = array(
@@ -428,64 +425,6 @@
             }
         }
 
-
-
-
-
-
-
-
-
         echo "<br><br>";
-    }
-
-
-
-
-
-
-
-
-    // Another
-    function addNewWord($kata_imbuhan, $kata_dasar)
-    {
-        $this->db->select('kata_imbuhan, kata_dasar');
-        $this->db->from('kata_imbuhan');
-        $this->db->where('kata_imbuhan', $kata_imbuhan);
-        $this->db->where('kata_dasar', $kata_dasar);
-        $query = $this->db->get();
-
-        if ($query->num_rows() > 0) {
-            return FALSE;
-        } else {
-            $data = array(
-                'id' => bin2hex(random_bytes(2)),
-                'kata_imbuhan' => $kata_imbuhan,
-                'kata_dasar' => $kata_dasar
-            );
-            $this->db->insert('kata_imbuhan', $data);
-            return TRUE;
-        }
-    }
-    function allImbuhan()
-    {
-        $query = $this->db->get('kata_imbuhan');
-        return $query->result_array();
-    }
-    function deleteImbuhan($id)
-    {
-        $this->db->where('id', $id);
-        $query = $this->db->get('kata_imbuhan');
-        if ($query->num_rows() > 0) {
-            $this->db->where('id', $id);
-            $this->db->delete('kata_imbuhan');
-            return TRUE;
-        } else {
-            return FALSE;
-        }
-    }
-    function allStopwords()
-    {
-        return $this->db->get('stopwords')->result_array();
     }
 }

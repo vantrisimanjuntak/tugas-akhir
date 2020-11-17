@@ -67,7 +67,7 @@ $(document).ready(function () {
                 },
                 success: function (data) {
                     $('#wrapper').css("height", "100%").show("slow", 1000);
-                    $('#result').html(data);
+                    $('#result').html(data).show(1500);
                 },
             });
         } else {

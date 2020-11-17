@@ -13,7 +13,13 @@
     }
     function searchtitle()
     {
+
         $keyword = $this->input->post('judul_skripsi');
-        $this->Main_model->searchtitle($keyword);
+        $query = $this->Main_model->searchtitle($keyword);
+
+        foreach ($query as $namaDosen => $nilai) {
+            echo '<div class="container-fluid" style="border: 2px solid green">' . $namaDosen . '</div>';
+            echo "<br>";
+        }
     }
 }

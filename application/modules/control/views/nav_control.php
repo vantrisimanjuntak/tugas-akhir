@@ -9,7 +9,7 @@
     <div class="collapse navbar-collapse" id="collapsibleNavbar">
         <ul class="navbar-nav ml-auto">
             <li class="nav-item text-white mr-3">
-                <?= strtoupper($session_access_user); ?>
+                <i class="fa fa-user-o" aria-hidden="true"></i>&nbsp;&nbsp; <?= strtoupper($session_access_user); ?>
             </li>
         </ul>
         <ul class="navbar-nav">

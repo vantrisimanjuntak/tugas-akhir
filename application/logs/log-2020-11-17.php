@@ -1,23 +1,184 @@
 <?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
 
-ERROR - 2020-11-17 02:17:40 --> 404 Page Not Found: /index
-ERROR - 2020-11-17 02:56:55 --> Severity: error --> Exception: syntax error, unexpected '$', expecting ';' or '{' C:\xampp\htdocs\tugas-akhir\application\modules\control\models\Control_model.php 73
-ERROR - 2020-11-17 04:37:21 --> Severity: Notice --> Undefined property: CI::$Main_model C:\xampp\htdocs\tugas-akhir\application\third_party\MX\Controller.php 59
-ERROR - 2020-11-17 04:37:21 --> Severity: error --> Exception: Call to a member function deleteStopwords() on null C:\xampp\htdocs\tugas-akhir\application\modules\control\controllers\Control.php 118
-ERROR - 2020-11-17 05:00:26 --> Severity: Warning --> sha1() expects at most 2 parameters, 3 given C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 423
-ERROR - 2020-11-17 05:00:26 --> Query error: Column 'id' cannot be null - Invalid query: INSERT INTO `pencarian` (`id`, `judul_pencarian`) VALUES (NULL, 'firebase android')
-ERROR - 2020-11-17 05:00:26 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php:260) C:\xampp\htdocs\tugas-akhir\system\core\Common.php 570
-ERROR - 2020-11-17 05:01:40 --> Severity: Warning --> sha1() expects at most 2 parameters, 3 given C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 422
-ERROR - 2020-11-17 05:01:40 --> Query error: Column 'id' cannot be null - Invalid query: INSERT INTO `pencarian` (`id`, `judul_pencarian`) VALUES (NULL, 'firebase android')
-ERROR - 2020-11-17 05:01:40 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php:260) C:\xampp\htdocs\tugas-akhir\system\core\Common.php 570
-ERROR - 2020-11-17 05:02:10 --> Severity: Warning --> sha1() expects at most 2 parameters, 3 given C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 422
-ERROR - 2020-11-17 05:02:10 --> Query error: Column 'id' cannot be null - Invalid query: INSERT INTO `pencarian` (`id`, `judul_pencarian`) VALUES (NULL, 'firebase android')
-ERROR - 2020-11-17 05:02:10 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php:260) C:\xampp\htdocs\tugas-akhir\system\core\Common.php 570
-ERROR - 2020-11-17 05:03:03 --> Severity: Warning --> sha1() expects at most 2 parameters, 3 given C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 422
-ERROR - 2020-11-17 05:03:03 --> Query error: Column 'id' cannot be null - Invalid query: INSERT INTO `pencarian` (`id`, `judul_pencarian`) VALUES (NULL, 'firebase android')
-ERROR - 2020-11-17 05:03:03 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php:260) C:\xampp\htdocs\tugas-akhir\system\core\Common.php 570
-ERROR - 2020-11-17 05:15:04 --> Severity: error --> Exception: Call to undefined function now() C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 420
-ERROR - 2020-11-17 05:15:04 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php:260) C:\xampp\htdocs\tugas-akhir\system\core\Common.php 570
-ERROR - 2020-11-17 11:17:22 --> Query error: You have an error in your SQL syntax; check the manual that corresponds to your MariaDB server version for the right syntax to use near '0, `waktu`) VALUES ('e09ce5bd91', 'jaringan internet', 1, '2020-11-17 11:17:22')' at line 1 - Invalid query: INSERT INTO `pencarian` (`id`, `judul_pencarian`, 0, `waktu`) VALUES ('e09ce5bd91', 'jaringan internet', 1, '2020-11-17 11:17:22')
-ERROR - 2020-11-17 11:17:22 --> Severity: Warning --> Cannot modify header information - headers already sent by (output started at C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php:260) C:\xampp\htdocs\tugas-akhir\system\core\Common.php 570
-ERROR - 2020-11-17 05:17:58 --> Severity: error --> Exception: syntax error, unexpected ',' C:\xampp\htdocs\tugas-akhir\application\models\Main_model.php 191
+ERROR - 2020-11-17 13:21:21 --> 404 Page Not Found: ../modules/control/controllers/Control/dashboard
+ERROR - 2020-11-17 13:21:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:21:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:22:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:50 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:50 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:50 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:50 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:50 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:50 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:50 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:50 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:50 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:50 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:50 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:24:51 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:14 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:45 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:25:46 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:39 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:28:40 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:48 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:48 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:48 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:48 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:48 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:48 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:48 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:48 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:48 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:48 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:48 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:49 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:49 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:49 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:49 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:49 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:30:49 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:32:11 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:32:11 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:32:11 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:32:11 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:32:11 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:32:11 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:32:11 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:32:43 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:33:12 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:33:12 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:33:12 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:33:12 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:33:12 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:33:28 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:41:00 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:41:10 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:41:24 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:41:58 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:41:58 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:42:04 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 13:42:30 --> 404 Page Not Found: /index
