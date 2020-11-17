@@ -5,7 +5,7 @@
         parent::__construct();
     }
 
-    //function for dosen 
+    // DOSEN
     function addlecture()
     {
         $data = array(
@@ -19,7 +19,8 @@
             $this->db->insert('dosen', $data);
         }
     }
-    private function _uploadImage()
+
+    private function __uploadImage()
     {
         $config['upload_path'] = './assets/images/dosen_profile/';
         $config['allowed_types'] = 'png|jpeg|jpg|gif';
@@ -36,21 +37,61 @@
             return $this->upload->data('file_name');
         }
     }
+
     function allProdi()
     {
         return $this->db->get('program_studi')->result_array();
     }
+
     function allLecture()
     {
         $this->db->order_by('nama', 'ASC');
-        $query = $this->db->get('dosen');
-        return $query->result_array();
+        return $this->db->get('dosen')->result_array();
     }
 
 
-    // end function for dosen
 
-    // function for skripsi
+    // MAHASISWA
+    function checknim($nim)
+    {
+        // CHECK IF MAHASISWA IS AVAILABLE
+        $this->db->select('nim');
+        $this->db->from('mahasiswa');
+        $this->db->where('nim', $nim);
+        $queryMahasiswa = $this->db->get();
+
+        // check if the MAHASISWA has submitted the SKRIPSI
+        $this->db->select('mahasiswa');
+        $this->db->from('sample');
+        $this->db->where('mahasiswa', $nim);
+        $querySubmit = $this->db->get();
+
+        // JIKA MAHASISWA ADA DAN SKRIPSI BELUM DIINPUT
+        if ($queryMahasiswa->num_rows() > 0 && $querySubmit->num_rows() == null) {
+            echo '<i class="fa fa-check" aria-hidden="true" style="color:yellow"></i>';
+            echo '<script>
+                $("#judulskripsi, #abstrak, #dp1, #dp2, #btnSubmit").removeAttr("disabled", true);
+                    </script>';
+        }
+        // JIKA MAHASISWA ADA DAN SKRIPSI SUDAH DIINPUT 
+        else if ($queryMahasiswa->num_rows() > 0 && $querySubmit->num_rows() > 0) {
+            echo "SKRIPSI SUDAH DIINPUT";
+        }
+        // JIKA MAHASISWA TIDAK ADA 
+        else {
+            echo '<i class="fa fa-times" aria-hidden="true">&nbsp;NIM TIDAK ADA</i>';
+            echo '<script>
+                $("#judulskripsi, #abstrak, #dp1, #dp2, #btnSubmit").prop("disabled", true);
+                    </script>';
+        }
+    }
+
+
+
+
+
+
+    // SKRIPSI
     function submitSkripsi()
     {
         $no_reg = $this->input->post('no_reg');
@@ -66,31 +107,51 @@
             'judul_skripsi' => $judulskripsi,
             'abstrak' => $abstrak,
             'dp_satu' => $dp1,
-            'dp_dua' => $dp2,
+            'dp_dua' => $dp2
         );
-        $this->db->insert('tugas_akhir', $data);
+        $this->db->insert('sample', $data);
 
-        $this->db->select('kata_kata');
-        $query = $this->db->get('pecah_kata')->result_array();
+        // BANYAK DATA SKRIPSI
+        $getDataSkripsi = $this->db->get('sample');
+        $totalSkripsi = $getDataSkripsi->num_rows();
 
+        // MENGHILANGKAN STOPWORD
         $wordMark = '/[{}()""!,.:?]/';
+
+        // Mengubah abstrak menjadi huruf kecil
         $toLowerAbstrak = strtolower($abstrak);
+        // Mengubah stopword ABSTRAK menjadi SPASI
         $clean = preg_replace($wordMark, "", $toLowerAbstrak);
-        $explode = array_unique(explode(" ", $clean));
+        $clear = preg_replace(array('/\bbadanya\b/', '/\boleh\b/', '/\bini\b/', '/\bitu\b/', '/\byang\b/', '/\bsebagai\b/', '/\bsebuah\b/', '/\byaitu\b/', '/\bdi\b/', '/\bselain\b/', '/\badalah\b/', '/\bdengan\b/'), array(''), $clean);
 
-        // Banyak data
-        $t = $this->db->get('tugas_akhir');
-        $banyakData =  $t->num_rows();
-        // D/df
 
-        foreach ($explode as $wordsAbstrak) {
 
-            if ($wordsAbstrak != "") {
-                $this->db->where('kata_kata', $wordsAbstrak);
-                $query = $this->db->get('pecah_kata');
-                // UPDATE TOTAL_DOKUMEN
-                if ($query->num_rows() > 0) {
-                    foreach ($query->result_array() as $row) {
+        // GET KATA IMBUHAN
+        $this->db->select('kata_imbuhan, kata_dasar');
+        $this->db->from('kata_imbuhan');
+        $queryKataImbuhan = $this->db->get();
+        foreach ($queryKataImbuhan->result_array() as $row) {
+            $kataImbuhan[] = $row['kata_imbuhan'];
+            $kataDasar[] = $row['kata_dasar'];
+        }
+        $search = $kataImbuhan;
+        $replace = $kataDasar;
+
+        // Change Kata Imbuhan to Kata Dasar in ABSTRAK
+
+        $removeKataImbuhan = str_replace($search, $replace, $clear);
+
+
+        // Mengubah ABSTRAK menjadi array
+        $arrayAbstrak = array_unique(explode(" ", $removeKataImbuhan));
+        foreach ($arrayAbstrak as $kata) {
+            // Check if KATA is not empty
+            if ($kata != "") {
+                $this->db->where('kata_kata', $kata);
+                $cekKataKata = $this->db->get('index');
+                // Cek If kata is available
+                if ($cekKataKata->num_rows() > 0) {
+                    foreach ($cekKataKata->result_array() as $row) {
                         $id = $row['id'];
                         $katakata = $row['kata_kata'];
                         $totalDokumen = $row['total_dokumen'];
@@ -99,263 +160,332 @@
 
                     $this->db->set('total_dokumen', $totalDokumen);
                     $this->db->where('kata_kata', $katakata);
-                    $this->db->update('pecah_kata');
+                    $this->db->update('index');
                 } else {
-
-                    $IdfBaru = log10($banyakData / 1);
+                    // If kata is unavailable
+                    $IdfBaru = log10($totalSkripsi / 1);
                     $data = array(
-
-                        'kata_kata' => $wordsAbstrak,
+                        'kata_kata' => $kata,
                         'no_doc' => $no_reg,
                         'total_dokumen' => 1,
                         'idf' => $IdfBaru,
-
                     );
-                    $this->db->insert('pecah_kata', $data);
+                    $this->db->insert('index', $data);
                 }
             }
         }
         // UPDATE IDF
-        $u = $this->db->get('pecah_kata')->result_array();
-        foreach ($u as $row) {
-            $idf = log10($banyakData / $row['total_dokumen']);
+        $queryTableIndex = $this->db->get('index')->result_array();
+        foreach ($queryTableIndex as $row) {
+            $idf = log10($totalSkripsi / $row['total_dokumen']);
             $this->db->set('idf', $idf);
             $this->db->where('kata_kata', $row['kata_kata']);
-            $this->db->update('pecah_kata');
+            $this->db->update('index');
         }
     }
 
-    // function for search by title
+
+    // FUNCTION SEARCH
     function searchtitle($keyword)
     {
+        date_default_timezone_set('Asia/Jakarta');
+
+
+        // To Lower Keyword
         $toLowerKeyword = strtolower($keyword);
+        // Wordmark
         $wordMark = '/[{}()""!,.:?]/';
-        $stopWords = ['adalah', 'oleh', 'pada', 'ini', 'dan', 'yang', 'sebagai', 'sebuah', 'yaitu', 'untuk', 'selain', 'adalah', 'itu', 'dengan', 'ada', 'tentang', 'bagi', 'dalam',  'judul_skripsi', 'abstrak'];
+        // Get Stopwords
+        $query = $this->db->get('stopwords');
+        foreach ($query->result_array() as $row) {
+            $kumpulanStopwords[] = $row['stopwords'];
+        }
+        $stopWords = $kumpulanStopwords;
+        $spasi = " ";
+
+        // Get Kata Imbuhan & Kata Dasar
+        $this->db->select('kata_imbuhan, kata_dasar');
+        $this->db->from('kata_imbuhan');
+        $query = $this->db->get();
+        foreach ($query->result_array() as $row) {
+            $kataImbuhan[] = $row['kata_imbuhan'];
+            $kataDasar[] = $row['kata_dasar'];
+        }
+        $search = $kataImbuhan;
+        $replace = $kataDasar;
 
         $num_doc = 1;
 
         $this->db->select('judul_skripsi, abstrak, no_reg, dp_satu, dp_dua');
-        $this->db->from('tugas_akhir');
-        $res = $this->db->get();
+        $this->db->from('sample');
+        $query = $this->db->get();
 
-        foreach ($res->result_array() as $row) {
+        foreach ($query->result_array() as $row) {
+
             $namaDokumen = "<b>Dokumen " . $num_doc++ . "</b>";
             $idDokumen = $row['no_reg'];
-            echo $namaDokumen . "<br>";
-            echo "<b>DOKUMEN ASLI</b><br>";
+            // echo $namaDokumen . "<br>";
+            // echo "<b>DOKUMEN ASLI</b><br>";
             $judulskripsi = $row['judul_skripsi'];
             $abstrakskripsi = $row['abstrak'];
             $dosen1 = $row['dp_satu'];
             $dosen2 = $row['dp_dua'];
-            echo $judulskripsi . "<br>";
-            echo $abstrakskripsi . "<br><br>";
-            echo "<b>BERSIH</b><br>";
+            // echo $judulskripsi . "<br>";
+            // echo $abstrakskripsi . "<br>";
             $judulKecil = strtolower($judulskripsi);
             $abstrakKecil = strtolower($abstrakskripsi);
             $judulRemove = preg_replace($wordMark, "", $judulKecil);
             $abstrakRemove = preg_replace($wordMark, "", $abstrakKecil);
-            $abstrakRemove2 = str_replace($stopWords, "", $abstrakRemove);
-            $unikAbstrak = array_unique(explode(" ", $abstrakRemove2));
-            $ada = 1;
-            $tidak = 0;
-            foreach ($unikAbstrak as $kata) {
-                echo $kata . " ";
-            }
-            echo "<br><br>";
-            echo "<b>Banyak Kata</b>";
+            $removeKataImbuhan = str_replace($search, $replace, $abstrakRemove);
+            $uniqueAbstrak_array = array_unique(explode(" ", $removeKataImbuhan));
+            $clear = preg_replace(array('/\bbadanya\b/', '/\boleh\b/', '/\bini\b/', '/\bitu\b/', '/\byang\b/', '/\bsebagai\b/', '/\bsebuah\b/', '/\byaitu\b/', '/\bdi\b/', '/\bselain\b/', '/\badalah\b/'), array(''), $removeKataImbuhan);
 
-            echo "<br><br>";
-            echo "<b>Pecahan Kata</b><br>";
 
-            // nilai awal (sebelum dipangkat)
+            // echo "<br>";
+            // echo "<b>BERSIH</b><br>";
+            // echo $clear;
+
+            // Nilai awal (sebelum dipangkat)
             $sum = 0;
-            // nilai awal (setelah dipangkat)
+            // Nilai awal
             $pangkat_sum = 0;
-            // KUMPULAN SELURUH KATA-KATA
-            foreach ($unikAbstrak as $kata) {
+
+
+
+            // echo "<br><br>";
+            // Get KATA and values
+            foreach ($uniqueAbstrak_array as $kata) {
                 if ($kata != "") {
                     $this->db->where('kata_kata', $kata);
-                    $query = $this->db->get('pecah_kata');
+                    $query = $this->db->get('index');
                     if ($query->num_rows() > 0) {
                         foreach ($query->result_array() as $row) {
-                            // $ho = pow($row['idf'], 2); // $ho = nilai $row['idf'] yang dipangkatdua kan
-                            echo $kata . " " . $row['idf']  .   "<br>";
+                            // echo $kata . " " . $row['idf'] . "<br>";
                             $idf = $row['idf'];
                         }
-                        // sebelum dipangkatkan
+                        // Sebelum dipangkatkan
                         $sum += $idf;
-                        // setelah dipangkatkan
+                        // Setelah dipangkatkan
                         $pangkat_sum += pow($idf, 2);
                     }
                 }
             }
-            // nilai awal (sebelum dipangkat)
+            // Nilai awal (sebelum dipangkat)
             $cek = 0;
-            // nilai awal (setelah dipangkat)
             $cek_after = 0;
             $ts = 0;
-            // echo  "<br><br>";
-            foreach ($unikAbstrak as $kata) {
+            foreach ($uniqueAbstrak_array as $kata) {
                 if ($kata != "") {
                     if (strpos($toLowerKeyword, $kata) !== FALSE) {
                         $this->db->select('kata_kata, idf');
                         $this->db->where('kata_kata', $kata);
-                        $query = $this->db->get('pecah_kata');
+                        $query = $this->db->get('index');
                         if ($query->num_rows() > 0) {
                             foreach ($query->result_array() as $row) {
-                                $xxx = pow($row['idf'], 2);
 
-                                echo "<b>" . $kata . " " . $row['idf'] . " " . $xxx . "</b><br>";
+                                $xxx = pow($row['idf'], 2);
+                                // echo "<b>" . $kata . " " . $row['idf'] . " " . $xxx . "</b><br>";
                             }
                             // Hasil pencarian sebelum dipangkat
                             $cek += $row['idf'];
                             // Hasil pencarian setelah dipangkat
                             $cek_after += pow($row['idf'], 2);
-                            // $ts += $xxx;
                         }
                     }
-                    $asf = array($namaDokumen =>  $cek);
+                    $asf = array($namaDokumen => $cek);
                 }
             }
-
-            print_r($asf);
-            echo "<br><br>";
+            // print_r($asf);
+            // echo "<br><br>";
             // SUM sebelum dipangkat
-            echo "<b>SUM = $sum </b>";
-            echo "<br>";
+            // echo "<b>SUM = $sum</b>";
+            // echo "<br>";
             // SUM setelah dipangkat
             $sum_sqrt = sqrt($pangkat_sum);
-            echo "<b>SUM Sqrt = " . $sum_sqrt  . "</b>";
-            echo  "<br>";
+            // echo "<b>SUM Sqrt = " . $sum_sqrt . "</b>";
+            // echo "<br>";
             // Nilai Kata Kunci sebelum dipangkat
-            echo "<b>Nilai Kata Kunci = " . $cek . "</b>";
+            // echo "<b>Nilai Kata Kunci = $cek </b>";
             // Nilai Kata Kunci setelah dipangkat
-            echo "<br>";
-            echo "<b>Nilai Kata Kunci Sqrt = " . sqrt($cek_after)    . "</b><br>";
+            // echo "<br>";
+            // echo "<b>Nilai Kata Kunci Sqrt = " . sqrt($cek_after) . "</b><br>";
             $arrayToLowerKeyword = explode(" ", $toLowerKeyword);
             $hitungkoma_awal = 0;
             $hargaKataKunci = 0;
-            foreach ($arrayToLowerKeyword as $key) {
+
+            // Change Keyword to arrays
+            foreach ($arrayToLowerKeyword as $row) {
                 $this->db->select('kata_kata, idf');
-                $this->db->from('pecah_kata');
-                $this->db->where('kata_kata', $key);
+                $this->db->from('index');
+                $this->db->where('kata_kata', $row);
                 $query = $this->db->get();
+
+                // Check if array is available in DB
                 if ($query->num_rows() > 0) {
                     foreach ($query->result_array() as $row) {
                         $idf = $row['idf'];
+                        $kata = $row['kata_kata'];
                     }
-                    $hitungkoma_akhir = substr_count($abstrakRemove2, $key) * $idf;
-
-                    echo "Kata $key = " . $hitungkoma_akhir . "<br>";
+                    // $hitungkoma_akhir adalah berapa banyak kata(kata kunci) didalam array abstrak (per judul) * $idf
+                    $hitungkoma_akhir = substr_count($removeKataImbuhan, $kata) * $idf;
+                    // If $kata is available in DB
+                    // echo "Kata $kata = $hitungkoma_akhir <br>";
                 } else {
-                    echo "Kata $key = " . substr_count($abstrakRemove2, $key) * $idf . "<br>";
+                    // If kata is unavailable in DB
+                    $hitungkoma_akhir = 0;
+                    // echo "<b>Kata $row TIDAK ADA </b><br>";
                 }
                 $hitungkoma_awal += $hitungkoma_akhir;
-                $hargaKataKunci += $row['idf'];
+                $hargaKataKunci += $idf;
             }
-            echo "<br>";
-            echo "<b>Hasil total = $hitungkoma_awal </b><br>";
-            echo "<b>Harga kata kunci =$hargaKataKunci </b><br>";
+
+            // echo "<br>";
+            // echo "<b>Hasil total = $hitungkoma_awal </b><br>";
+            // echo "<b>Harga kata kunci = $hargaKataKunci </b><br>";
             $kali = $hargaKataKunci * $sum_sqrt;
-            $hasilAkhir = sqrt($hitungkoma_awal / $kali);
-            echo "<b>FIX NILAI AKHIR = " . $hasilAkhir . "</b>";
-            echo  "<br><br>";
 
-
+            if ($kali == '') {
+                $hasilAkhir = 0;
+                // echo "<b>FIX NILAI AKHIR = $hasilAkhir </b>";
+                // echo "<br><br>";
+            } else {
+                $hasilAkhir = sqrt($hitungkoma_awal / $kali);
+                // echo "<b>FIX NILAI AKHIR = " . $hasilAkhir . "</b>";
+                // echo "<br><br>";
+            }
 
             $namaDokumenArray = array(
-                // 'idDokumen' => $idDokumen,
                 'idDokumen' => $idDokumen,
                 'hasil_akhir' => $hasilAkhir,
-                // 'nilaiKataKunci' => $cek,
                 'dosen_satu' => $dosen1,
                 'dosen_dua' => $dosen2,
             );
 
-            // print_r($namaDokumenArray);
-            // echo "<br>";
             $x[] = $namaDokumenArray;
-            // print_r($x);
         }
-        // echo "<br><br><br>";
-        echo "<b>Hasil Pencarian</b><br>";
-        // print_r(array_slice($x, 12));
-        $ccc =  array_column($x, 'hasil_akhir', 'idDokumen');
+        echo "<b>Hasil Pencarian</b>";
+        echo "<br><br>";
+        $ccc = array_column($x, 'hasil_akhir', 'idDokumen');
         // MENGAMBIL 2 LIMIT
-        $ow = array_slice($ccc, 0, 3);
+        arsort($ccc);
+        // print_r($ccc);
 
-        // MENGURUTKAN DARI YANG BESAR -> KECIL;
-        arsort($ow);
+        $val = array_sum($ccc);
+        // echo "<br><br>";
 
-        foreach ($ow as $idDokumen => $nilaiCari) {
-            $this->db->select('no_reg, judul_skripsi, abstrak, a.nama AS dp_satu, b.nama AS dp_dua, a.foto AS foto_dosen_satu, b.foto AS foto_dosen_dua');
-            $this->db->from('tugas_akhir c');
-            $this->db->join('dosen a', 'c.dp_satu = a.nip');
-            $this->db->join('dosen b', 'c.dp_dua = b.nip');
-            $this->db->where('no_reg', $idDokumen);
-            $query = $this->db->get();
-            if ($query->num_rows() > 0) {
-                foreach ($query->result_array() as $row) {
-                    $judul = $row['judul_skripsi'];
-                    $dosen_satu = $row['dp_satu'];
-                    $foto_dosen_satu = $row['foto_dosen_satu'];
-                    $dosen_dua = $row['dp_dua'];
-                    $foto_dosen_dua = $row['foto_dosen_dua'];
+        // echo "<br><br>";
+        // CHECK APAKAH HASIL PENCARIAN == 0 (TIDAK KETEMU)
+        if ($val == '0') {
+            echo '<h4 class="text-center">NOT FOUND</h4>';
+        } else {
+            // echo "<br><br>";
+            foreach ($ccc as $DocId => $value) {
+                if ($value != 0) {
+                    $this->db->select('no_reg, judul_skripsi, abstrak, a.nama AS dp_satu, b.nama AS dp_dua, a.foto AS foto_dosen_satu, b.foto AS foto_dosen_dua');
+                    $this->db->from('sample c');
+                    $this->db->join('dosen a', 'c.dp_satu = a.nip');
+                    $this->db->join('dosen b', 'c.dp_dua = b.nip');
+                    $this->db->where('no_reg', $DocId);
+                    $query = $this->db->get();
+
+                    if ($query->num_rows() > 0) {
+                        foreach ($query->result_array() as $row) {
+                            $judul = $row['judul_skripsi'];
+                            $dosen_satu = $row['dp_satu'];
+                            $foto_dosen_satu = $row['foto_dosen_satu'];
+                            $dosen_dua = $row['dp_dua'];
+                            $foto_dosen_dua = $row['foto_dosen_dua'];
+                        }
+                        // echo $judul . "<br>";
+                        // echo $value . "<br>";
+                        // echo $dosen_satu . "<br>";
+                        // echo $dosen_dua . "<br>";
+                    }
+                    $vv[] = $dosen_satu;
+                    $ww[] = $dosen_dua;
+
+                    $bb = array_merge($vv, $ww);
+                    $hasilDosen = array_count_values($bb);
+                    arsort($hasilDosen);
+                    // echo "<br><br>";
+                    // echo "<br><br>";
+                    // echo "<br><br>";
                 }
-
-                echo $judul . "<br>";
-                echo $dosen_satu . " " . $foto_dosen_satu . "<br>";
-                echo $dosen_dua . " " . $foto_dosen_dua . "<br>";
-                echo "<br>";
-
-                $dosen = array($dosen_satu, $dosen_dua);
             }
-            $vv[] = $dosen_satu;
-            $ww[] = $dosen_dua;
-        }
-        $bb = array_merge($vv, $ww);
-        // $mn = array_column($vv, '0', '1');
-        // print_r($vv);
-        echo "<br>";
-        // print_r($ww);
-        echo "<br>";
-        // print_r($bb);
-        echo "<br>";
-        echo "<b>Hasil Dosen</b><br>";
-        $hasilDosen = array_count_values($bb);
-        arsort($hasilDosen);
-        foreach ($hasilDosen as $key => $lk) {
-            echo $key . "<br>";
+            foreach ($hasilDosen as $namaDosen => $nilai) {
+                echo $namaDosen . " " . $nilai . "<br>";
+
+
+                // Insert Pencarian and Dosen to DB
+                $data = array(
+                    'id' => bin2hex(random_bytes(5)),
+                    'judul_pencarian' => $toLowerKeyword,
+                    'waktu' => date('Y-m-d H:i:s'),
+                    'dosen' => $namaDosen,
+                    'nilai' => $nilai,
+                );
+                $this->db->insert('pencarian', $data);
+            }
         }
 
 
-        echo "<br><br><br>";
+
+
+
+
+
+
+
+        echo "<br><br>";
     }
 
 
-    // end function for search by title
-    // end function for skripsi
 
-    function checknim($nim)
+
+
+
+
+
+    // Another
+    function addNewWord($kata_imbuhan, $kata_dasar)
     {
-        $this->db->where('nim', $nim);
-        $query = $this->db->get('mahasiswa');
+        $this->db->select('kata_imbuhan, kata_dasar');
+        $this->db->from('kata_imbuhan');
+        $this->db->where('kata_imbuhan', $kata_imbuhan);
+        $this->db->where('kata_dasar', $kata_dasar);
+        $query = $this->db->get();
 
-        $this->db->where('mahasiswa', $nim);
-        $dataExists = $this->db->get('tugas_akhir');
-
-        if ($query->num_rows() > 0 && $dataExists->num_rows() == null) {
-            echo '<i class="fa fa-check" aria-hidden="true" style="color:yellow"></i>';
-            echo '<script>
-                $("#judulskripsi, #abstrak, #dp1, #dp2, #btnSubmit").removeAttr("disabled", true);
-                    </script>';
-        } else if ($query->num_rows() > 0 && $dataExists->num_rows() > 0) {
-            echo "SKRIPSI SUDAH DIINPUT";
+        if ($query->num_rows() > 0) {
+            return FALSE;
         } else {
-            echo '<i class="fa fa-times" aria-hidden="true">&nbsp;NIM TIDAK ADA</i>';
-            echo '<script>
-                $("#judulskripsi, #abstrak, #dp1, #dp2, #btnSubmit").prop("disabled", true);
-                    </script>';
+            $data = array(
+                'id' => bin2hex(random_bytes(2)),
+                'kata_imbuhan' => $kata_imbuhan,
+                'kata_dasar' => $kata_dasar
+            );
+            $this->db->insert('kata_imbuhan', $data);
+            return TRUE;
         }
+    }
+    function allImbuhan()
+    {
+        $query = $this->db->get('kata_imbuhan');
+        return $query->result_array();
+    }
+    function deleteImbuhan($id)
+    {
+        $this->db->where('id', $id);
+        $query = $this->db->get('kata_imbuhan');
+        if ($query->num_rows() > 0) {
+            $this->db->where('id', $id);
+            $this->db->delete('kata_imbuhan');
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    function allStopwords()
+    {
+        return $this->db->get('stopwords')->result_array();
     }
 }

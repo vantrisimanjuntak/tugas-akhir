@@ -10,7 +10,7 @@
     {
         $data['title'] = "Portal Tugas Akhir";
         $data['dosen'] = $this->Main_model->allLecture();
-        $this->load->view('index', $data);
+        $this->load->view('skripsi_view', $data);
     }
     function checknim()
     {
@@ -22,5 +22,3 @@
         }
     }
 }
-
-

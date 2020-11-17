@@ -39,7 +39,7 @@
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">NIM<span style="color:red;">*</span></label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" name="nim" id="nim">
+                        <input type="text" class="form-control" name="nim" id="nim" autocomplete="OFF">
                     </div>
                     <div class="col-sm-5" style="color: red">
                         <small id="nim_result"></small>
@@ -48,7 +48,7 @@
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">Judul Skripsi<span style="color:red;">*</span></label>
                     <div class="col-sm-9">
-                        <input type="text" name="judulskripsi" class="form-control" id="judulskripsi">
+                        <input type="text" autocomplete="off" name="judulskripsi" class="form-control" id="judulskripsi">
                     </div>
                 </div>
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">

@@ -10,7 +10,8 @@
     <link rel="stylesheet" href="<?= base_url('assets/font-awesome-4.7.0/css/font-awesome.min.css') ?>">
     <!-- Lateef Font -->
     <link href="https://fonts.googleapis.com/css?family=Lateef&display=swap" rel="stylesheet">
-
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Laila:wght@300&display=swap" rel="stylesheet">
     <!-- Esteban -->
     <link href="https://fonts.googleapis.com/css?family=Esteban&display=swap" rel="stylesheet">
     <!-- SweetAlert2 CSS -->
@@ -21,6 +22,7 @@
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
     <script type="text/javascript" src="<?= base_url('assets/javascript/jquery-3.5.1.js') ?>"></script>
     <script type="text/javascript" languange="javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Lato&display=swap" rel="stylesheet">
     <!-- SweetAlert2 JS  -->
     <script src="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.js'); ?>"></script>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
@@ -51,11 +53,41 @@
             </a>
         </div>
     </div>
+    <div class="container mt-4">
+        <hr>
+        <h4 class="text-center">Petunjuk Penggunaan</h4>
+        <div class="row mt-5">
+            <div class="col-md-4">
+                <div class="d-flex justify-content-center">
+                    <i class="fa fa-keyboard-o fa-3x " aria-hidden="true" style="color: gray;"></i>
+                </div>
+                <h4 class="font-weight-bold text-center mt-4" style="font-family: 'Laila', serif;">Gunakan Kata Umum</h4>
+                <p style="font-family: 'Nobile', sans-serif; text-align:center">Mencari menggunakan kata yang tepat akan menambah keakuratan hasl pencarian, misalnya ruter menjadi <i>router</i>, enjin menjadi <i>engine</i>, dan lain sebagainya.</p>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex justify-content-center">
+                    <i class="fa fa-search fa-3x" aria-hidden="true" style="color: gray;"></i>
+                </div>
+                <h4 class="font-weight-bold text-center mt-4" style="font-family: 'Laila', serif;">Ganti Kata Kunci</h4>
+                <p style="font-size :20px;font-family: 'Nobile', sans-serif; text-align:center">Ganti kata kunci dengan yang memiliki kemiripan</p>
+            </div>
+            <div class="col-md-4">
+                <div class="d-flex justify-content-center">
+                    <i class="fa fa-database fa-3x" aria-hidden="true" style="color: gray;"></i>
+                </div>
+                <h4 class="font-weight-bold text-center mt-4" style="font-family: 'Laila', serif;">Data</h4>
+                <p style="font-family: 'Nobile', sans-serif; text-align:center">Jika tidak menemukan solusi, kemungkinan koleksi data kami yang sedikit</p>
+            </div>
+        </div>
+        <h5 class="text-center">"Aplikasi ini menggunakan metode VSM (<i>Vector Space Model</i>)"</h5>
+        <hr>
+    </div>
     <!-- Content for Kata Kunci -->
+
     <div class="container" id="wrapper" style="margin-top:170px; height: 500px;">
-        <h3 class="text-center font-weight-bold mb-4" style="font-family: Verdana, Geneva, Tahoma, sans-serif;">Kata Kunci</h3>
-        <div class="input-group pt-4 mb-3">
-            <input type="text" name="judul_skripsi" id="keyword" class="form-control" autofocus placeholder="Cari ...">
+        <h2 class="text-center font-weight-bold mb-4" style="font-family: 'Merriweather Sans', sans-serif;">Cari disini</h2>
+        <div class="input-group input-group-lg pt-4 mb-5">
+            <input type="text" name="judul_skripsi" id="keyword" class="form-control" placeholder="Tema apa yang anda pikirkan ?">
             <div class=" input-group-append">
                 <button class="btn btn-outline-secondary search" type="button" id="btnSearch"><i class="fa fa-search"></i></button>
             </div>
@@ -64,7 +96,8 @@
         <div class="container-fluid mb-3" id="result"></div>
     </div>
 
-    <!-- Content for Result -->
+
+    <!-- Content for Result  id="wrapper"-->
     <!-- End for Result -->
     <!-- End Content -->
 
