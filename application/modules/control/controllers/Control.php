@@ -48,6 +48,8 @@
             $data['allImbuhan'] = $this->Control_model->getAllImbuhan();
             $data['stopwords'] = $this->Control_model->getAllStopwords();
             $data['session_access_user'] = $this->session->userdata('alias');
+            $data['countSkripsi'] = $this->db->count_all_results('sample');
+            $data['countDosen'] = $this->db->count_all_results('dosen');
             $this->load->view('control/index', $data);
         } else {
             echo "<script>
@@ -56,6 +58,28 @@
             </script>";
         }
     }
+    // For Lecture
+    function lecture()
+    {
+        if ($this->session->userdata('username')) {
+            $data['title'] = 'Control | Portal Tugas Akhir';
+            $data['dosen'] = $this->Control_model->getAllDosen();
+            $data['session_access_user'] = $this->session->userdata('alias');
+            $this->load->view('control/dosen', $data);
+        }
+    }
+
+
+    // For Skripsi
+    function skripsi()
+    {
+        if ($this->session->userdata('username')) {
+            $data['allSkripsi'] = $this->Control_model->getAllSkipsi();
+            $data['session_access_user'] = $this->session->userdata('alias');
+            $this->db->view('control/skripsi', $data);
+        }
+    }
+
 
     // For Imbuhan
     function addImbuhan()

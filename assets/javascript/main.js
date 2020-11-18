@@ -1,19 +1,20 @@
 $(document).ready(function () {
-    $('#collapsibleNavbar').css("color: yellow");
-    var prevScrollpos = window.pageYOffset;
-    var nav = $('nav');
-    window.onscroll = function () {
-        var currentScrollPos = window.pageYOffset;
-        if (prevScrollpos > currentScrollPos) {
-            nav.addClass("fixed-top").show(400);
-        } else {
-            nav.hide(200);
-            // console.log("DOWN");
-            // nav.hide();
-            // nav.style.top = "-50px";
-        }
-        prevScrollpos = currentScrollPos;
-    }
+
+    // $('#collapsibleNavbar').css("color: yellow");
+    // var prevScrollpos = window.pageYOffset;
+    // var nav = $('nav');
+    // window.onscroll = function () {
+    //     var currentScrollPos = window.pageYOffset;
+    //     if (prevScrollpos > currentScrollPos) {
+    //         nav.addClass("fixed-top").show(400);
+    //     } else {
+    //         nav.hide(200);
+    //         // console.log("DOWN");
+    //         // nav.hide();
+    //         // nav.style.top = "-50px";
+    //     }
+    //     prevScrollpos = currentScrollPos;
+    // }
 
 
     $('#nim_result').html('');
@@ -86,37 +87,6 @@ $(document).ready(function () {
         }
     });
 
-
-    // function getTitleFromDB() {
-
-    //     $('#result').html('');
-    //     var title = $('#keyword').val();
-    //     if (title != '') {
-    //         $.ajax({
-    //             url: "dashboard/home/searchtitle",
-    //             method: "POST",
-    //             data: {
-    //                 jdl: title
-    //             },
-    //             success: function (data) {
-    //                 $('#result').html(data);
-    //             }
-    //         });
-    //     } else {
-    //         Swal.fire('Kata kunci kosong');
-    //     }
-    // }
-
-
-    // $('#btnSearch').click(function () {
-    //     // $('#wrapper').css("height", "339px");
-    //     // showSpesificTitle();
-    //     getTitleFromDB();
-
-    // });
-
-
-
     //check available NIM
     $('#nim').change(function () {
         var nim = $('#nim').val();
@@ -180,6 +150,8 @@ $(document).ready(function () {
             return false;
         }
     });
+
+
 
 
 

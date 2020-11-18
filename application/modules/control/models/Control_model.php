@@ -23,6 +23,47 @@
             return FALSE;
         }
     }
+
+    // For Dosen
+    function getAllDosen()
+    {
+        return $this->db->get('dosen')->result_array();
+    }
+    function addLecture()
+    {
+        $data = array(
+            'nip' => $this->input->post('nip'),
+            'nama' => $this->input->post('nama'),
+            'program_studi' => $this->input->post('program_studi'),
+            'pendidikan_terakhir' => $this->input->post('pendidikan_terakhir'),
+            'foto' => $this->__uploadImage(),
+        );
+        if ($data == TRUE) {
+            $this->db->insert('dosen', $data);
+        }
+    }
+    private function __uploadImage()
+    {
+        $config['upload_path'] = './assets/images/dosen_profile/';
+        $config['allowed_types'] = 'png|jpeg|jpg|gif';
+        $config['max_size'] = '2048';
+        $config['max_width'] = '0';
+        $config['max_height'] = '0';
+        $config['file_name'] = $this->input->post('nip');
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        if (!$this->upload->do_upload('userfile')) {
+            $error = array('error' => $this->upload->display_errors());
+        } else {
+            return $this->upload->data('file_name');
+        }
+    }
+    function deleteDosen()
+    {
+    }
+
+
     // For Imbuhan
     function getAllImbuhan()
     {

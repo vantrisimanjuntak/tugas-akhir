@@ -182,3 +182,6 @@ ERROR - 2020-11-17 13:41:58 --> 404 Page Not Found: /index
 ERROR - 2020-11-17 13:41:58 --> 404 Page Not Found: /index
 ERROR - 2020-11-17 13:42:04 --> 404 Page Not Found: /index
 ERROR - 2020-11-17 13:42:30 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 14:12:21 --> 404 Page Not Found: /index
+ERROR - 2020-11-17 14:43:03 --> Severity: Notice --> Undefined property: CI::$session_access_user C:\xampp\htdocs\tugas-akhir\application\third_party\MX\Controller.php 59
+ERROR - 2020-11-17 14:50:26 --> Severity: error --> Exception: Call to undefined method CI_DB_mysqli_driver::count() C:\xampp\htdocs\tugas-akhir\application\modules\control\controllers\Control.php 62

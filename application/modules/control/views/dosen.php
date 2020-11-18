@@ -72,7 +72,40 @@
         <!-- Header-->
 
 
-        <?php $this->load->view('control/content'); ?>
+        <div class="card">
+            <div class="card-header">
+                <strong class="card-title">DOSEN</strong>
+            </div>
+            <div class="card-body">
+                <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
+                    <thead>
+                        <tr>
+                            <th>No</th>
+                            <th>NIP</th>
+                            <th>Nama</th>
+                            <th>Program Studi</th>
+                            <th>Foto</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <?php
+                        $no = 1;
+                        foreach ($dosen as $data) : ?>
+                            <tr>
+                                <td><?= $no++; ?></td>
+                                <td><?= $data['nip']; ?></td>
+                                <td><?= $data['nama']; ?></td>
+                                <td><?= $data['program_studi']; ?></td>
+                                <td>
+                                    <img src="<?= base_url('assets/images/' . $data['foto']); ?>" alt="" style="width: 80px;">
+                                </td>
+                            </tr>
+
+                        <?php endforeach; ?>
+                    </tbody>
+                </table>
+            </div>
+        </div>
     </div><!-- /#right-panel -->
 
     <!-- Right Panel -->
