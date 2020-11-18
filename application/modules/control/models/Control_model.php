@@ -27,22 +27,45 @@
     // For Dosen
     function getAllDosen()
     {
-        return $this->db->get('dosen')->result_array();
+        $this->db->select('*');
+        $this->db->from('dosen');
+        $this->db->join('program_studi', 'program_studi.kd_program_studi = dosen.program_studi');
+        $query = $this->db->get();
+        return $query->result_array();
     }
-    function addLecture()
+    function checknip($nip)
+    {
+        $this->db->select('nip');
+        $this->db->from('dosen');
+        $this->db->where('nip', $nip);
+        $queryCheckNIP = $this->db->get();
+
+        if ($queryCheckNIP->num_rows() > 0) {
+            echo "DATA SUDAH DIINPUT";
+            echo
+                '<script>
+                $("#nama, #program_studi, #pendidikan_terakhir, #foto, #tambah").prop("disabled", true);
+                </script>';
+        } else {
+            echo '<i class="fa fa-check" aria-hidden="true" style="color:yellow"></i>';
+            echo
+                '<script>$("#nama, #program_studi, #pendidikan_terakhir, #foto, #tambah").prop("disabled", false);</script>';
+        }
+    }
+    function addLecture($nip, $nama, $prodi, $pendidikan_terakhir)
     {
         $data = array(
-            'nip' => $this->input->post('nip'),
-            'nama' => $this->input->post('nama'),
-            'program_studi' => $this->input->post('program_studi'),
-            'pendidikan_terakhir' => $this->input->post('pendidikan_terakhir'),
-            'foto' => $this->__uploadImage(),
+            'nip' => $nip,
+            'nama' => $nama,
+            'program_studi' => $prodi,
+            'pendidikan_terakhir' => $pendidikan_terakhir,
+            'foto' => $this->_uploadImage(),
         );
         if ($data == TRUE) {
             $this->db->insert('dosen', $data);
         }
     }
-    private function __uploadImage()
+    private function _uploadImage()
     {
         $config['upload_path'] = './assets/images/dosen_profile/';
         $config['allowed_types'] = 'png|jpeg|jpg|gif';
@@ -62,7 +85,16 @@
     function deleteDosen()
     {
     }
+    function getAllProdi()
+    {
+        return $this->db->get('program_studi')->result_array();
+    }
 
+    // For Skripsi
+    function getAllSkripsi()
+    {
+        return $this->db->get('sample')->result_array();
+    }
 
     // For Imbuhan
     function getAllImbuhan()

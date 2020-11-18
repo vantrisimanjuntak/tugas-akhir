@@ -13,14 +13,14 @@
             'nama' => $this->input->post('nama'),
             'program_studi' => $this->input->post('program_studi'),
             'pendidikan_terakhir' => $this->input->post('pendidikan_terakhir'),
-            'foto' => $this->__uploadImage(),
+            'foto' => $this->_uploadImage(),
         );
         if ($data == TRUE) {
             $this->db->insert('dosen', $data);
         }
     }
 
-    private function __uploadImage()
+    private function _uploadImage()
     {
         $config['upload_path'] = './assets/images/dosen_profile/';
         $config['allowed_types'] = 'png|jpeg|jpg|gif';

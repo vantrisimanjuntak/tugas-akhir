@@ -153,6 +153,22 @@ $(document).ready(function () {
 
 
 
+    $('#nip').change(function () {
+        var nip = $('#nip').val();
+        if (nip != '') {
+            $.ajax({
+                url: "control/checknip",
+                method: "POST",
+                data: {
+                    nip: nip
+                },
+                success: function (data) {
+                    $('#nip_result').html(data);
+                }
+            });
+        }
+    });
+
 
 
 });

@@ -8,7 +8,7 @@
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- <link rel="" href="apple-icon.png"> -->
+    <link rel="shortcut icon" href="<?= base_url('assets/images/wp/stta.png') ?>" type="image/x-icon">
 
     <script src="<?= base_url('assets/javascript/jquery-3.5.1.js') ?>" type="text/javascript"></script>
     <script type="text/javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script>
@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') ?>">
 
-    <link rel="shortcut icon" href="<?= base_url('assets/images/wp/stta.png') ?>">
+    <link rel="shortcut icon" href="<?= base_url('assets/images/stta.png') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/bootstrap/dist/css/bootstrap.min.css'); ?> ">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/font-awesome/css/font-awesome.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/themify-icons/css/themify-icons.css'); ?>">
@@ -70,52 +70,28 @@
 
         </header><!-- /header -->
         <!-- Header-->
-
-
         <div class="card">
             <div class="card-header">
-                <strong class="card-title">DOSEN</strong>
+                <strong class="card-title">IMBUHAN</strong>
             </div>
-            <br><br>
             <div class="container-fluid mb-4 mt-3" style="font-family: 'PT Serif', serif; ">
-                <form action="<?= base_url('control/addLecture'); ?>" method="POST" enctype="multipart/form-data">
-                    <div class="form-group row">
-                        <label for="" class="col-md-2 col-lg-2 col-form-label">NIP</label>
-                        <div class="col-md-5 col-lg-3">
-                            <input type="text" name="nip" id="nip" autocomplete="off" id="" class="form-control">
+                <form action="<?= base_url('control/addImbuhan'); ?>" method="POST" enctype="multipart/form-data">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="" class="col-md-5 col-lg-4 col-xl-3 col-form-label">Kata Imbuhan</label>
+                                <div class="col-md-7 col-lg-8 col-xl-7">
+                                    <input type="text" name="kata_imbuhan" required id="" autocomplete="off" class="form-control">
+                                </div>
+                            </div>
                         </div>
-                        <h4 class="mt-2" style="color:red" id="nip_result"></h4>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-md-2 col-form-label">Nama</label>
-                        <div class="col-md-7">
-                            <input type="text" name="nama" autocomplete="off" id="nama" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-md-2 col-lg-2 col-form-label">Program Studi</label>
-                        <div class="col-md-5">
-                            <select name="program_studi" id="program_studi" class="custom-select">
-                                <?php foreach ($prodi as $row) : ?>
-                                    <option value="<?= $row['kd_program_studi']; ?>"><?= $row['program_studi']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-md-2 col-form-label">Pendidikan Terakhir</label>
-                        <div class="col-md-5">
-                            <select name="pendidikan_terakhir" class="custom-select" id="pendidikan_terakhir">
-                                <option value="S1">S1</option>
-                                <option value="S2">S2</option>
-                                <option value="S3">S3</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row mt-3" style="font-family: 'PT Serif', serif; ">
-                        <label for="" class="col-sm-2 col-form-label">Foto</label>
-                        <div class="col-sm-6 col-md-5">
-                            <input type="file" accept="image/*" name="userfile" id="foto" class="form-control">
+                        <div class="col-md-6">
+                            <div class="form-group row">
+                                <label for="" class="col-md-5 col-lg-4 col-xl-3 col-form-label">Kata Dasar</label>
+                                <div class="col-md-7 col-lg-8 col-xl-7">
+                                    <input type="text" name="kata_dasar" required id="" autocomplete="off" class="form-control">
+                                </div>
+                            </div>
                         </div>
                     </div>
                     <div class="container">
@@ -133,26 +109,33 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>NIP</th>
-                            <th>Nama</th>
-                            <th>Program Studi</th>
-                            <th>Foto</th>
+                            <th>Kata Imbuhan</th>
+                            <th>Kata Dasar</th>
+                            <th>Action</th>
+
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $no = 1;
-                        foreach ($dosen as $data) : ?>
+                        foreach ($allImbuhan as $data) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $data['nip']; ?></td>
-                                <td><?= $data['nama']; ?></td>
-                                <td><?= $data['program_studi']; ?></td>
+                                <td><?= $data['kata_imbuhan']; ?></td>
+                                <td><?= $data['kata_dasar']; ?></td>
                                 <td>
-                                    <img src="<?= base_url('assets/images/dosen_profile/' . $data['foto']); ?>" alt="" style="width: 80px;">
+                                    <a href="#" style="text-decoration: none;">
+                                        <button type="button" class="btn btn-success">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                        </button>
+                                    </a>
+                                    <a href="<?= base_url('control/deleteImbuhan/' . $data['id']); ?>" style="text-decoration: none;">
+                                        <button type="button" class="btn btn-danger">
+                                            <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                        </button>
+                                    </a>
                                 </td>
                             </tr>
-
                         <?php endforeach; ?>
                     </tbody>
                 </table>

@@ -30,7 +30,7 @@
             <div class="form-group row mt-5" style="font-family: 'PT Serif', serif; ">
                 <label for="" class="col-sm-2 col-lg-2 col-form-label">NIP</label>
                 <div class="col-sm-10 col-lg-3">
-                    <input type="text" name="nip" id="nip" class="form-control" autocomplete="off">
+                    <input type="text" name="nip" id="" class="form-control" autocomplete="off">
                 </div>
             </div>
             <div class="form-group row mt-3" style="font-family: 'PT Serif', serif; ">

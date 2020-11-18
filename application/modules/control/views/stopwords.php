@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') ?>">
 
-    <link rel="shortcut icon" href="<?= base_url('assets/images/wp/stta.png') ?>">
+    <link rel="shortcut icon" href="<?= base_url('assets/images/stta.png') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/bootstrap/dist/css/bootstrap.min.css'); ?> ">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/font-awesome/css/font-awesome.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/themify-icons/css/themify-icons.css'); ?>">
@@ -74,83 +74,33 @@
 
         <div class="card">
             <div class="card-header">
-                <strong class="card-title">DOSEN</strong>
-            </div>
-            <br><br>
-            <div class="container-fluid mb-4 mt-3" style="font-family: 'PT Serif', serif; ">
-                <form action="<?= base_url('control/addLecture'); ?>" method="POST" enctype="multipart/form-data">
-                    <div class="form-group row">
-                        <label for="" class="col-md-2 col-lg-2 col-form-label">NIP</label>
-                        <div class="col-md-5 col-lg-3">
-                            <input type="text" name="nip" id="nip" autocomplete="off" id="" class="form-control">
-                        </div>
-                        <h4 class="mt-2" style="color:red" id="nip_result"></h4>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-md-2 col-form-label">Nama</label>
-                        <div class="col-md-7">
-                            <input type="text" name="nama" autocomplete="off" id="nama" class="form-control">
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-md-2 col-lg-2 col-form-label">Program Studi</label>
-                        <div class="col-md-5">
-                            <select name="program_studi" id="program_studi" class="custom-select">
-                                <?php foreach ($prodi as $row) : ?>
-                                    <option value="<?= $row['kd_program_studi']; ?>"><?= $row['program_studi']; ?></option>
-                                <?php endforeach; ?>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row">
-                        <label for="" class="col-md-2 col-form-label">Pendidikan Terakhir</label>
-                        <div class="col-md-5">
-                            <select name="pendidikan_terakhir" class="custom-select" id="pendidikan_terakhir">
-                                <option value="S1">S1</option>
-                                <option value="S2">S2</option>
-                                <option value="S3">S3</option>
-                            </select>
-                        </div>
-                    </div>
-                    <div class="form-group row mt-3" style="font-family: 'PT Serif', serif; ">
-                        <label for="" class="col-sm-2 col-form-label">Foto</label>
-                        <div class="col-sm-6 col-md-5">
-                            <input type="file" accept="image/*" name="userfile" id="foto" class="form-control">
-                        </div>
-                    </div>
-                    <div class="container">
-                        <div class="row">
-                            <div class="col-lg-12">
-                                <button type="submit" class="btn btn-primary float-right" id="tambah">Tambah</button>
-                            </div>
-                        </div>
-                    </div>
-                </form>
-                <hr>
+                <strong class="card-title">SKRIPSI</strong>
             </div>
             <div class="card-body">
                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>NIP</th>
-                            <th>Nama</th>
-                            <th>Program Studi</th>
-                            <th>Foto</th>
+                            <th>Stopwords</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $no = 1;
-                        foreach ($dosen as $data) : ?>
+                        foreach ($allStopwords as $data) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $data['nip']; ?></td>
-                                <td><?= $data['nama']; ?></td>
-                                <td><?= $data['program_studi']; ?></td>
+                                <td><?= $data['stopwords']; ?></td>
                                 <td>
-                                    <img src="<?= base_url('assets/images/dosen_profile/' . $data['foto']); ?>" alt="" style="width: 80px;">
+                                    <button type="button" class="btn btn-success">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger">
+                                        <i class="fa fa-trash-o" aria-hidden="true"></i>
+                                    </button>
                                 </td>
+
                             </tr>
 
                         <?php endforeach; ?>

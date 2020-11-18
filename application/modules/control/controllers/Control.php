@@ -64,9 +64,28 @@
         if ($this->session->userdata('username')) {
             $data['title'] = 'Control | Portal Tugas Akhir';
             $data['dosen'] = $this->Control_model->getAllDosen();
+            $data['prodi'] = $this->Control_model->getAllProdi();
             $data['session_access_user'] = $this->session->userdata('alias');
             $this->load->view('control/dosen', $data);
         }
+    }
+    function checknip()
+    {
+        $nip = $this->input->post('nip');
+        if ($nip != '') {
+            $this->Control_model->checknip($nip);
+        } else {
+            echo "NIP KOSONG";
+        }
+    }
+    function addLecture()
+    {
+        $nip = $this->input->post('nip');
+        $nama = $this->input->post('nama');
+        $prodi = $this->input->post('program_studi');
+        $pendidikan_terakhir = $this->input->post('pendidikan_terakhir');
+        $this->Control_model->addLecture($nip, $nama, $prodi, $pendidikan_terakhir);
+        redirect('control/lecture');
     }
 
 
@@ -74,24 +93,36 @@
     function skripsi()
     {
         if ($this->session->userdata('username')) {
-            $data['allSkripsi'] = $this->Control_model->getAllSkipsi();
+            $data['title'] = 'Control | Portal Tugas Akhir';
+            $data['allSkripsi'] = $this->Control_model->getAllSkripsi();
             $data['session_access_user'] = $this->session->userdata('alias');
-            $this->db->view('control/skripsi', $data);
+            $this->load->view('control/skripsi', $data);
         }
     }
 
 
     // For Imbuhan
+    function imbuhan()
+    {
+        if ($this->session->userdata('username')) {
+            $data['title'] = 'Control | Portal Tugas Akhir';
+            $data['allImbuhan'] = $this->Control_model->getAllImbuhan();
+            $data['session_access_user'] = $this->session->userdata('alias');
+            $this->load->view('control/imbuhan', $data);
+        }
+    }
+
+
     function addImbuhan()
     {
         if ($this->session->userdata('username')) {
-            $kata_dasar = strtolower($this->input->post('kata_dasar'));
             $kata_imbuhan = strtolower($this->input->post('kata_imbuhan'));
+            $kata_dasar = strtolower($this->input->post('kata_dasar'));
 
             if ($kata_dasar == NULL && $kata_imbuhan == NULL) {
                 echo "<script>
                 alert('FORM ADA YANG KOSONG');
-                window.location.href = '/tugas-akhir/control';
+                window.location.href = '/tugas-akhir/control/imbuhan';
                 </script>";
             } else {
                 $input = $this->Control_model->addImbuhan($kata_imbuhan, $kata_dasar);
@@ -99,12 +130,12 @@
 
                     echo "<script> 
                     alert('Data Berhasil Diinput');
-                    window.location.href='/tugas-akhir/control';
+                    window.location.href='/tugas-akhir/control/imbuhan';
                     </script>";
                 } else {
                     echo "<script> 
                     alert('Data Sudah Ada');
-                    window.location.href='/tugas-akhir/control';
+                    window.location.href='/tugas-akhir/control/imbuhan';
                     </script>";
                 }
             }
@@ -121,18 +152,26 @@
         if ($execute) {
             echo "<script> 
             alert('Berhasil Dihapus');
-            window.location.href='/tugas-akhir/control';
+            window.location.href='/tugas-akhir/control/imguhan';
             </script>";
         } else {
             echo "<script> 
             alert('DATA TIDAK ADA');
-            window.location.href='/tugas-akhir/control';
+            window.location.href='/tugas-akhir/control/imbuhan';
             </script>";
         }
     }
 
 
     // For Stopwords
+
+    function stopwords()
+    {
+        $data['title'] = 'Control | Portal Tugas Akhir';
+        $data['allStopwords'] = $this->Control_model->getAllStopwords();
+        $data['session_access_user'] = $this->session->userdata('alias');
+        $this->load->view('control/stopwords', $data);
+    }
     function addStopwords()
     {
         $stopwords = strtolower($this->input->post('stopwords'));
