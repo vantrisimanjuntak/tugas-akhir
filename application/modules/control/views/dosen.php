@@ -130,16 +130,17 @@
             </div>
             <div class="card-body">
                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
-                    <thead>
+                    <thead class="text-center">
                         <tr>
                             <th>No</th>
                             <th>NIP</th>
                             <th>Nama</th>
                             <th>Program Studi</th>
                             <th>Foto</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
-                    <tbody>
+                    <tbody style="text-align: center;">
                         <?php
                         $no = 1;
                         foreach ($dosen as $data) : ?>
@@ -150,6 +151,18 @@
                                 <td><?= $data['program_studi']; ?></td>
                                 <td>
                                     <img src="<?= base_url('assets/images/dosen_profile/' . $data['foto']); ?>" alt="" style="width: 80px;">
+                                </td>
+                                <td>
+                                    <a href="#">
+                                        <button type="button" class="btn btn-warning">
+                                            <i class="fa fa-pencil-square-o" aria-hidden="true" style="color:white"></i>
+                                        </button>
+                                    </a>
+                                    <a href="#">
+                                        <button type="button" class="btn btn-danger">
+                                            <i class="fa fa-trash" aria-hidden="true" style="color: white;"></i>
+                                        </button>
+                                    </a>
                                 </td>
                             </tr>
 

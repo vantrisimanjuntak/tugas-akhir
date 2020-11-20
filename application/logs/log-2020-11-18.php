@@ -919,3 +919,24 @@ ERROR - 2020-11-18 19:22:31 --> Query error: ERROR:  relation "sample" does not 
 LINE 2: FROM "sample"
              ^ - Invalid query: SELECT COUNT(*) AS "numrows"
 FROM "sample"
+ERROR - 2020-11-18 19:27:13 --> Severity: Warning --> pg_query(): Query failed: ERROR:  relation &quot;sample&quot; does not exist
+LINE 2: FROM &quot;sample&quot;
+             ^ C:\xampp\htdocs\tugas-akhir\system\database\drivers\postgre\postgre_driver.php 242
+ERROR - 2020-11-18 19:27:13 --> Query error: ERROR:  relation "sample" does not exist
+LINE 2: FROM "sample"
+             ^ - Invalid query: SELECT COUNT(*) AS "numrows"
+FROM "sample"
+ERROR - 2020-11-18 19:30:02 --> Severity: Warning --> pg_query(): Query failed: ERROR:  null value in column &quot;id&quot; of relation &quot;stopwords&quot; violates not-null constraint
+DETAIL:  Failing row contains (null, adanya). C:\xampp\htdocs\tugas-akhir\system\database\drivers\postgre\postgre_driver.php 242
+ERROR - 2020-11-18 19:30:02 --> Query error: ERROR:  null value in column "id" of relation "stopwords" violates not-null constraint
+DETAIL:  Failing row contains (null, adanya). - Invalid query: INSERT INTO "stopwords" ("stopwords") VALUES ('adanya')
+ERROR - 2020-11-18 19:37:53 --> Severity: Warning --> pg_query(): Query failed: ERROR:  relation &quot;sample&quot; does not exist
+LINE 2: FROM &quot;sample&quot;
+             ^ C:\xampp\htdocs\tugas-akhir\system\database\drivers\postgre\postgre_driver.php 242
+ERROR - 2020-11-18 19:37:53 --> Query error: ERROR:  relation "sample" does not exist
+LINE 2: FROM "sample"
+             ^ - Invalid query: SELECT COUNT(*) AS "numrows"
+FROM "sample"
+ERROR - 2020-11-18 19:45:22 --> 404 Page Not Found: /index
+ERROR - 2020-11-18 19:45:23 --> 404 Page Not Found: /index
+ERROR - 2020-11-18 19:45:23 --> 404 Page Not Found: /index

@@ -2,7 +2,7 @@
     <div class="pt-4">
         <div class="row">
             <div class="mt-4 col-xs-12 col-sm-12 col-md-12 col-lg-1">
-                <img src="<?= base_url('assets/images/stta.png') ?>" class="img-fluid mx-auto d-block" style="width: 70px;" alt="">
+                <img src="<?= base_url('assets/images/wp/stta.png') ?>" class="img-fluid mx-auto d-block" style="width: 70px;" alt="">
             </div>
             <div class="mt-4 col-sm-12 col-md-5 col-lg-3 text-center">
                 <h5 class="display-5 align-middle" style="font-size :23px;font-family: 'Lora', serif;">Sekolah Tinggi Teknologi Adisutjipto</h5>

@@ -8,7 +8,7 @@
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- <link rel="" href="apple-icon.png"> -->
+    <link rel="shortcut icon" href="<?= base_url('assets/images/wp/stta.png') ?>" type="image/x-icon">
 
     <script src="<?= base_url('assets/javascript/jquery-3.5.1.js') ?>" type="text/javascript"></script>
     <script type="text/javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script>

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="shortcut icon" href="<?= base_url('assets/images/stta.png') ?>">
+    <link rel="shortcut icon" href="<?= base_url('assets/images/wp/stta.png') ?>">
     <!-- Bootstrap 4 CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/bootstrap-4.0.0/css/bootstrap.min.css') ?>">
     <!-- Font Awesome -->
@@ -36,7 +36,7 @@
     <?php $this->load->view('nav'); ?>
     <!-- End Navbar -->
     <!-- Content -->
-    <div class="pt-5" style="background-image: url('assets/images/img-1.jpg'); height: 400px; background-position:70% 30%;background-size:cover;position:relative;background-repeat:no-repeat;">
+    <div class="pt-5" style="background-image: url('assets/images/wp/img-1.jpg'); height: 400px; background-position:70% 30%;background-size:cover;position:relative;background-repeat:no-repeat;">
         <div class="pt-4 pl-3">
             <div style="width: 240px;">
                 <h1 class="text-white" style="font-family: 'Playfair Display', serif">Bingung dengan Tugas Akhir?</h1>

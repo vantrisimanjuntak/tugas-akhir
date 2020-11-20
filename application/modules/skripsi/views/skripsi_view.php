@@ -39,7 +39,7 @@
                 <div class="form-group row" style="font-family: 'Times New Roman', serif">
                     <label for="" style="font-size: 20px" class="col-sm-3 col-form-label">NIM<span style="color:red;">*</span></label>
                     <div class="col-sm-3">
-                        <input type="text" class="form-control" name="nim" id="nim" autocomplete="OFF">
+                        <input type="text" class="form-control" name="nim" id="" autocomplete="OFF">
                     </div>
                     <div class="col-sm-5" style="color: red">
                         <small id="nim_result"></small>

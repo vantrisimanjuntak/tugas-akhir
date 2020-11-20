@@ -18,7 +18,7 @@ $(document).ready(function () {
 
 
     $('#nim_result').html('');
-    $('#judulskripsi, #abstrak, #dp1, #dp2, #btnSubmit').prop('disabled', 'disabled');
+    $('#judulskripsi, #abstrak, #dp_satu, #dp_dua, #btnSubmit').prop('disabled', 'disabled');
 
     function showSpesificTitle() {
         $('#result').html('');
@@ -92,7 +92,7 @@ $(document).ready(function () {
         var nim = $('#nim').val();
         if (nim != '') {
             $.ajax({
-                url: "skripsi/home/checknim",
+                url: "control/checknim",
                 method: "POST",
                 data: {
                     nim: nim
@@ -150,6 +150,14 @@ $(document).ready(function () {
             return false;
         }
     });
+
+    // inpit only number in Skripsi page
+    $('#nim').keypress(function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
+    });
+
 
 
 

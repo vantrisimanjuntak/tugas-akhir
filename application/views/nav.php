@@ -1,6 +1,6 @@
 <nav class="navbar navbar-expand-sm navbar-light fixed-top" style="background: rgba(255, 255, 255, 0.3);">
     <a class="navbar-brand mx-auto d-block" href="<?= base_url(''); ?>">
-        <img src="<?= base_url('assets/images/stta.png') ?>" class="img-fluid" style="width:40px;" alt="">
+        <img src="<?= base_url('assets/images/wp/stta.png') ?>" class="img-fluid" style="width:40px;" alt="">
     </a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#collapsibleNavbar">
         <span class="navbar-toggler-icon"></span>

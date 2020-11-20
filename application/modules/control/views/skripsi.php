@@ -8,7 +8,7 @@
     <meta name="description" content="Sufee Admin - HTML5 Admin Template">
     <meta name="viewport" content="width=device-width, initial-scale=1">
 
-    <!-- <link rel="" href="apple-icon.png"> -->
+    <link rel="shortcut icon" href="<?= base_url('assets/images/wp/stta.png') ?>" type="image/x-icon">
 
     <script src="<?= base_url('assets/javascript/jquery-3.5.1.js') ?>" type="text/javascript"></script>
     <script type="text/javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script>
@@ -75,6 +75,71 @@
         <div class="card">
             <div class="card-header">
                 <strong class="card-title">SKRIPSI</strong>
+            </div>
+            <br><br>
+            <div class="container-fluid mb-4 mt-3" style="font-family: 'PT Serif', serif; ">
+                <form action="<?= base_url('control/submitSkripsi'); ?>" method="POST" enctype="multipart/form-data">
+                    <div class="form-group row">
+                        <label for="" class="col-md-2 col-lg-2 col-form-label">No. Reg</label>
+                        <div class="col-md-2 col-lg-2">
+                            <?php $no_reg = bin2hex(random_bytes(4)); ?>
+                            <input type="text" name="no_reg" readonly autocomplete="off" id="" class="form-control" value="<?= $no_reg ?>">
+                        </div>
+                        <h4 class="mt-2" style="color:red" id="nip_result"></h4>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-md-2 col-form-label">NIM</label>
+                        <div class="col-md-3">
+                            <input type="text" name="nim" autocomplete="off" id="nim" class="form-control">
+                        </div>
+                        <div class="col-sm-5" style="color: red">
+                            <small id="nim_result"></small>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-md-2 col-lg-2 col-form-label">Judul Skripsi</label>
+                        <div class="col-md-9">
+                            <input type="text" name="judul_skripsi" autocomplete="off" id="judulskripsi" class="form-control" id="judul_skripsi">
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-md-2 col-form-label">Abstrak</label>
+                        <div class="col-md-9">
+                            <textarea name="abstrak" class="form-control" id="abstrak" cols="30" rows="20"></textarea>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-md-2 col-form-label">Dosen Pembimbing I</label>
+                        <div class="col-md-5">
+                            <select name="dp_satu" class="custom-select" id="dp_satu">
+                                <option value="">--PILIH DOSEN--</option>
+                                <?php foreach ($allDosen as $row) : ?>
+                                    <option value="<?= $row['nip'] ?>"><?= $row['nama']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+                    <div class="form-group row">
+                        <label for="" class="col-md-2 col-form-label">Dosen Pembimbing II</label>
+                        <div class="col-md-5">
+                            <select name="dp_dua" class="custom-select" id="dp_dua">
+                                <option value="">--PILIH DOSEN--</option>
+                                <?php foreach ($allDosen as $row) : ?>
+                                    <option value="<?= $row['nip'] ?>"><?= $row['nama']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
+
+                    <div class="container">
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <button type="submit" class="btn btn-primary float-right" id="btnSubmit"><i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;&nbsp;Tambah</button>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+                <hr>
             </div>
             <div class="card-body">
                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">

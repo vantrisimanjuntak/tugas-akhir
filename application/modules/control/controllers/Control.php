@@ -48,7 +48,7 @@
             $data['allImbuhan'] = $this->Control_model->getAllImbuhan();
             $data['stopwords'] = $this->Control_model->getAllStopwords();
             $data['session_access_user'] = $this->session->userdata('alias');
-            $data['countSkripsi'] = $this->db->count_all_results('sample');
+            $data['countSkripsi'] = $this->db->count_all_results('tugas_akhir');
             $data['countDosen'] = $this->db->count_all_results('dosen');
             $this->load->view('control/index', $data);
         } else {
@@ -95,8 +95,47 @@
         if ($this->session->userdata('username')) {
             $data['title'] = 'Control | Portal Tugas Akhir';
             $data['allSkripsi'] = $this->Control_model->getAllSkripsi();
+            $data['allDosen'] = $this->Control_model->getAllDosen();
             $data['session_access_user'] = $this->session->userdata('alias');
             $this->load->view('control/skripsi', $data);
+        } else {
+            echo "<script>
+            alert('SILAHKAN LOGIN TERLEBIH DAHULU');
+            window.location.href = '/tugas-akhir/control/login';
+            </script>";
+        }
+    }
+    function submitSkripsi()
+    {
+        $no_reg = $this->input->post('no_reg');
+        $nim = $this->input->post('nim');
+        $judulskripsi = $this->input->post('judul_skripsi');
+        $abstrak = $this->input->post('abstrak');
+        $dp1 = $this->input->post('dp_satu');
+        $dp2 = $this->input->post('dp_dua');
+
+        $abstrakLowerCase = strtolower($abstrak);
+        $wordMark = '/[{}()""!,.:?]/';
+        $removeAbstrakfromWordmark = preg_replace($wordMark, "", $abstrakLowerCase);
+        // $clearAbstrak = preg_replace(array('/\bbadanya\b/', '/\boleh\b/', '/\bini\b/', '/\bitu\b/', '/\byang\b/', '/\bsebagai\b/', '/\bsebuah\b/', '/\byaitu\b/', '/\bdi\b/', '/\bselain\b/', '/\badalah\b/', '/\bdengan\b/'), array(''), $removeAbstrakfromWordmark);
+        $queryGetStopwords = $this->Control_model->getAllStopwords();
+        foreach ($queryGetStopwords as $row) {
+            $arrayStopwords[] = '/\b' . $row['stopwords'] . '\b/';
+        }
+        $clearAbstrak = preg_replace($arrayStopwords, array(''), $removeAbstrakfromWordmark);
+
+
+        $this->Control_model->submitSkripsi($no_reg, $nim, $judulskripsi, $abstrak, $dp1, $dp2, $clearAbstrak);
+
+        redirect('control/skripsi');
+    }
+    function checknim()
+    {
+        $nim = $this->input->post('nim');
+        if ($nim != '') {
+            $this->Control_model->checknim($nim);
+        } else {
+            echo "NIM KOSONG";
         }
     }
 
@@ -179,19 +218,19 @@
         if ($stopwords === " ") {
             echo "<script>
             alert('FORM ADA YANG KOSONG');
-            window.location.href = '/tugas-akhir/control';
+            window.location.href = '/tugas-akhir/control/stopwords';
             </script>";
         } else {
             $queryAdd = $this->Control_model->addStopwords($stopwords);
             if ($queryAdd) {
                 echo "<script> 
                 alert('Data Berhasil Diinput');
-                window.location.href='/tugas-akhir/control';
+                window.location.href='/tugas-akhir/control/stopwords';
                 </script>";
             } else {
                 echo "<script> 
                 alert('Data Sudah Ada');
-                window.location.href='/tugas-akhir/control';
+                window.location.href='/tugas-akhir/control/stopwords';
                 </script>";
             }
         }
@@ -202,12 +241,12 @@
         if ($queryDelete) {
             echo "<script> 
             alert('Berhasil Dihapus');
-            window.location.href='/tugas-akhir/control';
+            window.location.href='/tugas-akhir/control/stopwords';
             </script>";
         } else {
             echo "<script> 
             alert('DATA TIDAK ADA');
-            window.location.href='/tugas-akhir/control';
+            window.location.href='/tugas-akhir/control/stopwords';
             </script>";
         }
     }
