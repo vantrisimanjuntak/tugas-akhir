@@ -15,14 +15,51 @@
     {
 
         $keyword = $this->input->post('judul_skripsi');
-        $query = $this->Main_model->searchtitle($keyword);
-        if ($query) {
-            foreach ($query as $namaDosen => $nilai) {
-                echo '<div class="container-fluid" style="border: 2px solid green">' . $namaDosen . '</div>';
-                echo "<br>";
+        $toLowerKeyword = strtolower($keyword);
+        $query = $this->Main_model->searchtitle($keyword, $toLowerKeyword);
+        foreach ($query as $nipDosen => $skorDosen) {
+            $queryDosen = $this->Main_model->getDosenByNIP($nipDosen);
+            foreach ($queryDosen->result_array() as $data) {
             }
-        } else {
-            return FALSE;
+            $c[] = array(
+                'nip' => $data['nip'],
+                'nama' => $data['nama'],
+                'foto' => $data['foto'],
+                'program_studi' => $data['program_studi'],
+                'skor' => $skorDosen
+            );
         }
+        $data['hasil'] = $c;
+        $this->load->view('dashboard/search_result_view', $data);
+    }
+
+
+
+
+
+
+
+
+    function view_result()
+    {
+
+
+
+        $data = array(
+            'nama' => 'Gasskeun',
+            'kelas' => 'TF',
+            'umur' => 24
+        );
+
+
+        print_r($data);
+        echo "<br><br>";
+
+        echo $data['nama'];
+        // $nip = 10209011;
+        // $nip =  10301028;
+        // $data['nip'] = $this->Main_model->getDosenByNIP($nip);
+        // print_r($data);
+        // $this->load->view('dashboard/search_result_view', $data);
     }
 }

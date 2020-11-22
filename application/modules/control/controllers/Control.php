@@ -117,9 +117,9 @@
         $abstrakLowerCase = strtolower($abstrak);
         $wordMark = '/[{}()""!,.:?]/';
         $removeAbstrakfromWordmark = preg_replace($wordMark, "", $abstrakLowerCase);
-        // $clearAbstrak = preg_replace(array('/\bbadanya\b/', '/\boleh\b/', '/\bini\b/', '/\bitu\b/', '/\byang\b/', '/\bsebagai\b/', '/\bsebuah\b/', '/\byaitu\b/', '/\bdi\b/', '/\bselain\b/', '/\badalah\b/', '/\bdengan\b/'), array(''), $removeAbstrakfromWordmark);
+
         $queryGetStopwords = $this->Control_model->getAllStopwords();
-        foreach ($queryGetStopwords as $row) {
+        foreach ($queryGetStopwords->result_array() as $row) {
             $arrayStopwords[] = '/\b' . $row['stopwords'] . '\b/';
         }
         $clearAbstrak = preg_replace($arrayStopwords, array(''), $removeAbstrakfromWordmark);

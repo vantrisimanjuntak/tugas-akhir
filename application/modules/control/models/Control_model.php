@@ -245,8 +245,7 @@
     // For Stopwords
     function getAllStopwords()
     {
-        $queryGetAllStopwords = $this->db->get('stopwords')->result_array();
-        return $queryGetAllStopwords;
+        return $this->db->get('stopwords');
     }
     function addStopwords($stopwords)
     {

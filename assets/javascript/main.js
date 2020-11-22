@@ -67,7 +67,7 @@ $(document).ready(function () {
                     judul_skripsi: keyword,
                 },
                 success: function (data) {
-                    $('#wrapper').css("height", "100%").show("slow", 1000);
+                    $('#wrapper').css("height", "100%", "border", "3px solid black").show("slow", 1000);
                     $('#result').html(data).show(1500);
                 },
             });
