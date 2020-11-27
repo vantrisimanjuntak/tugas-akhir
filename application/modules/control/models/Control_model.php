@@ -4,8 +4,11 @@
     {
         parent::__construct();
     }
-    function login($username, $password)
+    function login($username, $password, $timelogin)
     {
+
+
+
         $this->db->where('username', $username);
         $this->db->where('password', $password);
         $queryLogin = $this->db->get('superuser');
@@ -18,6 +21,13 @@
                 );
                 $this->session->set_userdata($sess);
             }
+
+            $data = array(
+                'id' => bin2hex(random_bytes(4)),
+                'login_id' => $row['id'],
+                'time' => $timelogin
+            );
+            $this->db->insert('login_time', $data);
             return TRUE;
         } else {
             return FALSE;
@@ -202,6 +212,32 @@
         }
     }
 
+    // For Mahasiswa
+    function getAllMahasiswa()
+    {
+        $queryGetAllMahasiswa = $this->db->get('mahasiswa');
+        return $queryGetAllMahasiswa->result_array();
+    }
+    function checkNIMBeforeAdd($nim)
+    {
+        $this->db->select('nim');
+        $this->db->from('mahasiswa');
+        $this->db->where('nim', $nim);
+        $queryGetMahasiswa = $this->db->get();
+
+        if ($queryGetMahasiswa->num_rows() > 0) {
+            echo 'DATA SUDAH DIINPUT';
+            echo '<script>
+            $("#nama, #program_studi, #tambah").prop("disabled", true);
+                </script>';
+        } else {
+            echo '<i class="fa fa-check" aria-hidden="true" style="color:yellow"></i>';
+            echo '<script>
+                $("#nim_mhs, #nama, #program_studi, #tambah").removeAttr("disabled", true);
+                    </script>';
+        }
+    }
+
     // For Imbuhan
     function getAllImbuhan()
     {
@@ -245,7 +281,7 @@
     // For Stopwords
     function getAllStopwords()
     {
-        return $this->db->get('stopwords');
+        return $this->db->get('stopwords')->result_array();
     }
     function addStopwords($stopwords)
     {

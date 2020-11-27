@@ -6,11 +6,15 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <!-- Bootstrap 4 CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="<?= base_url('assets/font-awesome-4.7.0/css/font-awesome.min.css'); ?>">
     <title><?= $title ?></title>
 </head>
 
 <body style="background-color: #1D0B4C;">
     <div class="container bg-white mt-5" style="max-width :560px; border: 2px solid white; border-radius:15px">
+        <div class="container bg-danger text-center text" style="border-radius: 3px;">
+            <?= $this->session->flashdata('failed'); ?></div>
         <div class="container-fluid mt-3">
             <img src="<?= base_url('assets/images/wp/operating-system-control-center-server-512-removebg-preview.png') ?>" class="mx-auto d-block " alt="" style="width: 80px;">
             <h3 class="text-center text-dark mt-4">Login </h3>

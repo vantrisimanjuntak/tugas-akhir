@@ -18,6 +18,9 @@
     {
         $username = $this->input->post('username');
         $password = sha1($this->input->post('password'));
+        date_default_timezone_set('Asia/Jakarta');
+        $timelogin = date('Y-m-d H:i:s');
+
 
         if ($username == NULL || $password == NULL) {
             echo "<script>
@@ -25,14 +28,15 @@
             window.location.href = '/tugas-akhir/control/login';
             </script>";
         } else {
-            $query = $this->Control_model->login($username, $password);
+            $query = $this->Control_model->login($username, $password, $timelogin);
             if ($query) {
                 redirect('control');
             } else {
-                echo "<script>
-                alert('USERNAME ATAU PASSWORD SALAH');
-                window.location.href = '/tugas-akhir/control/login';
-                </script>";
+                $this->session->set_flashdata(
+                    'failed',
+                    '<i class="fa fa-info-circle" aria-hidden="true" style="color: white;"></i>&nbsp<b>Username </b>dan <b>Password</b> salah'
+                );
+                $this->load->view('control/login_control_view');
             }
         }
     }
@@ -138,6 +142,32 @@
             echo "NIM KOSONG";
         }
     }
+
+    //For Mahasiswa 
+    function mahasiswa()
+    {
+        if ($this->session->userdata('username')) {
+            $data['title'] = 'Control | Portal Tugas Akhir';
+            $data['allMahasiswa'] = $this->Control_model->getAllMahasiswa();
+            $data['prodi'] = $this->Control_model->getAllProdi();
+            $data['session_access_user'] = $this->session->userdata('alias');
+            $this->load->view('control/mahasiswa', $data);
+        }
+    }
+    function checkNIMBeforeAdd()
+    {
+        $nim = $this->input->post('nim');
+        if ($nim != '') {
+            $this->Control_model->checkNIMBeforeAdd($nim);
+        } else {
+            echo "NIM KOSONG";
+        }
+    }
+    function addMahasiswa()
+    {
+    }
+
+
 
 
     // For Imbuhan

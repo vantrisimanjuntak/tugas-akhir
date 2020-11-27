@@ -151,8 +151,14 @@ $(document).ready(function () {
         }
     });
 
-    // inpit only number in Skripsi page
+    // input only number in Skripsi page
     $('#nim').keypress(function (e) {
+        if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
+            return false;
+        }
+    });
+
+    $('#nim_mhs').keypress(function (e) {
         if (e.which != 8 && e.which != 0 && (e.which < 48 || e.which > 57)) {
             return false;
         }
@@ -177,6 +183,22 @@ $(document).ready(function () {
         }
     });
 
+
+    $('#nim_mhs').change(function () {
+        var nim_mhs = $('#nim_mhs').val();
+        if (nim_mhs != '') {
+            $.ajax({
+                url: "control/checkNIMBeforeAdd",
+                method: "POST",
+                data: {
+                    nim: nim_mhs
+                },
+                success: function (data) {
+                    $('#nim_result').html(data);
+                }
+            });
+        }
+    });
 
 
 });

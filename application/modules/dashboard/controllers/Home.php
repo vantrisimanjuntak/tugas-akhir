@@ -17,20 +17,24 @@
         $keyword = $this->input->post('judul_skripsi');
         $toLowerKeyword = strtolower($keyword);
         $query = $this->Main_model->searchtitle($keyword, $toLowerKeyword);
-        foreach ($query as $nipDosen => $skorDosen) {
-            $queryDosen = $this->Main_model->getDosenByNIP($nipDosen);
-            foreach ($queryDosen->result_array() as $data) {
+        if ($query) {
+            foreach ($query as $nipDosen => $skorDosen) {
+                $queryDosen = $this->Main_model->getDosenByNIP($nipDosen);
+                foreach ($queryDosen->result_array() as $data) {
+                }
+                $c[] = array(
+                    'nip' => $data['nip'],
+                    'nama' => $data['nama'],
+                    'foto' => $data['foto'],
+                    'program_studi' => $data['program_studi'],
+                    'skor' => $skorDosen
+                );
             }
-            $c[] = array(
-                'nip' => $data['nip'],
-                'nama' => $data['nama'],
-                'foto' => $data['foto'],
-                'program_studi' => $data['program_studi'],
-                'skor' => $skorDosen
-            );
+            $data['hasil'] = $c;
+            $this->load->view('dashboard/search_result_view', $data);
+        } else {
+            $this->load->view('dashboard/not_found_view');
         }
-        $data['hasil'] = $c;
-        $this->load->view('dashboard/search_result_view', $data);
     }
 
 

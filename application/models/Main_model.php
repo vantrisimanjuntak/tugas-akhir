@@ -228,7 +228,8 @@
         // echo "<br><br>";
         // CHECK APAKAH HASIL PENCARIAN == 0 (TIDAK KETEMU)
         if ($val == '0') {
-            echo '<h4 class="text-center">NOT FOUND</h4>';
+            return FALSE;
+            // echo '<h4 class="text-center">Upss.. sepertinya kami tidak menemukan pembimbing yang tepat</h4>';
         } else {
             // echo "<br><br>";
             foreach ($ccc as $DocId => $value) {

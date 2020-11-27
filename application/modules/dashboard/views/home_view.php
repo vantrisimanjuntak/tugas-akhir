@@ -15,6 +15,12 @@
     <link rel="preconnect" href="https://fonts.gstatic.com">
     <link href="https://fonts.googleapis.com/css2?family=Esteban&family=Laila:wght@300&family=Lato&family=Lora&family=Playfair+Display&family=Zilla+Slab&display=swap" rel="stylesheet">
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Catamaran&family=Crimson+Text:wght@600&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Mukta:wght@500&family=Roboto&display=swap" rel="stylesheet">
     <!-- <script type="text/javascript" src="<?= base_url('assets/javascript/jquery-3.5.1.js') ?>"></script> -->
     <script type="text/javascript" languange="javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script>
 
@@ -39,7 +45,7 @@
     <div class="pt-5" style="background-image: url('assets/images/wp/img-1.jpg'); height: 400px; background-position:70% 30%;background-size:cover;position:relative;background-repeat:no-repeat;">
         <div class="pt-4 pl-3">
             <div style="width: 240px;">
-                <h1 class="text-white" style="font-family: 'Playfair Display', serif">Bingung dengan Tugas Akhir?</h1>
+                <h1 style="font-family: 'Mukta', sans-serif; color:yellow">Bingung dengan<br> <b>Tugas Akhir?</b></h1>
             </div>
             <a href="#wrapper">
                 <button type="button" class="btn btn-success mt-4 font-weight-bold" style="border-radius: 29px;">
@@ -103,7 +109,7 @@
     <!-- Content for Kata Kunci -->
 
     <div class="container mt-5" id="wrapper" style="height: 500px;">
-        <h2 class="text-center font-weight-bold mb-4" style="font-family: 'Merriweather Sans', sans-serif;">Cari disini</h2>
+        <h5 class="text-left font-weight-bold mb-4" style="font-family: 'Roboto', sans-serif;">Temukan pembimbingmu disini</h5>
         <div class="input-group input-group-lg pt-4 mb-5">
             <input type="text" name="judul_skripsi" id="keyword" class="form-control" autocomplete="off" placeholder="Tema apa yang anda pikirkan ?">
             <div class=" input-group-append">
