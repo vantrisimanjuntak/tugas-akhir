@@ -18,7 +18,7 @@ $(document).ready(function () {
 
 
     $('#nim_result').html('');
-    $('#judulskripsi, #abstrak, #dp_satu, #dp_dua, #btnSubmit').prop('disabled', 'disabled');
+    $('#judulskripsi, #abstrak, #dp_satu, #dp_dua, #btnSubmit, #nama, #program_studi').prop('disabled', 'disabled');
 
     function showSpesificTitle() {
         $('#result').html('');

@@ -130,6 +130,17 @@
                             </select>
                         </div>
                     </div>
+                    <div class="form-group row">
+                        <label for="" class="col-md-2 col-form-label">Program Studi</label>
+                        <div class="col-md-5">
+                            <select name="program_studi" class="custom-select" id="program_studi">
+                                <option value="">--PILIH PROGRAM STUDI--</option>
+                                <?php foreach ($program_studi as $row) : ?>
+                                    <option value="<?= $row['kd_program_studi'] ?>"><?= $row['program_studi']; ?></option>
+                                <?php endforeach; ?>
+                            </select>
+                        </div>
+                    </div>
 
                     <div class="container">
                         <div class="row">

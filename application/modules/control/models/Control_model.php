@@ -106,7 +106,7 @@
     {
         return $this->db->get('tugas_akhir')->result_array();
     }
-    function submitSkripsi($no_reg, $nim, $judulskripsi, $abstrak, $dp1, $dp2, $clearAbstrak)
+    function submitSkripsi($no_reg, $nim, $judulskripsi, $abstrak, $dp1, $dp2, $clearAbstrak, $program_studi)
     {
         $data = array(
             'no_reg' => $no_reg,
@@ -114,7 +114,8 @@
             'judul_skripsi' => $judulskripsi,
             'abstrak' => $abstrak,
             'dp_satu' => $dp1,
-            'dp_dua' => $dp2
+            'dp_dua' => $dp2,
+            'ta_prodi' => $program_studi
         );
 
         $this->db->insert('tugas_akhir', $data);
@@ -196,18 +197,21 @@
         if ($queryMahasiswa->num_rows() > 0 && $querySubmit->num_rows() == null) {
             echo '<i class="fa fa-check" aria-hidden="true" style="color:yellow"></i>';
             echo '<script>
-                $("#judulskripsi, #abstrak, #dp_satu, #dp_dua, #btnSubmit").removeAttr("disabled", true);
+                $("#judulskripsi, #abstrak, #dp_satu, #dp_dua, #program_studi, #btnSubmit").removeAttr("disabled", true);
                     </script>';
         }
         // JIKA MAHASISWA ADA DAN SKRIPSI SUDAH DIINPUT 
         else if ($queryMahasiswa->num_rows() > 0 && $querySubmit->num_rows() > 0) {
             echo "SKRIPSI SUDAH DIINPUT";
+            echo '<script>
+                $("#judulskripsi, #abstrak, #dp_satu, #dp_dua, #program_studi #btnSubmit").prop("disabled", true);
+                    </script>';
         }
         // JIKA MAHASISWA TIDAK ADA 
         else {
             echo '<i class="fa fa-times" aria-hidden="true">&nbsp;NIM TIDAK ADA</i>';
             echo '<script>
-                $("#judulskripsi, #abstrak, #dp_satu, #dp_dua, #btnSubmit").prop("disabled", true);
+                $("#judulskripsi, #abstrak, #dp_satu, #dp_dua, #program_studi #btnSubmit").prop("disabled", true);
                     </script>';
         }
     }
@@ -236,6 +240,16 @@
                 $("#nim_mhs, #nama, #program_studi, #tambah").removeAttr("disabled", true);
                     </script>';
         }
+    }
+    function addMahasiswa($nim, $nama, $program_studi)
+    {
+        $data = array(
+            'nim' => $nim,
+            'nama' => $nama,
+            'prodi' => $program_studi
+        );
+        $this->db->insert('mahasiswa', $data);
+        return TRUE;
     }
 
     // For Imbuhan
@@ -281,7 +295,7 @@
     // For Stopwords
     function getAllStopwords()
     {
-        return $this->db->get('stopwords')->result_array();
+        return $this->db->get('stopwords');
     }
     function addStopwords($stopwords)
     {

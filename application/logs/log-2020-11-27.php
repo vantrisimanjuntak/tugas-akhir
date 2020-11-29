@@ -80,3 +80,40 @@ ERROR - 2020-11-27 09:36:44 --> Severity: Compile Error --> Cannot redeclare Con
 ERROR - 2020-11-27 11:52:14 --> 404 Page Not Found: /index
 ERROR - 2020-11-27 12:06:25 --> 404 Page Not Found: ../modules/control/controllers/Control/chekNIMBeforeAdd
 ERROR - 2020-11-27 12:12:05 --> 404 Page Not Found: /index
+ERROR - 2020-11-27 12:27:50 --> Severity: error --> Exception: Call to a member function result_array() on array C:\xampp\htdocs\tugas-akhir\application\modules\control\controllers\Control.php 126
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Trying to access array offset on value of type resource C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 118
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Trying to access array offset on value of type resource C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 125
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Trying to access array offset on value of type resource C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 118
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Trying to access array offset on value of type resource C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 125
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Undefined index: stopwords C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 118
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Undefined index: id C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 125
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Undefined index: stopwords C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 118
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Undefined index: id C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 125
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Undefined index: stopwords C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 118
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Undefined index: id C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 125
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Trying to access array offset on value of type int C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 118
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Trying to access array offset on value of type int C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 125
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Trying to access array offset on value of type null C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 118
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Trying to access array offset on value of type null C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 125
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Trying to access array offset on value of type null C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 118
+ERROR - 2020-11-27 12:30:16 --> Severity: Notice --> Trying to access array offset on value of type null C:\xampp\htdocs\tugas-akhir\application\modules\control\views\stopwords.php 125
+ERROR - 2020-11-27 12:39:10 --> Severity: Warning --> pg_query(): Query failed: ERROR:  null value in column &quot;nip&quot; of relation &quot;dosen&quot; violates not-null constraint
+DETAIL:  Failing row contains (null, PASCALINA KAROLINA SRAUN , null, null, TF). C:\xampp\htdocs\tugas-akhir\system\database\drivers\postgre\postgre_driver.php 242
+ERROR - 2020-11-27 12:39:10 --> Query error: ERROR:  null value in column "nip" of relation "dosen" violates not-null constraint
+DETAIL:  Failing row contains (null, PASCALINA KAROLINA SRAUN , null, null, TF). - Invalid query: INSERT INTO "dosen" ("nip", "nama", "program_studi", "pendidikan_terakhir", "foto") VALUES (NULL, 'PASCALINA KAROLINA SRAUN ', 'TF', NULL, NULL)
+ERROR - 2020-11-27 12:41:42 --> Severity: error --> Exception: syntax error, unexpected '}', expecting variable (T_VARIABLE) or '{' or '$' C:\xampp\htdocs\tugas-akhir\application\modules\control\controllers\Control.php 171
+ERROR - 2020-11-27 18:58:03 --> Severity: Warning --> pg_query(): Query failed: ERROR:  column &quot;program_studi&quot; of relation &quot;tugas_akhir&quot; does not exist
+LINE 1: ... &quot;judul_skripsi&quot;, &quot;abstrak&quot;, &quot;dp_satu&quot;, &quot;dp_dua&quot;, &quot;program_s...
+                                                             ^ C:\xampp\htdocs\tugas-akhir\system\database\drivers\postgre\postgre_driver.php 242
+ERROR - 2020-11-27 18:58:03 --> Query error: ERROR:  column "program_studi" of relation "tugas_akhir" does not exist
+LINE 1: ... "judul_skripsi", "abstrak", "dp_satu", "dp_dua", "program_s...
+                                                             ^ - Invalid query: INSERT INTO "tugas_akhir" ("no_reg", "mahasiswa", "judul_skripsi", "abstrak", "dp_satu", "dp_dua", "program_studi") VALUES ('1e8b5df7', '15030048', ' IMPLEMENTASI SIMPLE ADDITIVE WEIGHTING (SAW) DAN WEIGHTED PRODUCT (WP) DALAM APLIKASI PENCARIAN BIMBEL UNTUK SISWA SMA DI KOTA YOGYAKARTA', 'IMPLEMENTASI SIMPLE ADDITIVE WEIGHTING (SAW) DAN WEIGHTED PRODUCT (WP) DALAM APLIKASI PENCARIAN BIMBEL UNTUK SISWA SMA DI KOTA YOGYAKARTA Oleh Agung Prasetia 15030048 INTISARI Dari hasil observasi di SMA Negeri 9 Yogyakarta dan SMA Negeri 8 Yogyakarta, dapat disimpulkan bahwa prioritas dalam menentukan Bimbel antara lain yaitu biaya, fasilitas, dan jarak ke tempat Bimbel. Penelitian bertujuan untuk membuat aplikasi pencarian Bimbel untuk siswa SMA di Kota Yogyakarta berbasis web, dengan metode WP dan SAW. Agar mempermudah mempertimbangkan pemilihan bimbel. Berdasarkan hasil implementasi pengujian yang telah dilakukan pada tugas akhir ini, maka dapat disimpulkan bahwa, metode SAW dan WP adalah metode yang dapat digunakan dalam pengambilan keputusan pemilihan bimbel. Metode yang lebih relevan digunakan adalah metode SAW dengan nilai perubahan ranking sebesar 2.93%. Kata Kunci : Sistem pendukung Keputusan, WP, SAW, Bimbel
+', '11611144', '10904068', 'TF')
+ERROR - 2020-11-27 19:41:31 --> Severity: Warning --> pg_query(): Query failed: ERROR:  invalid input syntax for type integer: &quot;ALDIO BIMA SAIFULLAH&quot;
+LINE 3: WHERE &quot;nim&quot; = 'ALDIO BIMA SAIFULLAH'
+                      ^ C:\xampp\htdocs\tugas-akhir\system\database\drivers\postgre\postgre_driver.php 242
+ERROR - 2020-11-27 19:41:31 --> Query error: ERROR:  invalid input syntax for type integer: "ALDIO BIMA SAIFULLAH"
+LINE 3: WHERE "nim" = 'ALDIO BIMA SAIFULLAH'
+                      ^ - Invalid query: SELECT "nim"
+FROM "mahasiswa"
+WHERE "nim" = 'ALDIO BIMA SAIFULLAH'

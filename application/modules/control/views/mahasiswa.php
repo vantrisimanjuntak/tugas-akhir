@@ -78,7 +78,7 @@
             </div>
             <br><br>
             <div class="container-fluid mb-4 mt-3" style="font-family: 'PT Serif', serif; ">
-                <form action="<?= base_url('control/addLecture'); ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?= base_url('control/addMahasiswa'); ?>" method="POST" enctype="multipart/form-data">
                     <div class="form-group row">
                         <label for="" class="col-md-2 col-lg-2 col-form-label">NIM</label>
                         <div class="col-md-5 col-lg-3">

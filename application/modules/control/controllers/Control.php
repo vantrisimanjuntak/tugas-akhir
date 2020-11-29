@@ -101,6 +101,7 @@
             $data['allSkripsi'] = $this->Control_model->getAllSkripsi();
             $data['allDosen'] = $this->Control_model->getAllDosen();
             $data['session_access_user'] = $this->session->userdata('alias');
+            $data['program_studi'] = $this->Control_model->getAllProdi();
             $this->load->view('control/skripsi', $data);
         } else {
             echo "<script>
@@ -117,6 +118,7 @@
         $abstrak = $this->input->post('abstrak');
         $dp1 = $this->input->post('dp_satu');
         $dp2 = $this->input->post('dp_dua');
+        $program_studi = $this->input->post('program_studi');
 
         $abstrakLowerCase = strtolower($abstrak);
         $wordMark = '/[{}()""!,.:?]/';
@@ -129,7 +131,7 @@
         $clearAbstrak = preg_replace($arrayStopwords, array(''), $removeAbstrakfromWordmark);
 
 
-        $this->Control_model->submitSkripsi($no_reg, $nim, $judulskripsi, $abstrak, $dp1, $dp2, $clearAbstrak);
+        $this->Control_model->submitSkripsi($no_reg, $nim, $judulskripsi, $abstrak, $dp1, $dp2, $clearAbstrak, $program_studi);
 
         redirect('control/skripsi');
     }
@@ -165,6 +167,14 @@
     }
     function addMahasiswa()
     {
+        if ($this->session->userdata('username')) {
+            $nim = $this->input->post('nim');
+            $nama = $this->input->post('nama');
+            $program_studi = $this->input->post('program_studi');
+
+            $this->Control_model->addMahasiswa($nim, $nama, $program_studi);
+            redirect('control/mahasiswa');
+        }
     }
 
 

@@ -112,7 +112,7 @@
                     <tbody>
                         <?php
                         $no = 1;
-                        foreach ($allStopwords as $data) : ?>
+                        foreach ($allStopwords->result_array() as $data) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
                                 <td><?= $data['stopwords']; ?></td>

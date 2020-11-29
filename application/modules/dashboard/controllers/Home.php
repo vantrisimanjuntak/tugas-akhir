@@ -18,8 +18,8 @@
         $toLowerKeyword = strtolower($keyword);
         $query = $this->Main_model->searchtitle($keyword, $toLowerKeyword);
         if ($query) {
-            foreach ($query as $nipDosen => $skorDosen) {
-                $queryDosen = $this->Main_model->getDosenByNIP($nipDosen);
+            foreach ($query as $arrayNipDosen => $skorDosen) {
+                $queryDosen = $this->Main_model->getDosenByNIP($arrayNipDosen);
                 foreach ($queryDosen->result_array() as $data) {
                 }
                 $c[] = array(
