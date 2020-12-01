@@ -25,12 +25,3 @@
         </div>
     <?php endforeach; ?>
 </div>
-
-
-<script>
-    var preloader = document.getElementById('overlay');
-
-    function loadFunction() {
-        preloader.style.display = 'none';
-    }
-</script>

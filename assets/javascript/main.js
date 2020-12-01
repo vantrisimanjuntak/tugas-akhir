@@ -58,6 +58,9 @@ $(document).ready(function () {
     }
 
     function GetTitleFromDb() {
+        $('#result').html('');
+        $('#wrapper').css("height", "100%");
+        $('#overlay').show();
         var keyword = $('#keyword').val();
         if (keyword != '') {
             $.ajax({
@@ -66,19 +69,15 @@ $(document).ready(function () {
                 data: {
                     judul_skripsi: keyword,
                 },
-                beforeSend: function () {
-                    $('#overlay').show();
-                },
-                complete: function () {
-                    $('#overlay').hide();
-                },
-                success: function (data) {
 
+                success: function (data) {
+                    $('#overlay').hide();
                     $('#wrapper').css("height", "100%", "border", "3px solid black").show("slow", 1000);
                     $('#result').html(data).show(1500);
                 },
             });
         } else {
+            $('#overlay').hide();
             Swal.fire('Kata kunci kosong');
         }
     }
