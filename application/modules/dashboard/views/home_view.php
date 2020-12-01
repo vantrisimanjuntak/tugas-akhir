@@ -6,7 +6,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="shortcut icon" href="<?= base_url('assets/images/wp/stta.png') ?>">
     <!-- Bootstrap 4 CSS -->
-    <link rel="stylesheet" href="<?= base_url('assets/bootstrap-4.0.0/css/bootstrap.min.css') ?>">
+    <!-- <link rel="stylesheet" href="<?= base_url('assets/bootstrap-4.0.0/css/bootstrap.min.css') ?>"> -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?= base_url('assets/font-awesome-4.7.0/css/font-awesome.min.css') ?>">
     <!-- SweetAlert2 CSS -->
@@ -108,7 +109,7 @@
 
     <!-- Content for Kata Kunci -->
 
-    <div class="container mt-5" id="wrapper" style="height: 500px;">
+    <div class="container mt-5" id="wrapper" style="height: 500px;" onload="loadFunction()">
         <h5 class="text-left font-weight-bold mb-4" style="font-family: 'Roboto', sans-serif;">Temukan pembimbingmu disini</h5>
         <div class="input-group input-group-lg pt-4 mb-5">
             <input type="text" name="judul_skripsi" id="keyword" class="form-control" autocomplete="off" placeholder="Tema apa yang anda pikirkan ?">
@@ -117,7 +118,22 @@
             </div>
         </div>
         <!-- End Content for Kata Kunci -->
-        <div class="container-fluid mb-3" id="result"> </div>
+
+        <!-- <div id="test" onload="loadFunction()">
+            <img src="<?= base_url('assets/images/wp/35.gif'); ?>" alt="Loading" /><br />
+            Loading...
+        </div> -->
+        <div class="container-fluid mb-3" id="result">
+            <div class="d-flex justify-content-center text-center">
+                <div id="overlay" style="display:none">
+                    <img src="<?= base_url('assets/images/wp/35.gif'); ?>" alt="Loading" /><br>
+                    Sedang mencari ...
+                </div>
+            </div>
+        </div>
+
+    </div>
+
     </div>
 
 
@@ -145,6 +161,13 @@
 
 
         });
+    </script>
+    <script>
+        var preloader = document.getElementById('overlay');
+
+        function loadFunction() {
+            preloader.style.display = 'none';
+        }
     </script>
 
 </body>
