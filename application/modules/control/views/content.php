@@ -93,9 +93,9 @@
                     </div>
                 </div>
                 <h4 class="mb-0">
-                    <span class="count">10468</span>
+                    <span class="count"><?= $countMhs ?></span>
                 </h4>
-                <p class="text-light">Members online</p>
+                <p class="text-light">Mahasiswa</p>
 
             </div>
 
@@ -122,9 +122,9 @@
                     </div>
                 </div>
                 <h4 class="mb-0">
-                    <span class="count">10468</span>
+                    <span class="count"><?= $countIdx ?></span>
                 </h4>
-                <p class="text-light">Members online</p>
+                <p class="text-light">Index</p>
 
                 <div class="chart-wrapper px-3" style="height:70px;" height="70">
 

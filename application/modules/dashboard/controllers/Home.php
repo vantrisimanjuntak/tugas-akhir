@@ -14,6 +14,8 @@
     function searchtitle()
     {
 
+        $banyakSkripsi = $this->Main_model->banyakData();
+
         $keyword = $this->input->post('judul_skripsi');
         $toLowerKeyword = strtolower($keyword);
         $query = $this->Main_model->searchtitle($keyword, $toLowerKeyword);
@@ -27,43 +29,21 @@
                     'nama' => $data['nama'],
                     'foto' => $data['foto'],
                     'program_studi' => $data['program_studi'],
-                    'skor' => $skorDosen
+                    'skor' => $skorDosen,
+                    'skorPersen' => ($skorDosen / $banyakSkripsi) * 100
                 );
             }
             $data['hasil'] = $c;
+
+            // $data['persen'] = ($c / $banyakSkripsi) * 100;
             $this->load->view('dashboard/search_result_view', $data);
         } else {
             $this->load->view('dashboard/not_found_view');
         }
     }
-
-
-
-
-
-
-
-
-    function view_result()
+    function countData()
     {
-
-
-
-        $data = array(
-            'nama' => 'Gasskeun',
-            'kelas' => 'TF',
-            'umur' => 24
-        );
-
-
-        print_r($data);
-        echo "<br><br>";
-
-        echo $data['nama'];
-        // $nip = 10209011;
-        // $nip =  10301028;
-        // $data['nip'] = $this->Main_model->getDosenByNIP($nip);
-        // print_r($data);
-        // $this->load->view('dashboard/search_result_view', $data);
+        $banyakSkripsi = $this->Main_model->banyakData();
+        echo $banyakSkripsi;
     }
 }

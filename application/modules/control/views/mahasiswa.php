@@ -27,6 +27,9 @@
 
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.css'); ?>">
+
 
 </head>
 
@@ -71,6 +74,7 @@
         </header><!-- /header -->
         <!-- Header-->
 
+        <div class="flash-data-for-mahasiswa" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
 
         <div class="card">
             <div class="card-header">
@@ -105,7 +109,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <button type="submit" class="btn btn-primary float-right" id="tambah">Tambah</button>
+                                <button type="submit" class="btn btn-primary float-right" id="tambah"><i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;Tambah</button>
                             </div>
                         </div>
                     </div>
@@ -131,18 +135,14 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $data['nim']; ?></td>
                                 <td><?= $data['nama']; ?></td>
-                                <td><?= $data['prodi']; ?></td>
+                                <td><?= $data['program_studi']; ?></td>
                                 <td>
-                                    <a href="#">
-                                        <button type="button" class="btn btn-warning">
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true" style="color:white"></i>
-                                        </button>
-                                    </a>
-                                    <a href="#">
-                                        <button type="button" class="btn btn-danger">
-                                            <i class="fa fa-trash" aria-hidden="true" style="color: white;"></i>
-                                        </button>
-                                    </a>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editMahasiswa<?= $data['nim']; ?>">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true" style="color:white"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteMahasiswa<?= $data['nim']; ?>">
+                                        <i class="fa fa-trash" aria-hidden="true" style="color: white;"></i>
+                                    </button>
                                 </td>
                             </tr>
 
@@ -151,6 +151,109 @@
                 </table>
             </div>
         </div>
+        <!-- For Modal Edit -->
+        <?php foreach ($allMahasiswa as $row) : ?>
+            <div class="modal fade" id="editMahasiswa<?= $row['nim'] ?>" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+                <div class="modal-dialog modal-lg" role="document">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title"> Update Mahasiswa</h5>
+                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                <span aria-hidden="true">&times;</span>
+                            </button>
+                        </div>
+                        <form action="<?= base_url('control/editMahasiswa/' . $row['nim']) ?>" method="POST" enctype="multipart/form-data" class="editMahasiswa">
+                            <div class="modal-body">
+                                <p>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">NIM</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" id="inputEmail3" readonly value="<?= $row['nim'] ?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
+                                        <div class="col-sm-6">
+                                            <input type="text" class="form-control" name="nama" autocomplete="off" placeholder="<?= $row['nama']; ?>">
+                                        </div>
+                                    </div>
+                                    <div class="form-group row">
+                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Program Studi</label>
+                                        <div class="col-sm-6">
+                                            <select name="program_studi" id="" class="custom-select">
+                                                <?php
+                                                foreach ($prodi as $rows_prodi) {
+                                                    $selected = ($rows_prodi['kd_program_studi'] == $row['kd_program_studi']) ? "selected" : ""; ?>
+                                                    <option value="<?= $rows_prodi['kd_program_studi'] ?>" <?= $selected; ?>> <?= $rows_prodi['program_studi'] ?></option>
+                                                <?php } ?>
+                                            </select>
+                                        </div>
+                                    </div>
+
+                                </p>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary " data-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-success " id="">Perbarui</button>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+        <!-- End For Modal Edit -->
+
+
+
+        <!-- For Modal Delete -->
+        <?php foreach ($allMahasiswa as $row) : ?>
+            <form method="POST" action="<?= base_url('control/deleteMahasiswa/' . $row['nim']) ?>" id="deleteMahasiswa">
+                <div class="modal fade" id="deleteMahasiswa<?php echo $row['nim'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="mediumModalLabel">Hapus Mahasiswa?</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <div class="modal-body">
+                                <div class="row mt-3">
+                                    <div class="col-md-3">
+                                        NIM
+                                    </div>
+                                    <div class="col-md-5">
+                                        <h6 class="font-weight-bold"><?= $row['nim'] ?></h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        Nama
+                                    </div>
+                                    <div class="col-md-5">
+                                        <h6 class="font-weight-bold"><?= $row['nama'] ?></h6>
+                                    </div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">
+                                        Program Studi
+                                    </div>
+                                    <div class="col-md-5">
+                                        <h6 class="font-weight-bold"><?= $row['program_studi'] ?></h6>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary " data-dismiss="modal">Batal</button>
+                                <button type="button" class="btn btn-danger mhs-confirm-delete" id="">Hapus</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        <?php endforeach; ?>
+        <!-- End For Modal Delete -->
     </div><!-- /#right-panel -->
 
     <!-- Right Panel -->
@@ -179,6 +282,9 @@
     <script src="<?= base_url('assets/control_template/vendors/datatables.net-buttons/js/buttons.colVis.min.js') ?>"></script>
     <script src="<?= base_url('assets/control_template/assets/js/init-scripts/data-table/datatables-init.js') ?>"></script>
 
+    <!-- SweetAlert2 JS -->
+    <script src="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.js'); ?>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
     <script>
         (function($) {

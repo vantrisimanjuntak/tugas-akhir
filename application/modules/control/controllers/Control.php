@@ -9,6 +9,7 @@
     }
 
 
+    // For Auth
     function login()
     {
         $data['title'] = 'Login';
@@ -16,8 +17,10 @@
     }
     function checklogin()
     {
+        $data['title'] = 'Login';
         $username = $this->input->post('username');
         $password = sha1($this->input->post('password'));
+        $ip_address =  $_SERVER['REMOTE_ADDR'];
         date_default_timezone_set('Asia/Jakarta');
         $timelogin = date('Y-m-d H:i:s');
 
@@ -28,15 +31,20 @@
             window.location.href = '/tugas-akhir/control/login';
             </script>";
         } else {
-            $query = $this->Control_model->login($username, $password, $timelogin);
+            $query = $this->Control_model->login($username, $password, $timelogin, $ip_address);
             if ($query) {
                 redirect('control');
             } else {
                 $this->session->set_flashdata(
                     'failed',
-                    '<i class="fa fa-info-circle" aria-hidden="true" style="color: white;"></i>&nbsp<b>Username </b>dan <b>Password</b> salah'
+                    '<div class="alert alert-warning alert-dismissible fade show" role="alert">
+                    Username dan Password salah!
+                    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                      <span aria-hidden="true">&times;</span>
+                    </button>
+                  </div>'
                 );
-                $this->load->view('control/login_control_view');
+                $this->load->view('control/login_control_view', $data);
             }
         }
     }
@@ -54,6 +62,8 @@
             $data['session_access_user'] = $this->session->userdata('alias');
             $data['countSkripsi'] = $this->db->count_all_results('tugas_akhir');
             $data['countDosen'] = $this->db->count_all_results('dosen');
+            $data['countMhs'] = $this->db->count_all_results('mahasiswa');
+            $data['countIdx'] = $this->db->count_all_results('index');
             $this->load->view('control/index', $data);
         } else {
             echo "<script>
@@ -62,6 +72,8 @@
             </script>";
         }
     }
+
+
     // For Lecture
     function lecture()
     {
@@ -71,6 +83,11 @@
             $data['prodi'] = $this->Control_model->getAllProdi();
             $data['session_access_user'] = $this->session->userdata('alias');
             $this->load->view('control/dosen', $data);
+        } else {
+            echo "<script>
+            alert('SILAHKAN LOGIN TERLEBIH DAHULU');
+            window.location.href = '/tugas-akhir/control/login';
+            </script>";
         }
     }
     function checknip()
@@ -88,8 +105,40 @@
         $nama = $this->input->post('nama');
         $prodi = $this->input->post('program_studi');
         $pendidikan_terakhir = $this->input->post('pendidikan_terakhir');
-        $this->Control_model->addLecture($nip, $nama, $prodi, $pendidikan_terakhir);
-        redirect('control/lecture');
+        $queryAddLecture = $this->Control_model->addLecture($nip, $nama, $prodi, $pendidikan_terakhir);
+        if ($queryAddLecture == TRUE) {
+            $this->session->set_flashdata('flash',  'ditambahkan');
+            redirect('control/lecture');
+        } else {
+            echo "ERROR";
+        }
+    }
+    function editLecture($nip)
+    {
+
+        $nama = $this->input->post('nama');
+        $prodi = $this->input->post('program_studi');
+        $pendidikan_terakhir = $this->input->post('pendidikan_terakhir');
+
+        $queryUpdate = $this->Control_model->editLecture($nip, $nama, $prodi, $pendidikan_terakhir);
+        if ($queryUpdate) {
+            $this->session->set_flashdata('flash', 'diubah');
+            redirect('control/lecture');
+        } else {
+            echo "<script>
+            alert('ERROR');
+            window.location.href = '/tugas-akhir/control/lecture';
+            </script>";
+        }
+    }
+    function deleteLecture($nip)
+    {
+
+        $queryDelete = $this->Control_model->deleteLecture($nip);
+        if ($queryDelete) {
+            $this->session->set_flashdata('flash', 'dihapus');
+            redirect('control/lecture');
+        }
     }
 
 
@@ -121,7 +170,8 @@
         $program_studi = $this->input->post('program_studi');
 
         $abstrakLowerCase = strtolower($abstrak);
-        $wordMark = '/[{}()""!,.:?]/';
+        $wordMark = '/[{}()""º°\'!,.:?]/';
+
         $removeAbstrakfromWordmark = preg_replace($wordMark, "", $abstrakLowerCase);
 
         $queryGetStopwords = $this->Control_model->getAllStopwords();
@@ -131,9 +181,13 @@
         $clearAbstrak = preg_replace($arrayStopwords, array(''), $removeAbstrakfromWordmark);
 
 
-        $this->Control_model->submitSkripsi($no_reg, $nim, $judulskripsi, $abstrak, $dp1, $dp2, $clearAbstrak, $program_studi);
-
-        redirect('control/skripsi');
+        $querySubmitSkripsi =  $this->Control_model->submitSkripsi($no_reg, $nim, $judulskripsi, $abstrak, $dp1, $dp2, $clearAbstrak, $program_studi);
+        if ($querySubmitSkripsi) {
+            $this->session->set_flashdata('flash', 'ditambahkan');
+            redirect('control/skripsi');
+        } else {
+            return FALSE;
+        }
     }
     function checknim()
     {
@@ -172,7 +226,35 @@
             $nama = $this->input->post('nama');
             $program_studi = $this->input->post('program_studi');
 
-            $this->Control_model->addMahasiswa($nim, $nama, $program_studi);
+            $queryAddMahasiswa = $this->Control_model->addMahasiswa($nim, $nama, $program_studi);
+            if ($queryAddMahasiswa) {
+                $this->session->set_flashdata('flash', 'ditambah');
+                redirect('control/mahasiswa');
+            } else {
+                return FALSE;
+            }
+        }
+    }
+    function editMahasiswa($nim)
+    {
+        $nama = $this->input->post('nama');
+        $program_studi = $this->input->post('program_studi');
+
+        // echo $nama . " " . $program_studi;
+
+        $queryEditMahasiswa = $this->Control_model->editMahasiswa($nama, $program_studi, $nim);
+        if ($queryEditMahasiswa) {
+            $this->session->set_flashdata('flash', 'diubah');
+            redirect('control/mahasiswa');
+        } else {
+            return FALSE;
+        }
+    }
+    function deleteMahasiswa($nim)
+    {
+        $queryDeleteMahasiswa = $this->Control_model->deleteMahasiswa($nim);
+        if ($queryDeleteMahasiswa) {
+            $this->session->set_flashdata('flash', 'dihapus');
             redirect('control/mahasiswa');
         }
     }

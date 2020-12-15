@@ -19,19 +19,20 @@
                     <a href="<?= base_url('control/lecture'); ?>" class="dropdown-toggle"> <i class="menu-icon fa fa-users"></i>Dosen</a>
                 </li>
                 <li class="">
-                    <a href="<?= base_url('control/skripsi') ?>"> <i class="menu-icon fa fa-file-text"></i>Skripsi</a>
-                </li>
-                <li class="">
                     <a href="<?= base_url('control/mahasiswa') ?>"> <i class="menu-icon fa fa-users"></i>Mahasiswa</a>
                 </li>
-                <h3 class="menu-title">Utilitas</h3><!-- /.menu-title -->
-
                 <li class="">
-                    <a href="<?= base_url('control/imbuhan'); ?>"> <i class="menu-icon fa fa-text-width"></i>Kata Imbuhan</a>
+                    <a href="<?= base_url('control/skripsi') ?>"> <i class="menu-icon fa fa-file-text"></i>Skripsi</a>
                 </li>
+
+                <h3 class="menu-title">Utilitas</h3><!-- /.menu-title -->
                 <li>
                     <a href="<?= base_url('control/stopwords'); ?>"> <i class="menu-icon fa fa-font"></i>Stopwords</a>
                 </li>
+                <li class="">
+                    <a href="<?= base_url('control/imbuhan'); ?>"> <i class="menu-icon fa fa-text-width"></i>Kata Imbuhan</a>
+                </li>
+
 
             </ul>
         </div><!-- /.navbar-collapse -->

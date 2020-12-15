@@ -7,6 +7,7 @@
                     <h6 class="card-title font-weight-bold" style="font-family: 'Lato', sans-serif;"><?= $data['nama'] ?></h6>
                     <h6>NIP : <?= $data['nip']; ?></h6>
                     <h6>Skor Pencarian : <?= $data['skor']; ?></h6>
+                    <h6>Skor Pencarian (Persen) : <?= $data['skorPersen']; ?>%</h6>
                     <button class="btn btn-primary" data-toggle="modal" data-target="#DataDosenModals">See Profile</button>
                 </div>
             </div>

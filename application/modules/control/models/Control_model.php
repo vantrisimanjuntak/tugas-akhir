@@ -4,7 +4,7 @@
     {
         parent::__construct();
     }
-    function login($username, $password, $timelogin)
+    function login($username, $password, $timelogin, $ip_address)
     {
 
 
@@ -25,7 +25,8 @@
             $data = array(
                 'id' => bin2hex(random_bytes(4)),
                 'login_id' => $row['id'],
-                'time' => $timelogin
+                'time_login' => $timelogin,
+                'ip_address' => $ip_address
             );
             $this->db->insert('login_time', $data);
             return TRUE;
@@ -66,17 +67,59 @@
     function addLecture($nip, $nama, $prodi, $pendidikan_terakhir)
     {
         $data = array(
-            'nip' => $nip,
+            'nip' => (string) $nip,
             'nama' => $nama,
             'program_studi' => $prodi,
             'pendidikan_terakhir' => $pendidikan_terakhir,
-            'foto' => $this->_uploadImage(),
+            'foto' => $this->uploadImageNewDosen(),
         );
-        if ($data == TRUE) {
+        if ($data) {
             $this->db->insert('dosen', $data);
+            return TRUE;
+        } else {
+            return FALSE;
         }
     }
-    private function _uploadImage()
+
+    function editLecture($nip, $nama, $prodi, $pendidikan_terakhir)
+    {
+        $data = array(
+            'nama' => $nama,
+            'program_studi' => $prodi,
+            'pendidikan_terakhir' => $pendidikan_terakhir,
+            'foto' => $this->updateImageNewDosen($nip),
+        );
+        if ($data) {
+            $this->db->update('dosen', $data, array('nip' => $nip));
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    function deleteLecture($nip)
+    {
+        $this->db->select('nip, foto');
+        $this->db->from('dosen');
+        $this->db->where('nip', $nip);
+        $query = $this->db->get();
+
+        if ($query->num_rows() > 0) {
+            foreach ($query->result_array() as $row) {
+                $foto = $row['foto'];
+            }
+
+            $this->db->delete('dosen', array('nip' => $nip));
+            unlink("./assets/images/dosen_profile/" . $foto);
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    function getAllProdi()
+    {
+        return $this->db->get('program_studi')->result_array();
+    }
+    public function uploadImageNewDosen()
     {
         $config['upload_path'] = './assets/images/dosen_profile/';
         $config['allowed_types'] = 'png|jpeg|jpg|gif';
@@ -93,12 +136,23 @@
             return $this->upload->data('file_name');
         }
     }
-    function deleteDosen()
+    public function updateImageNewDosen($nip)
     {
-    }
-    function getAllProdi()
-    {
-        return $this->db->get('program_studi')->result_array();
+        $config['upload_path'] = './assets/images/dosen_profile/';
+        $config['allowed_types'] = 'png|jpeg|jpg|gif';
+        $config['max_size'] = '2048';
+        $config['max_width'] = '0';
+        $config['max_height'] = '0';
+        $config['overwrite'] = TRUE;
+        $config['file_name'] = bin2hex(random_bytes(7));
+
+        $this->load->library('upload', $config);
+        $this->upload->initialize($config);
+        if (!$this->upload->do_upload('foto')) {
+            $error = array('error' => $this->upload->display_errors());
+        } else {
+            return $this->upload->data('file_name');
+        }
     }
 
     // For Skripsi
@@ -109,21 +163,21 @@
     function submitSkripsi($no_reg, $nim, $judulskripsi, $abstrak, $dp1, $dp2, $clearAbstrak, $program_studi)
     {
         $data = array(
-            'no_reg' => $no_reg,
+            'no_reg' => (string) $no_reg,
             'mahasiswa' => $nim,
             'judul_skripsi' => $judulskripsi,
             'abstrak' => $abstrak,
             'dp_satu' => $dp1,
             'dp_dua' => $dp2,
-            'ta_prodi' => $program_studi
+            'ta_program_studi' => $program_studi
         );
 
         $this->db->insert('tugas_akhir', $data);
 
 
         // Banyak Data Skripsi
-        $getDataSkripsi = $this->db->get('tugas_akhir');
-        $totalSkripsi = $getDataSkripsi->num_rows();
+        // $getDataSkripsi = $this->db->get('tugas_akhir');
+        $totalSkripsi = $this->db->count_all_results('tugas_akhir');
 
         // Get Kata Imbuhan
         $this->db->select('kata_imbuhan, kata_dasar');
@@ -178,6 +232,7 @@
             $this->db->where('kata_kata', $row['kata_kata']);
             $this->db->update('index');
         }
+        return TRUE;
     }
     function checknim($nim)
     {
@@ -219,8 +274,12 @@
     // For Mahasiswa
     function getAllMahasiswa()
     {
-        $queryGetAllMahasiswa = $this->db->get('mahasiswa');
-        return $queryGetAllMahasiswa->result_array();
+        $this->db->select('*');
+        $this->db->from('mahasiswa');
+        $this->db->join('program_studi', 'program_studi.kd_program_studi = mahasiswa.program_studi');
+        $this->db->order_by('nama', 'ASC');
+        $query = $this->db->get();
+        return $query->result_array();
     }
     function checkNIMBeforeAdd($nim)
     {
@@ -246,9 +305,32 @@
         $data = array(
             'nim' => $nim,
             'nama' => $nama,
-            'prodi' => $program_studi
+            'program_studi' => $program_studi
         );
-        $this->db->insert('mahasiswa', $data);
+        if ($data) {
+            $this->db->insert('mahasiswa', $data);
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    function editMahasiswa($nama, $program_studi, $nim)
+    {
+        $data = array(
+            'nama' => $nama,
+            'program_studi' => $program_studi,
+        );
+        if ($data) {
+            $this->db->update('mahasiswa', $data, array('nim' => $nim));
+            return TRUE;
+        } else {
+            return FALSE;
+        }
+    }
+    function deleteMahasiswa($nim)
+    {
+        $this->db->where('nim', $nim);
+        $query = $this->db->delete('mahasiswa');
         return TRUE;
     }
 

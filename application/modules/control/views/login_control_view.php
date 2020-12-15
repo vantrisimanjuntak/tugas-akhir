@@ -8,16 +8,21 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <!-- Font Awesome -->
     <link rel="stylesheet" href="<?= base_url('assets/font-awesome-4.7.0/css/font-awesome.min.css'); ?>">
+    <!-- Google Font -->
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Andika+New+Basic&display=swap" rel="stylesheet">
+    <link rel="shortcut icon" href="<?= base_url('assets/images/wp/stta.png') ?>" type="image/x-icon">
     <title><?= $title ?></title>
 </head>
 
-<body style="background-color: #1D0B4C;">
-    <div class="container bg-white mt-5" style="max-width :560px; border: 2px solid white; border-radius:15px">
-        <div class="container bg-danger text-center text" style="border-radius: 3px;">
+<body>
+    <div class="container bg-white mt-5" style="max-width :400px; border: 2px solid white; border-radius:15px">
+        <div class="container text-center" style="border-radius: 3px;">
             <?= $this->session->flashdata('failed'); ?></div>
         <div class="container-fluid mt-3">
             <img src="<?= base_url('assets/images/wp/operating-system-control-center-server-512-removebg-preview.png') ?>" class="mx-auto d-block " alt="" style="width: 80px;">
-            <h3 class="text-center text-dark mt-4">Login </h3>
+            <h4 class="text-center text-dark mt-4">LOGIN</h4>
+            <hr style="height:2px;border-width:0;color:gray;background-color:#B73225">
             <div class="container-fluid mt-4 mb-4">
                 <form action="<?= base_url('control/checklogin'); ?>" method="POST">
                     <div class="form-group row">
@@ -34,7 +39,7 @@
                     </div>
                     <div class="row">
                         <div class="col text-center pt-5">
-                            <button type="submit" class="btn btn-warning text-white font-weight-bold" style="width:180px; height:47px; border-radius: 40px;">
+                            <button type="submit" class="btn text-white font-weight-bold" style="width:180px; height:47px; border-radius: 40px; background-color:#266150;font-family: 'Andika New Basic', sans-serif;">
                                 <h4>LOGIN</h4>
                             </button>
 

@@ -25,6 +25,9 @@
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/jqvmap/dist/jqvmap.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/assets/css/style.css') ?>">
 
+    <!-- SweetAlert2 CSS -->
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.css'); ?>">
+
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
 
@@ -32,46 +35,32 @@
 
 <body>
 
-
-    <!-- Left Panel -->
-
     <?php $this->load->view('control/side'); ?>
-
-    <!-- Left Panel -->
-
-    <!-- Right Panel -->
 
     <div id="right-panel" class="right-panel">
 
         <!-- Header-->
         <header id="header" class="header">
-
             <div class="header-menu">
-
                 <div class="col-sm-7">
                     <a id="menuToggle" class="menutoggle pull-left"><i class="fa fa fa-tasks"></i></a>
                 </div>
-
                 <div class="col-sm-5">
                     <div class="user-area dropdown float-right">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                             <?= strtoupper($session_access_user); ?>
                         </a>
-
                         <div class="user-menu dropdown-menu">
                             <a class="nav-link" href="#"><i class="fa fa-user"></i> My Profile</a>
                             <a class="nav-link" href="<?= base_url('control/logout'); ?>"><i class="fa fa-power-off"></i> Logout</a>
                         </div>
                     </div>
-
-
                 </div>
             </div>
-
         </header><!-- /header -->
         <!-- Header-->
 
-
+        <div class="flash-data-for-dosen" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
         <div class="card">
             <div class="card-header">
                 <strong class="card-title">DOSEN</strong>
@@ -121,13 +110,15 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <button type="submit" class="btn btn-primary float-right" id="tambah">Tambah</button>
+                                <button type="submit" class="btn btn-primary float-right" id="tambah"><i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;Tambah</button>
                             </div>
                         </div>
                     </div>
                 </form>
                 <hr>
             </div>
+
+
             <div class="card-body">
                 <table id="bootstrap-data-table-export" class="table table-striped table-bordered">
                     <thead class="text-center">
@@ -153,16 +144,12 @@
                                     <img src="<?= base_url('assets/images/dosen_profile/' . $data['foto']); ?>" alt="" style="width: 80px;">
                                 </td>
                                 <td>
-                                    <a href="#">
-                                        <button type="button" class="btn btn-warning">
-                                            <i class="fa fa-pencil-square-o" aria-hidden="true" style="color:white"></i>
-                                        </button>
-                                    </a>
-                                    <a href="#">
-                                        <button type="button" class="btn btn-danger">
-                                            <i class="fa fa-trash" aria-hidden="true" style="color: white;"></i>
-                                        </button>
-                                    </a>
+                                    <button type="button" class="btn btn-warning" data-toggle="modal" data-target="#editDosen<?php echo $data['nip'] ?>">
+                                        <i class="fa fa-pencil-square-o" aria-hidden="true" style="color:white"></i>
+                                    </button>
+                                    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteLecture<?php echo $data['nip'] ?>">
+                                        <i class="fa fa-trash" aria-hidden="true" style="color: white;"></i>
+                                    </button>
                                 </td>
                             </tr>
 
@@ -170,6 +157,129 @@
                     </tbody>
                 </table>
             </div>
+
+
+            <!-- For Modal Edit -->
+            <?php foreach ($dosen as $row) : ?>
+                <div class="modal fade" id="editDosen<?php echo $row['nip'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="mediumModalLabel">Update Dosen</h5>
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                    <span aria-hidden="true">&times;</span>
+                                </button>
+                            </div>
+                            <form action="<?= base_url('control/editLecture/' . $row['nip']) ?>" method="POST" enctype="multipart/form-data" id="editLecture">
+                                <div class="modal-body">
+                                    <p>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">NIP</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" id="inputEmail3" readonly placeholder="<?= $row['nip']; ?>">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
+                                            <div class="col-sm-6">
+                                                <input type="text" class="form-control" name="nama" autocomplete="off">
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Program Studi</label>
+                                            <div class="col-sm-6">
+                                                <select name="program_studi" id="" class="custom-select">
+                                                    <?php foreach ($prodi as $row_prodi) {
+                                                        $selected = ($row_prodi['kd_program_studi'] == $row['kd_program_studi']) ? "selected" : ""; ?>
+                                                        <option value="<?= $row_prodi['kd_program_studi']; ?>" <?= $selected ?>><?= $row_prodi['program_studi']; ?></option>
+                                                    <?php } ?>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="inputEmail3" class="col-sm-2 col-form-label">Pendidikan Terakhir</label>
+                                            <div class="col-sm-6">
+                                                <select name="pendidikan_terakhir" id="" class="custom-select">
+                                                    <option value="S1">S1</option>
+                                                    <option value="S2">S2</option>
+                                                    <option value="S3">S3</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                        <div class="form-group row">
+                                            <label for="" class="col-sm-2 col-form-label">Foto</label>
+                                            <div class="col-sm-6">
+                                                <input type="file" accept="image/*" name="foto" id="" class="form-control">
+                                            </div>
+                                        </div>
+                                    </p>
+                                </div>
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary " data-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-success" id="">Perbarui</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            <?php endforeach; ?>
+            <!-- End For Modal Edit -->
+
+
+
+
+            <!-- For Modal Delete -->
+            <?php foreach ($dosen as $row) : ?>
+                <form method="POST" action="<?= base_url('control/deleteLecture/' . $row['nip']) ?>" id="deleteLecture">
+                    <div class="modal fade" id="deleteLecture<?php echo $row['nip'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
+                        <div class="modal-dialog modal-lg" role="document">
+                            <div class="modal-content">
+                                <div class="modal-header">
+                                    <h5 class="modal-title" id="mediumModalLabel">Hapus Dosen?</h5>
+                                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                        <span aria-hidden="true">&times;</span>
+                                    </button>
+                                </div>
+
+                                <div class="modal-body">
+                                    <img src="<?= base_url('assets/images/dosen_profile/' . $row['foto']); ?>" alt="" class="mx-auto d-block img-fluid w-25">
+                                    <div class="row mt-3">
+                                        <div class="col-md-3">
+                                            NIP
+                                        </div>
+                                        <div class="col-md-5">
+                                            <h6 class="font-weight-bold"><?= $row['nip'] ?></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            Nama
+                                        </div>
+                                        <div class="col-md-5">
+                                            <h6 class="font-weight-bold"><?= $row['nama'] ?></h6>
+                                        </div>
+                                    </div>
+                                    <div class="row">
+                                        <div class="col-md-3">
+                                            Program Studi
+                                        </div>
+                                        <div class="col-md-5">
+                                            <h6 class="font-weight-bold"><?= $row['program_studi'] ?></h6>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="modal-footer">
+                                    <button type="button" class="btn btn-secondary " data-dismiss="modal">Batal</button>
+                                    <button type="submit" class="btn btn-danger" id="">Hapus</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </form>
+
+            <?php endforeach; ?>
+            <!-- End For Modal Edit -->
         </div>
     </div><!-- /#right-panel -->
 
@@ -198,6 +308,10 @@
     <script src="<?= base_url('assets/control_template/vendors/datatables.net-buttons/js/buttons.print.min.js') ?>"></script>
     <script src="<?= base_url('assets/control_template/vendors/datatables.net-buttons/js/buttons.colVis.min.js') ?>"></script>
     <script src="<?= base_url('assets/control_template/assets/js/init-scripts/data-table/datatables-init.js') ?>"></script>
+
+    <!-- SweetAlert2 JS -->
+    <script src="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.js'); ?>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
 
     <script>

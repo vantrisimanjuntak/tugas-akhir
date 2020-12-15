@@ -24,7 +24,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/selectFX/css/cs-skin-elastic.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/jqvmap/dist/jqvmap.min.css') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/assets/css/style.css') ?>">
-
+    <link rel="stylesheet" type="text/css" href="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.css'); ?>">
     <link href='https://fonts.googleapis.com/css?family=Open+Sans:400,600,700,800' rel='stylesheet' type='text/css'>
 
 
@@ -70,7 +70,7 @@
 
         </header><!-- /header -->
         <!-- Header-->
-
+        <div class="flash-data-for-skripsi" data-flashdata="<?= $this->session->flashdata('flash'); ?>"></div>
 
         <div class="card">
             <div class="card-header">
@@ -78,7 +78,7 @@
             </div>
             <br><br>
             <div class="container-fluid mb-4 mt-3" style="font-family: 'PT Serif', serif; ">
-                <form action="<?= base_url('control/submitSkripsi'); ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?= base_url('control/submitSkripsi'); ?>" method="POST" enctype="multipart/form-data" id="submitSkripsi">
                     <div class="form-group row">
                         <label for="" class="col-md-2 col-lg-2 col-form-label">No. Reg</label>
                         <div class="col-md-2 col-lg-2">
@@ -111,7 +111,7 @@
                     <div class="form-group row">
                         <label for="" class="col-md-2 col-form-label">Dosen Pembimbing I</label>
                         <div class="col-md-5">
-                            <select name="dp_satu" class="custom-select" id="dp_satu">
+                            <select name="dp_satu" class="custom-select dosen_pembimbing" id="dp_satu">
                                 <option value="">--PILIH DOSEN--</option>
                                 <?php foreach ($allDosen as $row) : ?>
                                     <option value="<?= $row['nip'] ?>"><?= $row['nama']; ?></option>
@@ -122,7 +122,7 @@
                     <div class="form-group row">
                         <label for="" class="col-md-2 col-form-label">Dosen Pembimbing II</label>
                         <div class="col-md-5">
-                            <select name="dp_dua" class="custom-select" id="dp_dua">
+                            <select name="dp_dua" class="custom-select dosen_pembimbing" id="dp_dua">
                                 <option value="">--PILIH DOSEN--</option>
                                 <?php foreach ($allDosen as $row) : ?>
                                     <option value="<?= $row['nip'] ?>"><?= $row['nama']; ?></option>
@@ -145,7 +145,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <button type="submit" class="btn btn-primary float-right" id="btnSubmit"><i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;&nbsp;Tambah</button>
+                                <button type="button" class="btn btn-primary float-right" id="btnSubmit"><i class="fa fa-plus-square" aria-hidden="true"></i>&nbsp;&nbsp;Tambah</button>
                             </div>
                         </div>
                     </div>
@@ -210,7 +210,8 @@
     <script src="<?= base_url('assets/control_template/vendors/datatables.net-buttons/js/buttons.print.min.js') ?>"></script>
     <script src="<?= base_url('assets/control_template/vendors/datatables.net-buttons/js/buttons.colVis.min.js') ?>"></script>
     <script src="<?= base_url('assets/control_template/assets/js/init-scripts/data-table/datatables-init.js') ?>"></script>
-
+    <script src="<?= base_url('assets/sweetalert2/package/dist/sweetalert2.min.js'); ?>"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@9"></script>
 
     <script>
         (function($) {
