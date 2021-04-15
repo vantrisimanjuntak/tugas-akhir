@@ -16,7 +16,6 @@
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') ?>">
 
-    <link rel="shortcut icon" href="<?= base_url('assets/images/stta.png') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/bootstrap/dist/css/bootstrap.min.css'); ?> ">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/font-awesome/css/font-awesome.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/themify-icons/css/themify-icons.css'); ?>">
@@ -74,16 +73,16 @@
 
         <div class="card">
             <div class="card-header">
-                <strong class="card-title">STOPWORDS</strong>
+                <strong class="card-title">STOPWORD</strong>
             </div>
             <div class="container-fluid mb-4 mt-3" style="font-family: 'PT Serif', serif; ">
-                <form action="<?= base_url('control/addStopwords'); ?>" method="POST" enctype="multipart/form-data">
+                <form action="<?= base_url('control/addStopword'); ?>" method="POST" enctype="multipart/form-data">
                     <div class="row">
                         <div class="col-md-6">
                             <div class="form-group row">
-                                <label for="" class="col-md-5 col-lg-4 col-xl-3 col-form-label">Stopwords</label>
+                                <label for="" class="col-md-5 col-lg-4 col-xl-3 col-form-label">Stopword</label>
                                 <div class="col-md-7 col-lg-8 col-xl-7">
-                                    <input type="text" name="stopwords" required id="" autocomplete="off" class="form-control">
+                                    <input type="text" name="stopword" required id="" autocomplete="off" class="form-control">
                                 </div>
                             </div>
                         </div>
@@ -92,7 +91,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <button type="submit" class="btn btn-primary float-right" id="tambah">
+                                <button type="submit" class="btn btn-primary float-right">
                                     <i class="fa fa-plus-square fa-1x" aria-hidden="true"></i>&nbsp;&nbsp;Tambah</button>
                             </div>
                         </div>
@@ -105,24 +104,24 @@
                     <thead>
                         <tr>
                             <th>No</th>
-                            <th>Stopwords</th>
+                            <th>Stopword</th>
                             <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
                         <?php
                         $no = 1;
-                        foreach ($allStopwords->result_array() as $data) : ?>
+                        foreach ($allStopword->result_array() as $data) : ?>
                             <tr>
                                 <td><?= $no++; ?></td>
-                                <td><?= $data['stopwords']; ?></td>
+                                <td><?= $data['stopword']; ?></td>
                                 <td>
                                     <a href="#" style="text-decoration: none;">
                                         <button type="button" class="btn btn-success">
                                             <i class="fa fa-pencil-square-o" aria-hidden="true"></i>
                                         </button>
                                     </a>
-                                    <a href="<?= base_url('control/deleteStopwords/' . $data['id']); ?>" style="text-decoration: none;">
+                                    <a href="<?= base_url('control/deleteStopword/' . $data['id']); ?>" style="text-decoration: none;">
                                         <button type="button" class="btn btn-danger">
                                             <i class="fa fa-trash-o" aria-hidden="true"></i>
                                         </button>

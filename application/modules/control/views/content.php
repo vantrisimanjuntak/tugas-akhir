@@ -27,7 +27,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton1">
                         <div class="dropdown-menu-content">
-                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#detailsSkripsi">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <a class="dropdown-item" href="#">Something else here</a>
                         </div>
@@ -58,7 +58,7 @@
                     </button>
                     <div class="dropdown-menu" aria-labelledby="dropdownMenuButton2">
                         <div class="dropdown-menu-content">
-                            <a class="dropdown-item" href="#">Action</a>
+                            <a class="dropdown-item" data-toggle="modal" data-target="#detailsDosen">Action</a>
                             <a class="dropdown-item" href="#">Another action</a>
                             <a class="dropdown-item" href="#">Something else here</a>
                         </div>
@@ -76,6 +76,30 @@
         </div>
     </div>
     <!--/.col-->
+
+    <!-- Modal For Skripsi Count -->
+    <div class="modal fade" id="detailsSkripsi" tabindex="-1" role="dialog" aria-labelledby="" aria-hidden="true">
+        <div class="modal-dialog modal-lg" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="mediumModalLabel">Skripsi</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-primary">Confirm</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- End Modal -->
 
     <div class="col-sm-6 col-lg-3">
         <div class="card text-white bg-flat-color-3">

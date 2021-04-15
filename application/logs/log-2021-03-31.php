@@ -1,0 +1,32 @@
+<?php defined('BASEPATH') OR exit('No direct script access allowed'); ?>
+
+ERROR - 2021-03-31 11:34:16 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:16 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:16 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:17 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:17 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:17 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:17 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:17 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:17 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:17 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:17 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:17 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:18 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:18 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:18 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:18 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:18 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:18 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:18 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:18 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:18 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:19 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:19 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:19 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:19 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:19 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:19 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:19 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:19 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200
+ERROR - 2021-03-31 11:34:19 --> Severity: Notice --> Undefined variable: nn C:\xampp\htdocs\searching\application\models\Main_model.php 200

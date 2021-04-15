@@ -16,7 +16,7 @@
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') ?>">
 
-    <link rel="shortcut icon" href="<?= base_url('assets/images/stta.png') ?>">
+
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/bootstrap/dist/css/bootstrap.min.css'); ?> ">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/font-awesome/css/font-awesome.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/themify-icons/css/themify-icons.css'); ?>">
@@ -97,7 +97,7 @@
                     <div class="container">
                         <div class="row">
                             <div class="col-lg-12">
-                                <button type="submit" class="btn btn-primary float-right" id="tambah">Tambah</button>
+                                <button type="submit" class="btn btn-primary float-right">Tambah</button>
                             </div>
                         </div>
                     </div>

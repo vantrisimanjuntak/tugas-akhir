@@ -39,8 +39,8 @@
                     </div>
                     <div class="row">
                         <div class="col text-center pt-5">
-                            <button type="submit" class="btn text-white font-weight-bold" style="width:180px; height:47px; border-radius: 40px; background-color:#266150;font-family: 'Andika New Basic', sans-serif;">
-                                <h4>LOGIN</h4>
+                            <button type="submit" class="btn text-white font-weight-bold" style="width:140px; height:47px; border-radius: 40px; background-color:#d89216;font-family: 'Andika New Basic', sans-serif;">
+                                <h5>Login</h5>
                             </button>
 
                         </div>

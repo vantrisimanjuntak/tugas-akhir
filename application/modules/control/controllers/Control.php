@@ -18,7 +18,7 @@
     function checklogin()
     {
         $data['title'] = 'Login';
-        $username = $this->input->post('username');
+        $username = sha1($this->input->post('username'));
         $password = sha1($this->input->post('password'));
         $ip_address =  $_SERVER['REMOTE_ADDR'];
         date_default_timezone_set('Asia/Jakarta');
@@ -28,7 +28,7 @@
         if ($username == NULL || $password == NULL) {
             echo "<script>
             alert('USERNAME ATAU PASSWORD KOSONG');
-            window.location.href = '/tugas-akhir/control/login';
+            window.location.href = '/searching/control/login';
             </script>";
         } else {
             $query = $this->Control_model->login($username, $password, $timelogin, $ip_address);
@@ -58,17 +58,18 @@
         if ($this->session->userdata('username')) {
             $data['title'] = 'Control | Portal Tugas Akhir';
             $data['allImbuhan'] = $this->Control_model->getAllImbuhan();
-            $data['stopwords'] = $this->Control_model->getAllStopwords();
+            $data['stopwords'] = $this->Control_model->getAllStopword();
             $data['session_access_user'] = $this->session->userdata('alias');
             $data['countSkripsi'] = $this->db->count_all_results('tugas_akhir');
             $data['countDosen'] = $this->db->count_all_results('dosen');
             $data['countMhs'] = $this->db->count_all_results('mahasiswa');
             $data['countIdx'] = $this->db->count_all_results('index');
+            // $data['details_skripsi_prodi'] = $this->Control_model->details_skripsi_prodi();
             $this->load->view('control/index', $data);
         } else {
             echo "<script>
             alert('SILAHKAN LOGIN TERLEBIH DAHULU');
-            window.location.href = '/tugas-akhir/control/login';
+            window.location.href = '/searching/control/login';
             </script>";
         }
     }
@@ -86,7 +87,7 @@
         } else {
             echo "<script>
             alert('SILAHKAN LOGIN TERLEBIH DAHULU');
-            window.location.href = '/tugas-akhir/control/login';
+            window.location.href = '/searching/control/login';
             </script>";
         }
     }
@@ -127,7 +128,7 @@
         } else {
             echo "<script>
             alert('ERROR');
-            window.location.href = '/tugas-akhir/control/lecture';
+            window.location.href = '/searching/control/lecture';
             </script>";
         }
     }
@@ -155,7 +156,7 @@
         } else {
             echo "<script>
             alert('SILAHKAN LOGIN TERLEBIH DAHULU');
-            window.location.href = '/tugas-akhir/control/login';
+            window.location.href = '/searching/control/login';
             </script>";
         }
     }
@@ -170,18 +171,24 @@
         $program_studi = $this->input->post('program_studi');
 
         $abstrakLowerCase = strtolower($abstrak);
-        $wordMark = '/[{}()""º°\'!,.:?]/';
+        $judulSkripsiLowerCase = strtolower($judulskripsi);
+        $wordMark = '/[{}()""º°\'!,.;:?]/'; #PENAMBAHAN TITIK KOMA
 
         $removeAbstrakfromWordmark = preg_replace($wordMark, "", $abstrakLowerCase);
+        $removeJudulSkripsifromWordmark = preg_replace($wordMark, "", $judulSkripsiLowerCase);
 
-        $queryGetStopwords = $this->Control_model->getAllStopwords();
+        $queryGetStopwords = $this->Control_model->getAllStopword();
         foreach ($queryGetStopwords->result_array() as $row) {
-            $arrayStopwords[] = '/\b' . $row['stopwords'] . '\b/';
+            $arrayStopwords[] = '/\b' . $row['stopword'] . '\b/';
         }
         $clearAbstrak = preg_replace($arrayStopwords, array(''), $removeAbstrakfromWordmark);
+        $clearJudulSkripsi = preg_replace($arrayStopwords, array(''), $removeJudulSkripsifromWordmark);
+
+        $mergeData =  $clearJudulSkripsi . " " . $clearAbstrak;
+        // echo $mergeData;
 
 
-        $querySubmitSkripsi =  $this->Control_model->submitSkripsi($no_reg, $nim, $judulskripsi, $abstrak, $dp1, $dp2, $clearAbstrak, $program_studi);
+        $querySubmitSkripsi =  $this->Control_model->submitSkripsi($no_reg, $nim, $judulskripsi, $abstrak, $dp1, $dp2, $mergeData, $program_studi);
         if ($querySubmitSkripsi) {
             $this->session->set_flashdata('flash', 'ditambahkan');
             redirect('control/skripsi');
@@ -283,7 +290,7 @@
             if ($kata_dasar == NULL && $kata_imbuhan == NULL) {
                 echo "<script>
                 alert('FORM ADA YANG KOSONG');
-                window.location.href = '/tugas-akhir/control/imbuhan';
+                window.location.href = '/searching/control/imbuhan';
                 </script>";
             } else {
                 $input = $this->Control_model->addImbuhan($kata_imbuhan, $kata_dasar);
@@ -291,19 +298,19 @@
 
                     echo "<script> 
                     alert('Data Berhasil Diinput');
-                    window.location.href='/tugas-akhir/control/imbuhan';
+                    window.location.href='/searching/control/imbuhan';
                     </script>";
                 } else {
                     echo "<script> 
                     alert('Data Sudah Ada');
-                    window.location.href='/tugas-akhir/control/imbuhan';
+                    window.location.href='/searching/control/imbuhan';
                     </script>";
                 }
             }
         } else {
             echo "<script>
             alert('SILAHKAN LOGIN TERLEBIH DAHULU');
-            window.location.href = '/tugas-akhir/control/login';
+            window.location.href = '/searching/control/login';
             </script>";
         }
     }
@@ -313,12 +320,12 @@
         if ($execute) {
             echo "<script> 
             alert('Berhasil Dihapus');
-            window.location.href='/tugas-akhir/control/imguhan';
+            window.location.href='/searching/control/imguhan';
             </script>";
         } else {
             echo "<script> 
             alert('DATA TIDAK ADA');
-            window.location.href='/tugas-akhir/control/imbuhan';
+            window.location.href='/searching/control/imbuhan';
             </script>";
         }
     }
@@ -326,49 +333,49 @@
 
     // For Stopwords
 
-    function stopwords()
+    function stopword()
     {
         $data['title'] = 'Control | Portal Tugas Akhir';
-        $data['allStopwords'] = $this->Control_model->getAllStopwords();
+        $data['allStopword'] = $this->Control_model->getAllStopword();
         $data['session_access_user'] = $this->session->userdata('alias');
-        $this->load->view('control/stopwords', $data);
+        $this->load->view('control/stopword', $data);
     }
-    function addStopwords()
+    function addStopword()
     {
-        $stopwords = strtolower($this->input->post('stopwords'));
+        $stopword = strtolower($this->input->post('stopword'));
 
-        if ($stopwords === " ") {
+        if ($stopword === " ") {
             echo "<script>
             alert('FORM ADA YANG KOSONG');
-            window.location.href = '/tugas-akhir/control/stopwords';
+            window.location.href = '/searching/control/stopwords';
             </script>";
         } else {
-            $queryAdd = $this->Control_model->addStopwords($stopwords);
+            $queryAdd = $this->Control_model->addStopword($stopword);
             if ($queryAdd) {
                 echo "<script> 
                 alert('Data Berhasil Diinput');
-                window.location.href='/tugas-akhir/control/stopwords';
+                window.location.href='/searching/control/stopword';
                 </script>";
             } else {
                 echo "<script> 
                 alert('Data Sudah Ada');
-                window.location.href='/tugas-akhir/control/stopwords';
+                window.location.href='/searching/control/stopword';
                 </script>";
             }
         }
     }
-    function deleteStopwords($id)
+    function deleteStopword($id)
     {
-        $queryDelete =  $this->Control_model->deleteStopwords($id);
+        $queryDelete =  $this->Control_model->deleteStopword($id);
         if ($queryDelete) {
             echo "<script> 
             alert('Berhasil Dihapus');
-            window.location.href='/tugas-akhir/control/stopwords';
+            window.location.href='/searching/control/stopword';
             </script>";
         } else {
             echo "<script> 
             alert('DATA TIDAK ADA');
-            window.location.href='/tugas-akhir/control/stopwords';
+            window.location.href='/searching/control/stopword';
             </script>";
         }
     }

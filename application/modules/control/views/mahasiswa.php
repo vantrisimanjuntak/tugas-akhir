@@ -84,20 +84,20 @@
             <div class="container-fluid mb-4 mt-3" style="font-family: 'PT Serif', serif; ">
                 <form action="<?= base_url('control/addMahasiswa'); ?>" method="POST" enctype="multipart/form-data">
                     <div class="form-group row">
-                        <label for="" class="col-md-2 col-lg-2 col-form-label">NIM</label>
-                        <div class="col-md-5 col-lg-3">
+                        <label for="" class="col-md-3 col-lg-2 col-form-label">NIM</label>
+                        <div class="col-md-3 col-lg-3">
                             <input type="text" name="nim" id="nim_mhs" autocomplete="off" class="form-control">
                         </div>
                         <h4 class="mt-2" style="color:red" id="nim_result"></h4>
                     </div>
                     <div class="form-group row">
-                        <label for="" class="col-md-2 col-form-label">Nama</label>
+                        <label for="" class="col-md-3 col-lg-2 col-form-label">Nama</label>
                         <div class="col-md-7">
                             <input type="text" name="nama" autocomplete="off" id="nama" class="form-control">
                         </div>
                     </div>
                     <div class="form-group row">
-                        <label for="" class="col-md-2 col-lg-2 col-form-label">Program Studi</label>
+                        <label for="" class="col-md-3 col-lg-2 col-form-label">Program Studi</label>
                         <div class="col-md-5">
                             <select name="program_studi" id="program_studi" class="custom-select">
                                 <?php foreach ($prodi as $row) : ?>
@@ -165,36 +165,36 @@
                         <form action="<?= base_url('control/editMahasiswa/' . $row['nim']) ?>" method="POST" enctype="multipart/form-data" class="editMahasiswa">
                             <div class="modal-body">
                                 <p>
-                                    <div class="form-group row">
-                                        <label for="inputEmail3" class="col-sm-2 col-form-label">NIM</label>
-                                        <div class="col-sm-6">
-                                            <input type="text" class="form-control" id="inputEmail3" readonly value="<?= $row['nim'] ?>">
-                                        </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">NIM</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" readonly value="<?= $row['nim'] ?>">
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Nama</label>
-                                        <div class="col-sm-6">
-                                            <input type="text" class="form-control" name="nama" autocomplete="off" placeholder="<?= $row['nama']; ?>">
-                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Nama</label>
+                                    <div class="col-sm-6">
+                                        <input type="text" class="form-control" required name="nama" autocomplete="off" placeholder="<?= $row['nama']; ?>">
                                     </div>
-                                    <div class="form-group row">
-                                        <label for="inputEmail3" class="col-sm-2 col-form-label">Program Studi</label>
-                                        <div class="col-sm-6">
-                                            <select name="program_studi" id="" class="custom-select">
-                                                <?php
-                                                foreach ($prodi as $rows_prodi) {
-                                                    $selected = ($rows_prodi['kd_program_studi'] == $row['kd_program_studi']) ? "selected" : ""; ?>
-                                                    <option value="<?= $rows_prodi['kd_program_studi'] ?>" <?= $selected; ?>> <?= $rows_prodi['program_studi'] ?></option>
-                                                <?php } ?>
-                                            </select>
-                                        </div>
+                                </div>
+                                <div class="form-group row">
+                                    <label class="col-sm-2 col-form-label">Program Studi</label>
+                                    <div class="col-sm-6">
+                                        <select name="program_studi" class="custom-select">
+                                            <?php
+                                            foreach ($prodi as $rows_prodi) {
+                                                $selected = ($rows_prodi['kd_program_studi'] == $row['kd_program_studi']) ? "selected" : ""; ?>
+                                                <option value="<?= $rows_prodi['kd_program_studi'] ?>" <?= $selected; ?>> <?= $rows_prodi['program_studi'] ?></option>
+                                            <?php } ?>
+                                        </select>
                                     </div>
+                                </div>
 
                                 </p>
                             </div>
                             <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary " data-dismiss="modal">Batal</button>
-                                <button type="submit" class="btn btn-success " id="">Perbarui</button>
+                                <button type="button" class="btn btn-secondary" data-dismiss="modal">Batal</button>
+                                <button type="submit" class="btn btn-success ">Perbarui</button>
                             </div>
                         </form>
                     </div>
@@ -207,7 +207,7 @@
 
         <!-- For Modal Delete -->
         <?php foreach ($allMahasiswa as $row) : ?>
-            <form method="POST" action="<?= base_url('control/deleteMahasiswa/' . $row['nim']) ?>" id="deleteMahasiswa">
+            <form method="POST" action="<?= base_url('control/deleteMahasiswa/' . $row['nim']) ?>">
                 <div class="modal fade" id="deleteMahasiswa<?php echo $row['nim'] ?>" tabindex="-1" role="dialog" aria-labelledby="mediumModalLabel" aria-hidden="true">
                     <div class="modal-dialog modal-lg" role="document">
                         <div class="modal-content">
@@ -246,7 +246,7 @@
 
                             <div class="modal-footer">
                                 <button type="button" class="btn btn-secondary " data-dismiss="modal">Batal</button>
-                                <button type="button" class="btn btn-danger mhs-confirm-delete" id="">Hapus</button>
+                                <button type="button" class="btn btn-danger mhs-confirm-delete">Hapus</button>
                             </div>
                         </div>
                     </div>

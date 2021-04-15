@@ -23,15 +23,26 @@
             foreach ($query as $arrayNipDosen => $skorDosen) {
                 $queryDosen = $this->Main_model->getDosenByNIP($arrayNipDosen);
                 foreach ($queryDosen->result_array() as $data) {
+                    $nip = $data['nip'];
                 }
                 $c[] = array(
-                    'nip' => $data['nip'],
+                    'nip' => "$nip",
                     'nama' => $data['nama'],
                     'foto' => $data['foto'],
                     'program_studi' => $data['program_studi'],
                     'skor' => $skorDosen,
                     'skorPersen' => ($skorDosen / $banyakSkripsi) * 100
                 );
+
+                // INSERT TO HASIL_PENCARIAN TABLE
+                $data = array(
+                    'id' => bin2hex(random_bytes(10)),
+                    'keyword' => $toLowerKeyword,
+                    'dosen' => $data['nip'],
+                    'skor' => ($skorDosen / $banyakSkripsi) * 100,
+
+                );
+                $this->db->insert('hasil_pencarian', $data);
             }
             $data['hasil'] = $c;
 

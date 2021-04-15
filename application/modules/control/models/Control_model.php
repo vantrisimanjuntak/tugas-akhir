@@ -7,8 +7,6 @@
     function login($username, $password, $timelogin, $ip_address)
     {
 
-
-
         $this->db->where('username', $username);
         $this->db->where('password', $password);
         $queryLogin = $this->db->get('superuser');
@@ -53,15 +51,15 @@
         $queryCheckNIP = $this->db->get();
 
         if ($queryCheckNIP->num_rows() > 0) {
-            echo "DATA SUDAH DIINPUT";
+            echo "Data sudah ada ";
             echo
-                '<script>
+            '<script>
                 $("#nama, #program_studi, #pendidikan_terakhir, #foto, #tambah").prop("disabled", true);
                 </script>';
         } else {
             echo '<i class="fa fa-check" aria-hidden="true" style="color:yellow"></i>';
             echo
-                '<script>$("#nama, #program_studi, #pendidikan_terakhir, #foto, #tambah").prop("disabled", false);</script>';
+            '<script>$("#nama, #program_studi, #pendidikan_terakhir, #foto, #tambah").prop("disabled", false);</script>';
         }
     }
     function addLecture($nip, $nama, $prodi, $pendidikan_terakhir)
@@ -83,6 +81,17 @@
 
     function editLecture($nip, $nama, $prodi, $pendidikan_terakhir)
     {
+        $this->db->select('nip, foto');
+        $this->db->from('dosen');
+        $this->db->where('nip', $nip);
+        $query = $this->db->get();
+        if ($query->num_rows() > 0) {
+            foreach ($query->result_array() as $row) {
+                $foto = $row['foto'];
+            }
+        }
+
+
         $data = array(
             'nama' => $nama,
             'program_studi' => $prodi,
@@ -90,6 +99,7 @@
             'foto' => $this->updateImageNewDosen($nip),
         );
         if ($data) {
+            unlink("./assets/images/dosen_profile/" . $foto);
             $this->db->update('dosen', $data, array('nip' => $nip));
             return TRUE;
         } else {
@@ -126,7 +136,7 @@
         $config['max_size'] = '2048';
         $config['max_width'] = '0';
         $config['max_height'] = '0';
-        $config['file_name'] = $this->input->post('nip');
+        $config['file_name'] = bin2hex(random_bytes(7));
 
         $this->load->library('upload', $config);
         $this->upload->initialize($config);
@@ -136,7 +146,7 @@
             return $this->upload->data('file_name');
         }
     }
-    public function updateImageNewDosen($nip)
+    public function updateImageNewDosen()
     {
         $config['upload_path'] = './assets/images/dosen_profile/';
         $config['allowed_types'] = 'png|jpeg|jpg|gif';
@@ -158,12 +168,20 @@
     // For Skripsi
     function getAllSkripsi()
     {
-        return $this->db->get('tugas_akhir')->result_array();
+        $this->db->select('a.no_reg,a.mahasiswa, a.judul_skripsi, a.abstrak, a.ta_program_studi, b.nama AS dp_satu, c.nama AS dp_dua');
+        $this->db->from('tugas_akhir a');
+        $this->db->join('dosen b', 'a.dp_satu = b.nip');
+        $this->db->join('dosen c', 'a.dp_dua = c.nip');
+        // $this->db->join('program_studi', 'program_studi.kd_program_studi = dosen.program_studi');
+        // $this->db->order_by('nama', 'ASC');
+        $query = $this->db->get();
+        return $query->result_array();
+        // return $this->db->get('tugas_akhir')->result_array();
     }
-    function submitSkripsi($no_reg, $nim, $judulskripsi, $abstrak, $dp1, $dp2, $clearAbstrak, $program_studi)
+    function submitSkripsi($no_reg, $nim, $judulskripsi, $abstrak, $dp1, $dp2, $mergeData, $program_studi)
     {
         $data = array(
-            'no_reg' => (string) $no_reg,
+            'no_reg' => "$no_reg",
             'mahasiswa' => $nim,
             'judul_skripsi' => $judulskripsi,
             'abstrak' => $abstrak,
@@ -190,32 +208,32 @@
         $search = $kataImbuhan;
         $replace = $kataDasar;
 
-        $removeKataImbuhan = str_replace($search, $replace, $clearAbstrak);
+        $removeKataImbuhan = str_replace($search, $replace, $mergeData);
 
         // Mengubah ABSTRAK menjadi array
         $arrayAbstrak = array_unique(explode(" ", $removeKataImbuhan));
         foreach ($arrayAbstrak as $kata) {
             // Check if KATA is not empty
             if ($kata != "") {
-                $this->db->where('kata_kata', $kata);
+                $this->db->where('term', $kata);
                 $cekKataKata = $this->db->get('index');
                 // Cek if KATA is available
                 if ($cekKataKata->num_rows() > 0) {
                     foreach ($cekKataKata->result_array() as $row) {
                         $id = $row['id'];
-                        $katakata = $row['kata_kata'];
+                        $katakata = $row['term'];
                         $totalDokumen = $row['total_dokumen'];
                     }
                     $totalDokumen++;
 
                     $this->db->set('total_dokumen', $totalDokumen);
-                    $this->db->where('kata_kata', $katakata);
+                    $this->db->where('term', $katakata);
                     $this->db->update('index');
                 } else {
                     // If KATA is unavailable
                     $IdfBaru = log10($totalSkripsi / 1);
                     $data = array(
-                        'kata_kata' => $kata,
+                        'term' => "$kata",
                         'no_doc' => $no_reg,
                         'total_dokumen' => 1,
                         'idf' => $IdfBaru,
@@ -229,7 +247,7 @@
         foreach ($queryTableIndex as $row) {
             $idf = log10($totalSkripsi / $row['total_dokumen']);
             $this->db->set('idf', $idf);
-            $this->db->where('kata_kata', $row['kata_kata']);
+            $this->db->where('term', $row['term']);
             $this->db->update('index');
         }
         return TRUE;
@@ -250,7 +268,7 @@
 
         // JIKA MAHASISWA ADA DAN SKRIPSI BELUM DIINPUT
         if ($queryMahasiswa->num_rows() > 0 && $querySubmit->num_rows() == null) {
-            echo '<i class="fa fa-check" aria-hidden="true" style="color:yellow"></i>';
+            echo '<i class="fa fa-check" aria-hidden="true" style="color:#5eaaa8"></i>';
             echo '<script>
                 $("#judulskripsi, #abstrak, #dp_satu, #dp_dua, #program_studi, #btnSubmit").removeAttr("disabled", true);
                     </script>';
@@ -271,6 +289,10 @@
         }
     }
 
+    function details_skripsi_prodi()
+    {
+    }
+
     // For Mahasiswa
     function getAllMahasiswa()
     {
@@ -289,7 +311,7 @@
         $queryGetMahasiswa = $this->db->get();
 
         if ($queryGetMahasiswa->num_rows() > 0) {
-            echo 'DATA SUDAH DIINPUT';
+            echo 'Data sudah ada';
             echo '<script>
             $("#nama, #program_studi, #tambah").prop("disabled", true);
                 </script>';
@@ -375,33 +397,33 @@
     }
 
     // For Stopwords
-    function getAllStopwords()
+    function getAllStopword()
     {
-        return $this->db->get('stopwords');
+        return $this->db->get('stopword');
     }
-    function addStopwords($stopwords)
+    function addStopword($stopword)
     {
-        $this->db->where('stopwords', $stopwords);
-        $query = $this->db->get('stopwords');
+        $this->db->where('stopword', $stopword);
+        $query = $this->db->get('stopword');
 
         if ($query->num_rows() > 0) {
             return FALSE;
         } else {
             $data = array(
                 'id' => bin2hex(random_bytes(3)),
-                'stopwords' => $stopwords
+                'stopword' => $stopword
             );
-            $this->db->insert('stopwords', $data);
+            $this->db->insert('stopword', $data);
             return TRUE;
         }
     }
-    function deleteStopwords($id)
+    function deleteStopword($id)
     {
         $this->db->where('id', $id);
-        $queryGetStopwords = $this->db->get('stopwords');
+        $queryGetStopwords = $this->db->get('stopword');
         if ($queryGetStopwords->num_rows() > 0) {
             $this->db->where('id', $id);
-            $this->db->delete('stopwords');
+            $this->db->delete('stopword');
             return TRUE;
         } else {
             return FALSE;

@@ -12,11 +12,12 @@
 
     <script src="<?= base_url('assets/javascript/jquery-3.5.1.js') ?>" type="text/javascript"></script>
     <script type="text/javascript" src="<?= base_url('assets/javascript/main.js'); ?>"></script>
+    <script type="javascript" src="https://cdn.datatables.net/1.10.23/js/jquery.dataTables.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
     <!-- Bootstrap 4 CSS -->
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/datatables.net-bs4/css/dataTables.bootstrap4.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/datatables.net-buttons-bs4/css/buttons.bootstrap4.min.css') ?>">
 
-    <link rel="shortcut icon" href="<?= base_url('assets/images/stta.png') ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/bootstrap/dist/css/bootstrap.min.css'); ?> ">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/font-awesome/css/font-awesome.min.css'); ?>">
     <link rel="stylesheet" href="<?= base_url('assets/control_template/vendors/themify-icons/css/themify-icons.css'); ?>">
@@ -172,14 +173,60 @@
                                 <td><?= $no++; ?></td>
                                 <td><?= $data['mahasiswa']; ?></td>
                                 <td><?= $data['judul_skripsi']; ?></td>
-                                <td><?= $data['abstrak']; ?></td>
+                                <td><?= substr($data['abstrak'], 0, 100); ?> ...
+                                    <br><br><a href="" data-toggle="modal" data-target="#review<?= $data['no_reg']; ?>"><i>lihat selengkapnya</i></a>
+                                </td>
                                 <td><?= $data['dp_satu']; ?></td>
                                 <td><?= $data['dp_dua']; ?></td>
 
                             </tr>
 
+                            <div class="fade"></div>
+                            <div class="modal fade" id="review<?= $data['no_reg']; ?>" tabindex="-1" data-backdrop="static" data-keyboard="false" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog modal-lg modal-dialog-scrollabel">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Full Text</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body ">
+                                            <div class="row mb-1">
+                                                <div class="col-sm-3">Judul</div>
+                                                <div class="col-sm-9"><b><?= $data['judul_skripsi'] ?></b></div>
+                                            </div>
+                                            <div class="row mb-1">
+                                                <div class="col-sm-3">NIM</div>
+                                                <div class="col-sm-9"><?= $data['mahasiswa'] ?></div>
+                                            </div>
+                                            <div class="row mb-1">
+                                                <div class="col-sm-3">Dosen Pembimbing I</div>
+                                                <div class="col-sm-9"><?= $data['dp_satu']; ?></div>
+                                            </div>
+                                            <div class="row mb-1">
+                                                <div class="col-sm-3">Dosen Pembimbing II</div>
+                                                <div class="col-sm-9"><?= $data['dp_dua']; ?></div>
+                                            </div>
+                                            <div class="row mb-1">
+                                                <div class="col-sm-3">Program Studi</div>
+                                                <div class="col-sm-9"><?= $data['ta_program_studi']; ?></div>
+                                            </div>
+                                            <div class="row mb-1">
+                                                <div class="col-sm-3">Abstrak</div>
+                                                <div class="col-sm-9"><?= $data['abstrak']; ?></div>
+                                            </div>
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Keluar</button>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
                         <?php endforeach; ?>
+
                     </tbody>
+
                 </table>
             </div>
         </div>
